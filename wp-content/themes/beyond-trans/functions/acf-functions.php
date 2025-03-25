@@ -1,5 +1,16 @@
 <?php
-// Add support for ACF JSON
+// Create ACF-JSON directory if it doesn't exist
+function ensure_acf_json_directory_exists()
+{
+    $acf_json_path = get_stylesheet_directory() . '/acf-json';
+
+    if (!file_exists($acf_json_path)) {
+        wp_mkdir_p($acf_json_path);
+    }
+}
+add_action('acf/init', 'ensure_acf_json_directory_exists');
+
+// Save ACF JSON to theme
 add_filter('acf/settings/save_json', 'save_acf_json_to_theme');
 function save_acf_json_to_theme($path)
 {
@@ -7,6 +18,7 @@ function save_acf_json_to_theme($path)
     return $path;
 }
 
+// Load ACF JSON from theme
 add_filter('acf/settings/load_json', 'load_acf_json_from_theme');
 function load_acf_json_from_theme($paths)
 {
