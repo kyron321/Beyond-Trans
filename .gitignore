@@ -10,6 +10,10 @@
 # Ignore everything inside wp-content except beyond trans theme, and plugins
 wp-content/*
 !wp-content/plugins/
+wp-content/plugins/*
+!wp-content/plugins/beyond-trans-team-members/
+
+
 !wp-content/themes/
 
 # Ignore system files
