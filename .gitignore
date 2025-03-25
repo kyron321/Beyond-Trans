@@ -7,10 +7,10 @@
 # Allow wp-content directory
 !wp-content/
 
-# Ignore everything inside wp-content except theme, and plugins
+# Ignore everything inside wp-content except beyond trans theme, and plugins
 wp-content/*
-!wp-content/themes/beyond-trans
 !wp-content/plugins/
+!wp-content/themes/
 
 # Ignore system files
 .DS_Store
