@@ -12,6 +12,7 @@ wp-content/*
 !wp-content/plugins/
 wp-content/plugins/*
 !wp-content/plugins/beyond-trans-team-members/
+!wp-content/plugins/beyond-trans-therapists/
 
 
 !wp-content/themes/
