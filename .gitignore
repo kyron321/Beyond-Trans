@@ -1,8 +1,12 @@
 # Ignore everything in the root directory
 /*
 
-# Allow gitignore file
+# Allow essential files
 !.gitignore
+!package.json
+!gulpfile.js
+!.nvmrc
+!readme.md
 
 # Allow wp-content directory
 !wp-content/
