@@ -4,6 +4,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 const del = require('del');
+const rename = require('gulp-rename'); // Add gulp-rename
 
 // File paths
 const themeDir = 'wp-content/themes/beyond-trans';
@@ -14,7 +15,7 @@ const paths = {
     dest: `${themeDir}/dist/css/`
   },
   adminStyles: {
-    src: `${themeDir}/assets/scss/admin.scss`,  // Create this file if it doesn't exist
+    src: `${themeDir}/assets/scss/admin.scss`,
     watch: `${themeDir}/assets/scss/admin/**/*.scss`,
     dest: `${themeDir}/dist/css/`
   },
@@ -41,6 +42,7 @@ function styles() {
       includePaths: ['node_modules']
     }).on('error', sass.logError))
     .pipe(autoprefixer())
+    .pipe(rename({ suffix: '.min' })) // Rename to .min.css
     .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.styles.dest));
 }
@@ -54,6 +56,7 @@ function adminStyles() {
       includePaths: ['node_modules']
     }).on('error', sass.logError))
     .pipe(autoprefixer())
+    .pipe(rename({ suffix: '.min' })) // Rename to .min.css
     .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.adminStyles.dest));
 }
@@ -63,6 +66,7 @@ function scripts() {
   return src(paths.scripts.src)
     .pipe(sourcemaps.init())
     .pipe(uglify())
+    .pipe(rename({ suffix: '.min' })) // Rename to .min.js
     .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.scripts.dest));
 }
