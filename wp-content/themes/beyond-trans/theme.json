@@ -1,10 +1,62 @@
 {
     "version": 2,
-    "styles": {
+    "settings": {
         "color": {
-            "primary": "#ff0000",
-            "secondary": "#ff0000"
+            "defaultPalette": false,
+            "palette": [
+                {
+                    "name": "Primary",
+                    "slug": "primary",
+                    "color": "#3498db"
+                },
+                {
+                    "name": "Secondary",
+                    "slug": "secondary",
+                    "color": "#2ecc71"
+                },
+                {
+                    "name": "Accent",
+                    "slug": "accent",
+                    "color": "#e74c3c"
+                },
+                {
+                    "name": "Dark",
+                    "slug": "dark",
+                    "color": "#34495e"
+                },
+                {
+                    "name": "Light",
+                    "slug": "light",
+                    "color": "#ecf0f1"
+                }
+            ],
+            "text": false
+        },
+        "typography": {
+            "fontFamilies": [
+                {
+                    "fontFamily": "'Poppins', sans-serif",
+                    "name": "Poppins",
+                    "slug": "poppins"
+                },
+                {
+                    "fontFamily": "'Manrope', sans-serif",
+                    "name": "Manrope",
+                    "slug": "manrope"
+                }
+            ]
+        }
+    },
+    "styles": {
+        "typography": {
+            "fontFamily": "'Manrope', sans-serif"
+        },
+        "elements": {
+            "heading": {
+                "typography": {
+                    "fontFamily": "'Poppins', sans-serif"
+                }
+            }
         }
     }
 }
-
