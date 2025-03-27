@@ -28,24 +28,8 @@ function load_acf_json_from_theme($paths)
 }
 
 // Register ACF blocks
-
-add_action('acf/init', function () {
-    if (function_exists('acf_register_block_type')) {
-        acf_register_block_type(array(
-            'name'              => 'banner',
-            'title'             => __('Banner'),
-            'description'       => __('A custom banner block that uses ACF fields.'),
-            'render_template'   => get_template_directory() . '/blocks/banner/banner.php',
-            'category'          => 'Beyond Trans',
-            'icon'              => 'format-image',
-            'keywords'          => array('banner'),
-            'enqueue_style'     => get_template_directory_uri() . '/blocks/banner/banner.css',
-            'supports'          => array(
-                'anchor' => true,
-                'align'  => true,
-                'jsx'    => true,
-                'color'  => true,
-            ),
-        ));
-    }
-});
+function register_acf_blocks()
+{
+    register_block_type(get_template_directory() . '/blocks/banner');
+}
+add_action('init', 'register_acf_blocks');

@@ -33,6 +33,14 @@ function theme_scripts()
     wp_enqueue_script('theme-script', get_template_directory_uri() . '/dist/js/main.min.js', [], THEME_VERSION, true);
 }
 
+// Enqueue theme fonts
+function theme_fonts()
+{
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap', [], null);
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap', [], null);
+}
+add_action('wp_enqueue_scripts', 'theme_fonts');
+
 
 // Add theme support for post thumbnails
 add_theme_support('post-thumbnails');

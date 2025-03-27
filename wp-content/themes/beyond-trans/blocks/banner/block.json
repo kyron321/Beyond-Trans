@@ -1,0 +1,16 @@
+{
+    "name": "acf/banner",
+    "title": "Banner",
+    "description": "A simple banner block",
+    "style": [ "file:./banner.css" ],
+    "category": "formatting",
+    "icon": "testimonial",
+    "keywords": ["banner"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "banner.php"
+    },
+    "supports": {
+        "align": false
+    }
+}
