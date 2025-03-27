@@ -17,3 +17,12 @@ function allowedBlocks()
     return $allowed_blocks;
 }
 add_filter('allowed_block_types_all', 'allowedBlocks');
+
+// Remove the "Advanced" tab by disabling custom class name support
+function remove_the_class_anchor($metadata)
+{
+    $metadata['supports']['customClassName'] = false;
+    $metadata['supports']['anchor'] = false;
+    return $metadata;
+}
+add_filter('block_type_metadata', 'remove_the_class_anchor');

@@ -4,13 +4,18 @@
     "description": "A simple banner block",
     "style": [ "file:./banner.css" ],
     "category": "formatting",
-    "icon": "testimonial",
+    "icon": "block-default",
     "keywords": ["banner"],
     "acf": {
         "mode": "edit",
         "renderTemplate": "banner.php"
     },
     "supports": {
-        "align": false
+        "align": false,
+        "color": {
+            "text": true,
+            "background": true,
+            "link": true
+        }
     }
 }
