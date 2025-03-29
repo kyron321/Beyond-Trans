@@ -34,6 +34,13 @@ function register_svg_post_type()
 }
 add_action('init', 'register_svg_post_type');
 
+// Register categories for the SVG post type
+function add_categories_to_svg_post_type()
+{
+    register_taxonomy_for_object_type('category', 'svg');
+}
+add_action('init', 'add_categories_to_svg_post_type');
+
 // Add custom fields to SVG post type
 function add_svg_columns($columns)
 {
@@ -87,4 +94,18 @@ function render_svg_preview_meta_box($post)
     } else {
         echo '<p>No SVG code found.</p>';
     }
+}
+
+// Get SVG code from ACF field by post title or ID.
+function get_svg_by_post_id($post_id, $field_name = 'full_svg_code')
+{
+    // Get the SVG code from the specified ACF field
+    $svg_code = get_field($field_name, $post_id);
+
+    // Return the SVG code or a fallback message
+    if ($svg_code) {
+        return $svg_code;
+    }
+
+    return '<p>No SVG code found.</p>';
 }
