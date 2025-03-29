@@ -1,5 +1,6 @@
 <?php
-// Register a custom post type for SVGs
+
+// Register SVG post type
 function register_svg_post_type()
 {
     $labels = array(
@@ -29,62 +30,58 @@ function register_svg_post_type()
         'publicly_queryable' => false,
     );
 
-    register_post_type('svg_library', $args);
+    register_post_type('svg', $args);
 }
 add_action('init', 'register_svg_post_type');
 
-// Add a custom column to the SVG post type
+// Add custom fields to SVG post type
 function add_svg_columns($columns)
 {
-    $columns['svg_preview'] = 'Preview'; // Ensure the key matches
+    $columns['svg_preview'] = 'Preview';
     return $columns;
 }
-add_filter('manage_svg_library_posts_columns', 'add_svg_columns');
+add_filter('manage_svg_posts_columns', 'add_svg_columns');
 
-// Populate the custom column
+// Display SVG preview in the admin column
 function add_svg_column_content($column, $post_id)
 {
     if ($column === 'svg_preview') {
-        // Get the SVG code from the ACF field
-        $svg_code = get_field('full_svg_code', $post_id); // Use the ACF field name
+        $svg_code = get_field('full_svg_code', $post_id);
 
         if ($svg_code) {
-            // Display the SVG code directly in the admin column
             echo '<div>';
-            echo $svg_code; // Render the SVG
+            echo $svg_code;
             echo '</div>';
         } else {
             echo 'No SVG code found';
         }
     }
 }
-add_action('manage_svg_library_posts_custom_column', 'add_svg_column_content', 10, 2);
+add_action('manage_svg_posts_custom_column', 'add_svg_column_content', 10, 2);
 
-// Add a meta box to display the SVG preview on the single SVG editor page
+// Add custom meta box to SVG post type
 function add_svg_preview_meta_box()
 {
     add_meta_box(
-        'svg_preview_meta_box', // Meta box ID
-        'SVG Preview',          // Meta box title
-        'render_svg_preview_meta_box', // Callback function
-        'svg_library',          // Post type
-        'side',                 // Context (side, normal, advanced)
-        'low'                  // Priority
+        'svg_preview_meta_box',
+        'SVG Preview',
+        'render_svg_preview_meta_box',
+        'svg',
+        'normal',
+        'low'
     );
 }
 add_action('add_meta_boxes', 'add_svg_preview_meta_box');
 
-// Render the SVG preview in the meta box
+// Render the SVG preview meta box
 function render_svg_preview_meta_box($post)
 {
-    // Get the SVG code from the ACF field
-    $svg_code = get_field('full_svg_code', $post->ID); // Use the ACF field name
+    $svg_code = get_field('full_svg_code', $post->ID);
 
     if ($svg_code) {
-        // Display the SVG preview
         echo '<div style="border: 1px solid #ddd; padding: 10px; text-align: center;">';
         echo '<div style="max-width: 100%; max-height: 200px; overflow: auto;">';
-        echo $svg_code; // Render the SVG
+        echo $svg_code;
         echo '</div>';
         echo '</div>';
     } else {

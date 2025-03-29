@@ -29,7 +29,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "svg_library"
+                "value": "svg"
             }
         ]
     ],
@@ -42,5 +42,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1743274399
+    "modified": 1743276282
 }
