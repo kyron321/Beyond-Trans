@@ -1,0 +1,16 @@
+{
+    "name": "acf/banner-tile",
+    "title": "Banner Tile",
+    "description": "A simple banner block",
+    "style": [ "file:./banner-tile.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["banner", "tile"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "banner-tile.php"
+    },
+    "supports": {
+        "align": false
+    }
+}

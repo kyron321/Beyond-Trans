@@ -31,6 +31,7 @@ function load_acf_json_from_theme($paths)
 function register_acf_blocks()
 {
     register_block_type(get_template_directory() . '/blocks/banner');
+    register_block_type(get_template_directory() . '/blocks/banner-tile');
 }
 add_action('init', 'register_acf_blocks');
 
