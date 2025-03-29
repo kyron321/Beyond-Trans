@@ -33,3 +33,14 @@ function register_acf_blocks()
     register_block_type(get_template_directory() . '/blocks/banner');
 }
 add_action('init', 'register_acf_blocks');
+
+// Register a website options page
+if (function_exists('acf_add_options_page')) {
+    acf_add_options_page(array(
+        'page_title' => 'Website Options',
+        'menu_title' => 'Website Options',
+        'menu_slug'  => 'website-options',
+        'capability' => 'edit_posts',
+        'redirect'   => false,
+    ));
+}
