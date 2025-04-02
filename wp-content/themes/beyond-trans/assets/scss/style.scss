@@ -1,9 +1,9 @@
 // Base elements
+@use 'base/colors';
 @use 'base/reset';
-// @use 'typography';
-// @use 'buttons';
+@use 'base/typography';
+@use 'base/buttons';
 // @use 'forms';
-// @use 'layout';
 
 // Blocks
-@use 'blocks/banner';
+@use 'blocks/banner'
