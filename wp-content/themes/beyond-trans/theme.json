@@ -31,32 +31,6 @@
                 }
             ],
             "text": false
-        },
-        "typography": {
-            "fontFamilies": [
-                {
-                    "fontFamily": "'Poppins', sans-serif",
-                    "name": "Poppins",
-                    "slug": "poppins"
-                },
-                {
-                    "fontFamily": "'Manrope', sans-serif",
-                    "name": "Manrope",
-                    "slug": "manrope"
-                }
-            ]
-        }
-    },
-    "styles": {
-        "typography": {
-            "fontFamily": "'Manrope', sans-serif"
-        },
-        "elements": {
-            "heading": {
-                "typography": {
-                    "fontFamily": "'Poppins', sans-serif"
-                }
-            }
         }
     }
 }
