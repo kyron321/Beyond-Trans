@@ -16,18 +16,18 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: inherit; // Match the button's border-radius
-        transform: translateX(-100%); // Start off-screen to the left
+        border-radius: inherit;
+        transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
-        z-index: -1; // Place behind the button text
+        z-index: -1;
     }
 
     &:hover {
         &::before {
-            transform: translateX(0); // Fill the button from left to right
+            transform: translateX(0);
         }
 
-        color: inherit; // Keep text color consistent
+        color: inherit;
     }
 
     // Primary button styles
@@ -36,7 +36,7 @@
         color: var(--white);
 
         &::before {
-            background-color: var(--primary-dark); // Darker shade for hover effect
+            background-color: var(--primary-dark);
         }
     }
 
@@ -46,7 +46,7 @@
         color: var(--black);
 
         &::before {
-            background-color: var(--primary); // Darker shade for hover effect
+            background-color: var(--primary);
         }
     }
 
