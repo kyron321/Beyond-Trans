@@ -25,14 +25,14 @@ $cta_two = get_field('cta_two');
 
         <div class="banner-cta">
             <?php if ($cta): ?>
-            <a href="<?php echo esc_url($cta['url']); ?>" class="btn btn-primary"
+            <a href="<?php echo esc_url($cta['url']); ?>" class="btn btn-secondary"
                 target="<?php echo esc_attr($cta['target']); ?>">
                 <?php echo esc_html($cta['title']); ?>
             </a>
             <?php endif; ?>
 
             <?php if ($cta_two): ?>
-            <a href="<?php echo esc_url($cta_two['url']); ?>" class="btn btn-secondary"
+            <a href="<?php echo esc_url($cta_two['url']); ?>" class="btn btn-white"
                 target="<?php echo esc_attr($cta_two['target']); ?>">
                 <?php echo esc_html($cta_two['title']); ?>
             </a>
