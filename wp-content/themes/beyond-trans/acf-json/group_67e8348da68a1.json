@@ -127,8 +127,8 @@
         },
         {
             "key": "field_67e83ae36a8d8",
-            "label": "Genspect Related Website",
-            "name": "genspect_related_website",
+            "label": "Genspect Related Websites",
+            "name": "genspect_related_websites",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -216,5 +216,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1743278285
+    "modified": 1743628496
 }

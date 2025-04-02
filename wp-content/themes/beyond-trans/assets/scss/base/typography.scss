@@ -99,11 +99,40 @@ span {
     margin-bottom: $body-margin-bottom;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+    color: var(--black);
+}
+
+li {
+    list-style: none;
+    margin-bottom: 0.5rem;
+    color: var(--black);
+}
+
+a {
+    span {
+        color: inherit;
+    }
+}
+
 a {
     text-decoration: none;
     font-family: $body-font-family;
     font-size: $body-font-size-small;
     font-weight: $body-font-weight-semibold;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        text-decoration: underline;
+        color: var(--primary);
+    }
 }
 
 p {

@@ -23,11 +23,12 @@
     }
 
     &:hover {
+        color: inherit;
+        text-decoration: none;
+
         &::before {
             transform: translateX(0);
         }
-
-        color: inherit;
     }
 
     // Primary button styles
