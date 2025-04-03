@@ -1,5 +1,7 @@
 <?php
 $website_logo = get_field('website_logo', 'option');
+$cta_1 = get_field('cta_1', 'option');
+$cta_2 = get_field('cta_2', 'option');
 ?>
 
 <nav class="main-nav">
@@ -8,7 +10,7 @@ $website_logo = get_field('website_logo', 'option');
             <a href="/">
                 <?php $svg_code = $website_logo ? get_svg_by_post_id($website_logo) : ''; ?>
                 <?php if ($svg_code): ?>
-                <?= $svg_code; ?>
+                    <?= $svg_code; ?>
                 <?php endif; ?>
             </a>
         </div>
@@ -20,8 +22,12 @@ $website_logo = get_field('website_logo', 'option');
             ));
             ?>
             <div class="main-nav__menu__ctas">
-                <a href="<?= esc_url(home_url('/')); ?>donate" class="btn btn-secondary">Donate</a>
-                <a href="<?= esc_url(home_url('/')); ?>join" class="btn btn-transparent">Contact</a>
+                <?php if ($cta_1): ?>
+                    <a href="<?= esc_url($cta_1['url']); ?>" class="btn btn-transparent"><?= esc_html($cta_1['title']); ?></a>
+                <?php endif; ?>
+                <?php if ($cta_2): ?>
+                    <a href="<?= esc_url($cta_2['url']); ?>" class="btn btn-secondary"><?= esc_html($cta_2['title']); ?></a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
