@@ -105,8 +105,7 @@ h3,
 h4,
 h5,
 h6,
-p,
-span {
+p {
     color: var(--black);
 }
 
@@ -117,6 +116,7 @@ li {
 }
 
 a {
+    color: var(--primary);
     text-decoration: none;
     font-family: $body-font-family;
     font-size: $body-font-size-small;
@@ -125,7 +125,7 @@ a {
 
     &:hover {
         text-decoration: underline;
-        color: var(--primary);
+        color: var(--primary-dark);
     }
 }
 
