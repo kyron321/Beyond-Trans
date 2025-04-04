@@ -4,6 +4,36 @@
     background-color: var(--primary-dark);
     height: 520px;
 
+    .container {
+        flex-direction: column;
+    }
+
+    &__bottom {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__copyright {
+            color: var(--white);
+            font-weight: 300;
+            font-size: 0.875rem;
+        }
+
+        &__menu {
+            ul {
+                display: flex;
+                gap: 1.5rem;
+
+                a {
+                    color: var(--white);
+                    font-weight: 300;
+                    font-size: 0.875rem;
+                }
+            }
+        }
+    }
+
     &__main {
         display: flex;
         height: 340px;
@@ -93,7 +123,7 @@
 
                 h6 {
                     color: var(--white);
-                    font-size: 1rem;
+                    font-size: 1.125rem;
                     font-weight: 500;
                     margin-bottom: 0.5rem;
                 }
