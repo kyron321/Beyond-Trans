@@ -1,0 +1,133 @@
+.footer {
+    display: flex;
+    align-items: center;
+    background-color: var(--primary-dark);
+    height: 520px;
+
+    &__main {
+        display: flex;
+        height: 340px;
+        width: 100%;
+        background-color: var(--primary);
+        border: solid 1px;
+        border-color: rgba(white, 0.2);
+        border-radius: 40px;
+
+        &__inner {
+            padding: 48px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 8rem;
+
+            &__left {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                max-width: 500px;
+
+                &__logo {
+                    padding-bottom: 1.5rem;
+                }
+
+                &__newsletter {
+
+                    &__form {
+
+                        form {
+                            margin-bottom: 1rem;
+
+                            input {
+                                width: 100%;
+                                max-width: 380px;
+                                appearance: none;
+                                border: none;
+                                background: rgb(255 255 255 / 10%);
+                                border: solid 1px rgb(255 255 255 / 20%);
+                                padding: 13.5px 8px;
+                                border-radius: 12px;
+                                margin-right: 1rem;
+                                transition: all 0.3s ease-in-out;
+                                color: var(--white);
+                                font-size: 1rem;
+
+                                &:focus {
+                                    outline: none;
+                                    background: rgb(255 255 255 / 20%);
+                                }
+
+                                &::placeholder {
+                                    color: rgb(255 255 255 / 60%);
+                                    font-size: 1rem;
+                                }
+                            }
+
+                            button {
+                                padding: 1rem 1.5rem;
+                                border: none;
+                                background: rgb(255 255 255 / 10%);
+
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+
+                    &__title {
+                        font-size: 1rem;
+                        color: var(--white);
+                    }
+
+                    &__privacy {
+                        color: var(--white);
+                        font-weight: 300;
+                        font-size: 0.75rem;
+                    }
+                }
+            }
+
+            &__right {
+                display: flex;
+                width: 100%;
+
+                h6 {
+                    color: var(--white);
+                    font-size: 1rem;
+                    font-weight: 500;
+                    margin-bottom: 0.5rem;
+                }
+
+                menu {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    width: 100%;
+                    max-width: 500px;
+
+                    li {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        margin-bottom: 1rem;
+
+                        a {
+                            display: flex;
+                            align-items: center;
+                            gap: 0.75rem;
+                            color: var(--white);
+                            font-size: 1rem;
+                            text-decoration: none;
+                            transition: all 0.3s ease-in-out;
+
+                            &:hover {
+                                color: var(--white);
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

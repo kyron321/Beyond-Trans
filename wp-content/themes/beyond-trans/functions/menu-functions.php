@@ -7,7 +7,6 @@ function register_custom_menus()
         'header-menu' => __('Header Menu'),
         'footer-menu-one'  => __('Footer Menu One'),
         'footer-menu-two'  => __('Footer Menu Two'),
-        'footer-menu-three'  => __('Footer Menu Three'),
         'policy-menu'  => __('Policy Menu'),
     ));
 }

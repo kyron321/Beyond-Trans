@@ -104,6 +104,34 @@
                     "return_format": "array",
                     "allow_in_bindings": 0,
                     "parent_repeater": "field_67e839b710a7c"
+                },
+                {
+                    "key": "field_67f03b004ddae",
+                    "label": "Social Icon",
+                    "name": "social_icon",
+                    "aria-label": "",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": "",
+                    "post_status": "",
+                    "taxonomy": [
+                        "category:social-icons"
+                    ],
+                    "return_format": "id",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "bidirectional": 0,
+                    "ui": 1,
+                    "bidirectional_target": [],
+                    "parent_repeater": "field_67e839b710a7c"
                 }
             ]
         },
@@ -268,5 +296,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1743714914
+    "modified": 1743797164
 }

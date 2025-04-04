@@ -1,8 +1,12 @@
-<footer>
+<footer class="footer">
     <div class="container">
-        <?php get_template_part('template-parts/common/logo'); ?>
-        <?php get_template_part('template-parts/layout/menus/footer', 'menu'); ?>
-        <?php wp_footer(); ?>
+        <div class="footer__main">
+            <div class="footer__main__inner">
+                <?php get_template_part('templates/footer/footer-left'); ?>
+                <?php get_template_part('templates/footer/footer-right'); ?>
+            </div>
+        </div>
+        <?php get_template_part('templates/footer/footer-bottom'); ?>
     </div>
 </footer>
 </body>
