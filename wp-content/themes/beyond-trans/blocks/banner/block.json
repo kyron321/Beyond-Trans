@@ -11,11 +11,6 @@
         "renderTemplate": "banner.php"
     },
     "supports": {
-        "align": false,
-        "color": {
-            "text": true,
-            "background": true,
-            "link": true
-        }
+        "align": false
     }
 }

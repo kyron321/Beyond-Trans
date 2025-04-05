@@ -1,4 +1,4 @@
-.banner {
+.banner-tile {
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -37,13 +37,8 @@
         position: relative;
         z-index: 3;
         max-width: 1200px;
+        padding: 6rem 2rem;
         text-align: center;
-
-        &.container {
-            flex-direction: column;
-            padding-top: 12rem;
-            padding-bottom: 12rem;
-        }
 
         &__title {
             color: var(--white);
