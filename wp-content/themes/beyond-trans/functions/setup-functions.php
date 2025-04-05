@@ -9,13 +9,6 @@ function theme_styles()
 }
 add_action('wp_enqueue_scripts', 'theme_styles');
 
-// Enqueue editor preview styles
-function editor_block_preview_styles()
-{
-    wp_enqueue_style('editor_block_preview_styles', get_template_directory_uri() . '/dist/css/style.min.css', [], THEME_VERSION);
-}
-add_action('enqueue_block_editor_assets', 'editor_block_preview_styles');
-
 // Enqueue admin exclusive styles
 function admin_styles()
 {

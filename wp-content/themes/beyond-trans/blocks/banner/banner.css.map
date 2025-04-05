@@ -1,1 +1,0 @@
-{"version":3,"sources":["banner/banner.scss","banner/banner.css"],"names":[],"mappings":"AAAA;EACI,aAAA;ACCJ","file":"banner.css","sourcesContent":[".banner-block {\n    display: none;\n}",".banner-block {\n  display: none;\n}"]}

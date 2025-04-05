@@ -1,9 +1,8 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const autoprefixer = require('gulp-autoprefixer');
-const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
-const del = require('del');
+const { deleteAsync } = require('del');
 const rename = require('gulp-rename');
 
 // File paths
@@ -25,18 +24,13 @@ const paths = {
   },
   blocks: {
     src: `${themeDir}/blocks/*/*.scss`,
-    watch: `${themeDir}/blocks/*/*.scss`,
-    dest: (file) => {
-      // Extract the directory path for each block
-      const blockPath = file.dirname.split('/').pop();
-      return `${themeDir}/blocks/${blockPath}`;
-    }
+    watch: `${themeDir}/blocks/*/*.scss`
   }
 };
 
 // Clean dist directory
-function clean() {
-  return del([
+async function clean() {
+  return await deleteAsync([
     `${themeDir}/dist/css/**/*`,
     `${themeDir}/dist/js/**/*`
   ]);
@@ -45,35 +39,30 @@ function clean() {
 // Main styles task
 function styles() {
   return src(paths.styles.src)
-    .pipe(sourcemaps.init())
     .pipe(sass.sync({ 
       outputStyle: 'compressed',
       includePaths: ['node_modules']
     }).on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(rename({ suffix: '.min' }))
-    .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.styles.dest));
 }
 
 // Admin styles task
 function adminStyles() {
   return src(paths.adminStyles.src)
-    .pipe(sourcemaps.init())
     .pipe(sass.sync({ 
       outputStyle: 'compressed',
       includePaths: ['node_modules']
     }).on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(rename({ suffix: '.min' }))
-    .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.adminStyles.dest));
 }
 
 // Blocks styles task
 function blockStyles() {
   return src(paths.blocks.src)
-    .pipe(sourcemaps.init())
     .pipe(sass.sync({ 
       outputStyle: 'compressed',
       includePaths: ['node_modules']
@@ -82,7 +71,6 @@ function blockStyles() {
     .pipe(rename(function(path) {
       path.extname = '.css';
     }))
-    .pipe(sourcemaps.write('./'))
     .pipe(dest(function(file) {
       return file.base;
     }));
@@ -91,10 +79,8 @@ function blockStyles() {
 // Scripts task
 function scripts() {
   return src(paths.scripts.src)
-    .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
-    .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.scripts.dest));
 }
 
