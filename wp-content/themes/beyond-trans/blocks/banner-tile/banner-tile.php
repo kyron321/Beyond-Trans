@@ -12,7 +12,7 @@ $is_first_block = ($position === 0);
 $loading_type = $is_first_block ? 'eager' : 'lazy';
 ?>
 
-<section class="banner-tile">
+<section class="block banner-tile">
     <?php if ($image): ?>
         <div class="banner-tile__image">
             <img
@@ -24,28 +24,30 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
     <?php endif; ?>
 
     <div class="banner-tile__content">
-        <?php if ($title): ?>
-            <h1 class="banner-tile__content__title"><?= $title; ?></h1>
-        <?php endif; ?>
-
-        <?php if ($sub_title): ?>
-            <p class="banner-tile__content__subtitle"><?= $sub_title; ?></p>
-        <?php endif; ?>
-
-        <div class="banner-tile__content__ctas">
-            <?php if ($cta): ?>
-                <a href="<?= $cta['url']; ?>" class="btn btn-primary"
-                    target="<?= $cta['target'] ?: '_blank'; ?>">
-                    <?= $cta['title']; ?>
-                </a>
+        <div class="banner-tile__content__inner container">
+            <?php if ($title): ?>
+                <h1 class="banner-tile__content__title"><?= $title; ?></h1>
             <?php endif; ?>
 
-            <?php if ($cta_two): ?>
-                <a href="<?= $cta_two['url']; ?>" class="btn btn-secondary"
-                    target="<?= $cta_two['target'] ?: '_blank'; ?>">
-                    <?= $cta_two['title']; ?>
-                </a>
+            <?php if ($sub_title): ?>
+                <p class="banner-tile__content__subtitle"><?= $sub_title; ?></p>
             <?php endif; ?>
+
+            <div class="banner-tile__content__ctas">
+                <?php if ($cta): ?>
+                    <a href="<?= $cta['url']; ?>" class="btn btn-primary"
+                        target="<?= $cta['target'] ?: '_blank'; ?>">
+                        <?= $cta['title']; ?>
+                    </a>
+                <?php endif; ?>
+
+                <?php if ($cta_two): ?>
+                    <a href="<?= $cta_two['url']; ?>" class="btn btn-white"
+                        target="<?= $cta_two['target'] ?: '_blank'; ?>">
+                        <?= $cta_two['title']; ?>
+                    </a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </section>

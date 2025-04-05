@@ -12,7 +12,7 @@ $is_first_block = ($position === 0);
 $loading_type = $is_first_block ? 'eager' : 'lazy';
 ?>
 
-<section class="banner">
+<section class="block banner">
     <?php if ($image): ?>
         <div class="banner__image">
             <img
