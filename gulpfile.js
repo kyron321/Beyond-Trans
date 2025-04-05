@@ -4,7 +4,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 const del = require('del');
-const rename = require('gulp-rename'); // Add gulp-rename
+const rename = require('gulp-rename');
 
 // File paths
 const themeDir = 'wp-content/themes/beyond-trans';
@@ -22,6 +22,15 @@ const paths = {
   scripts: {
     src: `${themeDir}/assets/js/**/*.js`,
     dest: `${themeDir}/dist/js/`
+  },
+  blocks: {
+    src: `${themeDir}/blocks/*/*.scss`,
+    watch: `${themeDir}/blocks/*/*.scss`,
+    dest: (file) => {
+      // Extract the directory path for each block
+      const blockPath = file.dirname.split('/').pop();
+      return `${themeDir}/blocks/${blockPath}`;
+    }
   }
 };
 
@@ -42,7 +51,7 @@ function styles() {
       includePaths: ['node_modules']
     }).on('error', sass.logError))
     .pipe(autoprefixer())
-    .pipe(rename({ suffix: '.min' })) // Rename to .min.css
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.styles.dest));
 }
@@ -56,9 +65,27 @@ function adminStyles() {
       includePaths: ['node_modules']
     }).on('error', sass.logError))
     .pipe(autoprefixer())
-    .pipe(rename({ suffix: '.min' })) // Rename to .min.css
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.adminStyles.dest));
+}
+
+// Blocks styles task
+function blockStyles() {
+  return src(paths.blocks.src)
+    .pipe(sourcemaps.init())
+    .pipe(sass.sync({ 
+      outputStyle: 'compressed',
+      includePaths: ['node_modules']
+    }).on('error', sass.logError))
+    .pipe(autoprefixer())
+    .pipe(rename(function(path) {
+      path.extname = '.css';
+    }))
+    .pipe(sourcemaps.write('./'))
+    .pipe(dest(function(file) {
+      return file.base;
+    }));
 }
 
 // Scripts task
@@ -66,7 +93,7 @@ function scripts() {
   return src(paths.scripts.src)
     .pipe(sourcemaps.init())
     .pipe(uglify())
-    .pipe(rename({ suffix: '.min' })) // Rename to .min.js
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))
     .pipe(dest(paths.scripts.dest));
 }
@@ -75,6 +102,7 @@ function scripts() {
 function watchFiles() {
   watch(paths.styles.watch, styles);
   watch(paths.adminStyles.watch, adminStyles);
+  watch(paths.blocks.watch, blockStyles);
   watch(paths.scripts.src, scripts);
 }
 
@@ -82,17 +110,18 @@ function watchFiles() {
 exports.clean = clean;
 exports.styles = styles;
 exports.adminStyles = adminStyles;
+exports.blockStyles = blockStyles;
 exports.scripts = scripts;
 exports.watch = watchFiles;
 
 // Default task
 exports.default = series(
   clean,
-  parallel(styles, adminStyles, scripts)
+  parallel(styles, adminStyles, blockStyles, scripts)
 );
 
 // Build task
 exports.build = series(
   clean,
-  parallel(styles, adminStyles, scripts)
+  parallel(styles, adminStyles, blockStyles, scripts)
 );
