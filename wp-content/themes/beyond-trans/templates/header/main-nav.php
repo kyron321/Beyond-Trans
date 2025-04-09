@@ -19,6 +19,9 @@ $cta_2 = get_field('cta_2', 'option');
             wp_nav_menu(array(
                 'theme_location' => 'header-menu',
                 'items_wrap' => '<ul class="main-nav__menu__list">%3$s</ul>',
+                'container' => false,
+                'depth' => 2, // Allow one level of dropdown
+                'walker' => new Main_Nav_Walker(),
             ));
             ?>
             <div class="main-nav__menu__ctas">
