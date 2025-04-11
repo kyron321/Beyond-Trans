@@ -39,6 +39,10 @@
         &::before {
             background-color: var(--primary-dark);
         }
+
+        &:hover {
+            color: var(--white);
+        }
     }
 
     // Secondary button styles
@@ -61,11 +65,15 @@
         color: var(--black);
 
         &::before {
-            background-color: var(--primary);
+            background-color: var(--primary-dark);
+        }
+
+        &:hover {
+            color: var(--white);
         }
     }
 
-    // Transparent 25% button styles
+    // Transparent button styles
     &-transparent {
         background-color: rgba(255, 255, 255, 0.25);
         color: var(--white);

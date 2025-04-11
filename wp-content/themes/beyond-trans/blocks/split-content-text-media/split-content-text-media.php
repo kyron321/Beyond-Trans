@@ -29,6 +29,12 @@ if (!empty($text_class)) {
     $block_classes[] = $text_class;
 }
 
+// Determine button class for CTA two based on background color
+$cta_two_class = 'btn btn-underline';
+if ($bg_class === 'bg-light-yellow' || $bg_class === 'bg-grey') {
+    $cta_two_class = 'btn btn-primary';
+}
+
 // Get block position
 $position = isset($block['attrs']['position']) ? $block['attrs']['position'] : null;
 $is_first_block = ($position === 0);
@@ -83,7 +89,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
 
                         <?php if ($cta_two): ?>
                             <a href="<?php echo esc_url($cta_two['url']); ?>"
-                                class="btn btn-underline"
+                                class="<?php echo esc_attr($cta_two_class); ?>"
                                 target="<?php echo esc_attr($cta_two['target'] ?: '_self'); ?>">
                                 <?php echo esc_html($cta_two['title']); ?>
                             </a>

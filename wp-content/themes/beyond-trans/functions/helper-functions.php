@@ -74,7 +74,7 @@ function bt_get_background_color($background_color)
         'darker-green' => 'bg-primary-dark',
         'darkest-green' => 'bg-primary-darker',
         'off-grey' => 'bg-grey',
-        'light-yellow' => 'bg-secondary'
+        'light-yellow' => 'bg-light-yellow',
     ];
 
     // If background color is not set or doesn't exist in our map, return empty string
