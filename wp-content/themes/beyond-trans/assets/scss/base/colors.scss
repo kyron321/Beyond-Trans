@@ -4,9 +4,67 @@
     --primary: #026670;
     --secondary: #FCE181;
     --secondary-dark: #efd25f;
-    --tea: #FEFCF2;
+    --eggshell-white: #FEFCF2;
     --grey: #EDEAE5;
     --grey-light: #F2F5F8;
     --white: #FFFFFF;
     --black: #000000;
+}
+
+// Background color classes for blocks
+.bg-primary {
+    background-color: var(--primary); // Dark Green
+}
+
+.bg-primary-dark {
+    background-color: var(--primary-dark); // Darker Green
+}
+
+.bg-primary-darker {
+    background-color: var(--primary-darker); // Darkest Green
+}
+
+.bg-grey {
+    background-color: var(--grey); // Off Grey
+}
+
+.bg-secondary {
+    background-color: var(--eggshell-white); // Light Yellow
+}
+
+// Text color classes
+.text-light {
+    color: var(--white);
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    li,
+    span {
+        color: var(--white);
+        ;
+    }
+
+    svg {
+        fill: var(--white);
+        ;
+    }
+
+    a:not(.btn) {
+        color: var(--white);
+        ;
+        text-decoration: underline;
+    }
+}
+
+.text-dark {
+    color: var(--black);
+
+    a:not(.btn) {
+        color: var(--black);
+    }
 }

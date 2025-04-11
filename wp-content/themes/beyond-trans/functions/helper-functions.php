@@ -110,11 +110,11 @@ function bt_get_text_color_for_background($background_color)
         }
     }
 
-    // Define which backgrounds need light text
+    // Define which backgrounds need light text - using slug values from ACF
     $dark_backgrounds = [
-        'Dark Green',
-        'Darker Green',
-        'Darkest Green'
+        'dark-green',
+        'darker-green',
+        'darkest-green'
     ];
 
     if (in_array($background_color, $dark_backgrounds)) {

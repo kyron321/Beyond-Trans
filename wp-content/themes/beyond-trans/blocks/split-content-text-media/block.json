@@ -1,0 +1,16 @@
+{
+    "name": "acf/split-content-text-media",
+    "title": "Split Content Text Media",
+    "description": "A block with split content sections",
+    "style": [ "file:./split-content-text-media.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["split", "content", "text", "media"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "split-content-text-media.php"
+    },
+    "supports": {
+        "align": false
+    }
+}
