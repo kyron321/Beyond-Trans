@@ -30,8 +30,12 @@ function load_acf_json_from_theme($paths)
 // Register ACF blocks
 function register_acf_blocks()
 {
-    register_block_type(get_template_directory() . '/blocks/banner');
-    register_block_type(get_template_directory() . '/blocks/banner-tile');
+    $blocks_dir = get_template_directory() . '/blocks';
+    $block_folders = array_filter(glob($blocks_dir . '/*'), 'is_dir');
+
+    foreach ($block_folders as $block_folder) {
+        register_block_type($block_folder);
+    }
 }
 add_action('init', 'register_acf_blocks');
 
