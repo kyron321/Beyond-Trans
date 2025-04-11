@@ -1,10 +1,10 @@
 {
     "key": "group_67f158d8ba485",
-    "title": "Block : Split Content Text Media",
+    "title": "Block : Grid Cards",
     "fields": [
         {
             "key": "field_67f6e317f7b98",
-            "label": "Split Content Text Media",
+            "label": "Grid Cards",
             "name": "",
             "aria-label": "",
             "type": "accordion",
@@ -21,11 +21,11 @@
             "endpoint": 0
         },
         {
-            "key": "field_67f95dceef7f6",
-            "label": "Column One",
-            "name": "",
+            "key": "field_67f988e1ef090",
+            "label": "Block Heading",
+            "name": "block_heading",
             "aria-label": "",
-            "type": "tab",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -34,16 +34,19 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
         },
         {
-            "key": "field_67f95bacf21aa",
-            "label": "Column One",
-            "name": "column_one",
+            "key": "field_67f95bd3f21ab",
+            "label": "Cards",
+            "name": "cards",
             "aria-label": "",
-            "type": "group",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -52,14 +55,20 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
+            "layout": "table",
+            "pagination": 0,
+            "min": 3,
+            "max": 3,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_67f95c5de4a0b",
-                    "label": "Subheading",
-                    "name": "subheading",
+                    "key": "field_67f989cfbda06",
+                    "label": "Card",
+                    "name": "card",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "group",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -68,83 +77,14 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
-                },
-                {
-                    "key": "field_67f95c3fe4a09",
-                    "label": "Heading",
-                    "name": "heading",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
-                },
-                {
-                    "key": "field_67f95b8ef21a8",
-                    "label": "Text",
-                    "name": "text",
-                    "aria-label": "",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "rows": "",
-                    "placeholder": "",
-                    "new_lines": ""
-                },
-                {
-                    "key": "field_67f95ea855022",
-                    "label": "Key Points",
-                    "name": "key_points",
-                    "aria-label": "",
-                    "type": "repeater",
-                    "instructions": "Leave blank if you don't want this to display",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "layout": "table",
-                    "pagination": 0,
-                    "min": 0,
-                    "max": 0,
-                    "collapsed": "",
-                    "button_label": "Add Row",
-                    "rows_per_page": 20,
+                    "layout": "block",
                     "sub_fields": [
                         {
-                            "key": "field_67f95edc55023",
-                            "label": "Key Point Icon",
-                            "name": "key_point_icon",
+                            "key": "field_67f989b322660",
+                            "label": "Card",
+                            "name": "",
                             "aria-label": "",
-                            "type": "post_object",
+                            "type": "accordion",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -153,26 +93,43 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "post_type": [
-                                "svg"
-                            ],
-                            "post_status": "",
-                            "taxonomy": [
-                                "category:fa-icons"
-                            ],
-                            "return_format": "id",
-                            "multiple": 0,
-                            "allow_null": 0,
-                            "allow_in_bindings": 0,
-                            "bidirectional": 0,
-                            "ui": 1,
-                            "bidirectional_target": [],
-                            "parent_repeater": "field_67f95ea855022"
+                            "open": 0,
+                            "multi_expand": 0,
+                            "endpoint": 0
                         },
                         {
-                            "key": "field_67f95eeb55024",
-                            "label": "Key Point Text",
-                            "name": "key_point_text",
+                            "key": "field_67f95bd3f21ac",
+                            "label": "Image",
+                            "name": "image",
+                            "aria-label": "",
+                            "type": "image_aspect_ratio_crop",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "crop_type": "aspect_ratio",
+                            "aspect_ratio_width": 405,
+                            "aspect_ratio_height": 240,
+                            "return_format": "array",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "allow_in_bindings": 0
+                        },
+                        {
+                            "key": "field_67f98889e013b",
+                            "label": "Heading",
+                            "name": "heading",
                             "aria-label": "",
                             "type": "text",
                             "instructions": "",
@@ -188,172 +145,50 @@
                             "allow_in_bindings": 0,
                             "placeholder": "",
                             "prepend": "",
-                            "append": "",
-                            "parent_repeater": "field_67f95ea855022"
+                            "append": ""
+                        },
+                        {
+                            "key": "field_67f988a4e013c",
+                            "label": "Text",
+                            "name": "text",
+                            "aria-label": "",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "rows": "",
+                            "placeholder": "",
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_67f988ade013d",
+                            "label": "CTA",
+                            "name": "cta",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "allow_in_bindings": 0
                         }
-                    ]
-                },
-                {
-                    "key": "field_67f95f2155025",
-                    "label": "CTA One",
-                    "name": "cta_one",
-                    "aria-label": "",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array",
-                    "allow_in_bindings": 0
-                },
-                {
-                    "key": "field_67f95f2c55026",
-                    "label": "CTA Two",
-                    "name": "cta_two",
-                    "aria-label": "",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array",
-                    "allow_in_bindings": 0
+                    ],
+                    "parent_repeater": "field_67f95bd3f21ab"
                 }
             ]
-        },
-        {
-            "key": "field_67f95dfbef7f7",
-            "label": "Column Two",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_67f95bd3f21ab",
-            "label": "Column Two",
-            "name": "column_two",
-            "aria-label": "",
-            "type": "group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_67f95bd3f21ac",
-                    "label": "Image",
-                    "name": "image",
-                    "aria-label": "",
-                    "type": "image_aspect_ratio_crop",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "crop_type": "aspect_ratio",
-                    "aspect_ratio_width": 616,
-                    "aspect_ratio_height": 640,
-                    "return_format": "array",
-                    "preview_size": "medium",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "allow_in_bindings": 0
-                }
-            ]
-        },
-        {
-            "key": "field_67f966a4f5f27",
-            "label": "Block Options",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_67f969ead67fd",
-            "label": "Flip Columns",
-            "name": "flip_columns",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "Enable this to swap the positions of the columns",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "allow_in_bindings": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
-        },
-        {
-            "key": "field_67f966b1f5f28",
-            "label": "Background Colour",
-            "name": "background_colour",
-            "aria-label": "",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "field_67f965d048605"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
         }
     ],
     "location": [
@@ -361,7 +196,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/split-content-text-media"
+                "value": "acf\/grid-cards"
             }
         ]
     ],
@@ -374,5 +209,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1744400047
+    "modified": 1744407681
 }

@@ -141,4 +141,59 @@
             }
         }
     }
+
+    &-underline-black {
+        background-color: transparent;
+        color: var(--black);
+        border-radius: 0px;
+        padding-left: 0.5rem;
+        padding-right: 1.5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        position: relative;
+
+        // Use ::before for the underline effect
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            top: unset;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--black);
+            transition: width 0.3s ease-in-out;
+            z-index: 1;
+        }
+
+        &:hover::before {
+            width: 100%;
+            transition: width 0.3s ease-in-out;
+        }
+
+        // Use ::after for the arrow symbol
+        &::after {
+            content: "";
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 320 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/%3E%3C/svg%3E");
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            right: 0rem;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease-in-out;
+            font-size: 0.875rem;
+        }
+
+        &:hover {
+            color: var(--black);
+
+            &::after {
+                transform: translateY(-50%) translateX(3px);
+            }
+        }
+    }
 }

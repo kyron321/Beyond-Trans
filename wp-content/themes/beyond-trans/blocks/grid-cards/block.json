@@ -1,0 +1,16 @@
+{
+    "name": "acf/grid-cards",
+    "title": "Grid Cards",
+    "description": "A simple grid cards block",
+    "style": [ "file:./grid-cards.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["grid", "cards"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "grid-cards.php"
+    },
+    "supports": {
+        "align": false
+    }
+}
