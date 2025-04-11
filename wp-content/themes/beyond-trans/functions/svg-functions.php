@@ -95,17 +95,3 @@ function render_svg_preview_meta_box($post)
         echo '<p>No SVG code found.</p>';
     }
 }
-
-// Get SVG code from ACF field by post title or ID.
-function get_svg_by_post_id($post_id, $field_name = 'full_svg_code')
-{
-    // Get the SVG code from the specified ACF field
-    $svg_code = get_field($field_name, $post_id);
-
-    // Return the SVG code or a fallback message
-    if ($svg_code) {
-        return $svg_code;
-    }
-
-    return '<p>No SVG code found.</p>';
-}
