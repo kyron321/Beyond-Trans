@@ -91,12 +91,17 @@ h6 {
 
 p,
 li,
+div,
 span {
     font-size: $body-font-size;
     font-weight: $body-font-weight;
     line-height: $body-line-height;
     font-family: $body-font-family;
     margin-bottom: $body-margin-bottom;
+}
+
+div {
+    margin-bottom: 0;
 }
 
 h1,
