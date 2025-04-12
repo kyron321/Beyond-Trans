@@ -25,6 +25,11 @@ const paths = {
   blocks: {
     src: `${themeDir}/blocks/*/*.scss`,
     watch: `${themeDir}/blocks/*/*.scss`
+  },
+  images: {
+    src: `${themeDir}/assets/images/**/*`,
+    watch: `${themeDir}/assets/images/**/*`,
+    dest: `${themeDir}/dist/images/`
   }
 };
 
@@ -32,7 +37,8 @@ const paths = {
 async function clean() {
   return await deleteAsync([
     `${themeDir}/dist/css/**/*`,
-    `${themeDir}/dist/js/**/*`
+    `${themeDir}/dist/js/**/*`,
+    `${themeDir}/dist/images/**/*`  // Add images to clean task
   ]);
 }
 
@@ -84,12 +90,19 @@ function scripts() {
     .pipe(dest(paths.scripts.dest));
 }
 
+// Images task
+function images() {
+  return src(paths.images.src)
+    .pipe(dest(paths.images.dest));
+}
+
 // Watch files
 function watchFiles() {
   watch(paths.styles.watch, styles);
   watch(paths.adminStyles.watch, adminStyles);
-  watch(paths.blocks.watch, blockStyles);
   watch(paths.scripts.src, scripts);
+  watch(paths.blocks.watch, series(blockStyles, styles, scripts));
+  watch(paths.images.watch, images);
 }
 
 // Export tasks
@@ -98,16 +111,17 @@ exports.styles = styles;
 exports.adminStyles = adminStyles;
 exports.blockStyles = blockStyles;
 exports.scripts = scripts;
+exports.images = images;
 exports.watch = watchFiles;
 
 // Default task
 exports.default = series(
   clean,
-  parallel(styles, adminStyles, blockStyles, scripts)
+  parallel(styles, adminStyles, blockStyles, scripts, images)
 );
 
 // Build task
 exports.build = series(
   clean,
-  parallel(styles, adminStyles, blockStyles, scripts)
+  parallel(styles, adminStyles, blockStyles, scripts, images)
 );
