@@ -55,7 +55,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
 
                 <?php if ($text): ?>
                     <div class="split-content-text-media__text">
-                        <?php echo wpautop(esc_html($text)); ?>
+                        <?php echo $text; ?>
                     </div>
                 <?php endif; ?>
 
@@ -71,7 +71,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
                                         <?php echo get_svg_by_post_id($icon_id); ?>
                                     </div>
                                 <?php endif; ?>
-                                <span class="split-content-text-media__key-point-text"><?php echo esc_html($point_text); ?></span>
+                                <span class="split-content-text-media__key-point-text"><?php echo $point_text; ?></span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
