@@ -1,0 +1,16 @@
+{
+    "name": "acf/split-content-text-cta",
+    "title": "Split Content Text CTA",
+    "description": "A block with two columns: text content on one side and text with CTAs on the other.",
+    "category": "formatting",
+    "icon": "columns",
+    "keywords": ["split", "content", "text", "cta", "columns"],
+    "style": [ "file:./split-content-text-cta.css" ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "split-content-text-cta.php"
+    },
+    "supports": {
+        "align": false
+    }
+}
