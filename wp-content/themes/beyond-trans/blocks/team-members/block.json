@@ -1,0 +1,16 @@
+{
+    "name": "acf/team-members",
+    "title": "Team Members",
+    "description": "Display team members in a grid layout",
+    "category": "formatting",
+    "icon": "groups",
+    "keywords": ["team", "members", "staff", "employees", "people"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "team-members.php"
+    },
+    "style": ["file:./team-members.css"],
+    "supports": {
+        "align": false
+    }
+}
