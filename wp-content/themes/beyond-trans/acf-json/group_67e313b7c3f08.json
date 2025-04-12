@@ -3,6 +3,27 @@
     "title": "CPT : Team Members",
     "fields": [
         {
+            "key": "field_67fa58b76bfa6",
+            "label": "Experience \/ Role",
+            "name": "experience__role",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
             "key": "field_67e313b702484",
             "label": "Description",
             "name": "description",
@@ -19,7 +40,7 @@
             "default_value": "",
             "maxlength": "",
             "allow_in_bindings": 0,
-            "rows": "",
+            "rows": 6,
             "placeholder": "",
             "new_lines": ""
         },
@@ -37,7 +58,7 @@
                 "class": "",
                 "id": ""
             },
-            "open": 0,
+            "open": 1,
             "multi_expand": 0,
             "endpoint": 0
         },
@@ -134,12 +155,12 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1742935658
+    "modified": 1744460040
 }
