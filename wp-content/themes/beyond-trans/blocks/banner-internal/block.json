@@ -1,0 +1,16 @@
+{
+    "name": "acf/banner-internal",
+    "title": "Banner Internal",
+    "description": "A banner block for internal pages",
+    "style": [ "file:./banner-internal.css" ],
+    "category": "formatting",
+    "icon": "align-wide",
+    "keywords": ["banner", "internal", "header"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "banner-internal.php"
+    },
+    "supports": {
+        "align": false
+    }
+}
