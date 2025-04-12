@@ -1,0 +1,16 @@
+{
+    "name": "acf/testimonials-grid",
+    "title": "Testimonials Grid",
+    "description": "Display a grid of testimonials",
+    "style": [ "file:./testimonials-grid.css" ],
+    "category": "formatting",
+    "icon": "testimonial",
+    "keywords": ["testimonials", "reviews", "grid"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "testimonials-grid.php"
+    },
+    "supports": {
+        "align": false
+    }
+}

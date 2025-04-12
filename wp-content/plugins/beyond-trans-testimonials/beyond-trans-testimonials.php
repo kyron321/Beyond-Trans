@@ -49,7 +49,7 @@ function beyond_trans_register_testimonials_post_type()
         'hierarchical'       => false,
         'menu_position'      => 30,
         'menu_icon'          => 'dashicons-format-quote',
-        'supports'           => array('title', 'thumbnail')
+        'supports'           => array('title')
     );
 
     register_post_type('testimonial', $args);

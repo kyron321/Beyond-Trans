@@ -1,10 +1,10 @@
 {
-    "key": "group_67e31ea8e0817",
-    "title": "CPT : Testimonials",
+    "key": "group_67fa346a0813e",
+    "title": "Block : Testimonial Grid",
     "fields": [
         {
-            "key": "field_67e31f03463fa",
-            "label": "Content",
+            "key": "field_67fa346a08eb1",
+            "label": "Testimonials Grid",
             "name": "",
             "aria-label": "",
             "type": "accordion",
@@ -21,11 +21,11 @@
             "endpoint": 0
         },
         {
-            "key": "field_67e31ea8e1a4c",
-            "label": "Quote",
-            "name": "quote",
+            "key": "field_67fa34b6fce62",
+            "label": "Heading",
+            "name": "heading",
             "aria-label": "",
-            "type": "textarea",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -37,21 +37,21 @@
             "default_value": "",
             "maxlength": "",
             "allow_in_bindings": 0,
-            "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "prepend": "",
+            "append": ""
         },
         {
-            "key": "field_67e31f72463fd",
-            "label": "Affiliation",
-            "name": "affiliation",
+            "key": "field_67fa3575fce64",
+            "label": "Subheading",
+            "name": "subheading",
             "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "75",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -63,34 +63,63 @@
             "append": ""
         },
         {
-            "key": "field_67e31f1c463fb",
-            "label": "Star Rating",
-            "name": "star_rating",
+            "key": "field_67fa3582fce65",
+            "label": "Testimonials",
+            "name": "testimonials",
             "aria-label": "",
-            "type": "range",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": 5,
+            "post_type": [
+                "testimonial"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "return_format": "object",
             "min": "",
-            "max": 5,
+            "max": "",
             "allow_in_bindings": 0,
-            "step": "",
-            "prepend": "",
-            "append": ""
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_67fa386e97910",
+            "label": "CTA",
+            "name": "cta",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "block",
                 "operator": "==",
-                "value": "testimonial"
+                "value": "acf\/testimonials-grid"
             }
         ]
     ],
@@ -103,5 +132,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1744450445
+    "modified": 1744451704
 }
