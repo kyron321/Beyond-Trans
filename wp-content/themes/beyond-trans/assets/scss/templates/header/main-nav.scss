@@ -100,13 +100,15 @@
 
                 // Submenu styling
                 ul.sub-menu {
-                    display: block; // Important: keep this as block
+                    display: block;
                     position: absolute;
                     top: calc(100% + 8px);
                     left: 50%;
                     transform: translateX(-50%) translateY(10px);
                     background-color: var(--primary-dark);
                     min-width: 200px;
+                    width: max-content;
+                    max-width: 280px;
                     z-index: 999;
                     padding: 1rem;
                     border-radius: 1.25em;
@@ -137,11 +139,14 @@
                             padding: 8px 15px;
                             display: flex;
                             align-items: center;
-                            white-space: nowrap;
+                            white-space: normal; // Allow text to wrap
+                            word-break: normal; // Normal word breaking
+                            hyphens: auto; // Enable hyphenation for long words
                             position: relative;
-                            padding-right: 35px;
+                            padding-right: 48px;
                             transition: 0.2s ease-in-out;
-                            text-align: center;
+                            text-align: left; // Left align text for better readability
+                            line-height: 1.4; // Better line height for wrapped text
 
                             &::after {
                                 content: "";
@@ -151,6 +156,7 @@
                                 transform: translateY(-50%);
                                 width: 14px;
                                 height: 14px;
+                                flex-shrink: 0; // Prevent icon from shrinking
                                 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill=' white' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/%3E%3C/svg%3E");
                                 background-size: contain;
                                 background-repeat: no-repeat;
@@ -159,7 +165,8 @@
                             }
 
                             &:hover {
-                                margin-left: 6px;
+                                // margin-left: 6px;
+                                // padding-right: 48px; // Maintain consistent padding on hover
 
                                 &::after {
                                     right: 9px;
