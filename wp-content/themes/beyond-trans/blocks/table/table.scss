@@ -1,0 +1,185 @@
+.table-block {
+    padding: 6rem 0;
+    background-color: var(--primary);
+
+    &__content {
+        margin-bottom: 5rem;
+    }
+
+    &__subheading {
+        font-size: 1rem;
+        color: var(--white);
+    }
+
+    &__heading {
+        color: var(--white);
+    }
+
+    &__text {
+        max-width: 800px;
+        color: var(--white);
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--white);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__wrapper {
+        width: 100%;
+    }
+
+    &__caption {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        color: var(--white);
+    }
+
+    &__responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+    }
+
+    &__table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        table-layout: fixed;
+        border: 1px solid var(--white);
+        border-radius: 8px;
+        overflow: hidden;
+
+        // Determine column count and set width
+        &.col-count-2 th,
+        &.col-count-2 td {
+            width: 50%;
+        }
+
+        &.col-count-3 th,
+        &.col-count-3 td {
+            width: 33.333%;
+        }
+
+        &.col-count-4 th,
+        &.col-count-4 td {
+            width: 25%;
+        }
+
+        &.col-count-5 th,
+        &.col-count-5 td {
+            width: 20%;
+        }
+
+        &.col-count-6 th,
+        &.col-count-6 td {
+            width: 16.666%;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--white);
+            border-right: 1px solid var(--white);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+
+        // Remove right border from last cell in each row
+        th:last-child,
+        td:last-child {
+            border-right: none;
+        }
+
+        // Remove bottom border from cells in last row
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td {
+            color: var(--white);
+            font-size: .875rem;
+            font-weight: 300;
+        }
+
+        th {
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border-bottom: 2px solid var(--white);
+        }
+
+        // Apply border radius to corner cells
+        tr:first-child th:first-child {
+            border-top-left-radius: 7px;
+        }
+
+        tr:first-child th:last-child {
+            border-top-right-radius: 7px;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 7px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 7px;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--primary);
+        }
+
+        tr {
+            background-color: var(--primary);
+        }
+
+        tr:hover {
+            td {
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+    }
+
+    &--empty {
+        .table-block__empty-message {
+            padding: 2rem;
+            text-align: center;
+            background-color: var(--primary-dark);
+            border: 1px dashed var(--white);
+            border-radius: 8px;
+            color: var(--white);
+        }
+    }
+
+    // Responsive styles
+    @media (max-width: 767px) {
+        padding: 4rem 0;
+
+        &__heading {
+            font-size: 1.75rem;
+        }
+
+        &__caption {
+            font-size: 1.25rem;
+        }
+
+        &__table {
+
+            th,
+            td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    }
+}

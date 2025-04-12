@@ -32,7 +32,7 @@ if (!empty($text_class)) {
 // Determine button class for CTA two based on background color
 $cta_two_class = 'btn btn-underline';
 if ($bg_class === 'bg-light-yellow' || $bg_class === 'bg-grey') {
-    $cta_two_class = 'btn btn-primary';
+    $cta_two_class = 'btn btn-underline-black';
 }
 
 // Get block position

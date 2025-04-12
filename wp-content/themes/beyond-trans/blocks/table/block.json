@@ -1,0 +1,16 @@
+{
+    "name": "acf/table",
+    "title": "Table",
+    "description": "Display a table of data",
+    "category": "formatting",
+    "icon": "editor-table",
+    "keywords": ["table", "data", "grid"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "table.php"
+    },
+    "style": ["file:./table.css"],
+    "supports": {
+        "align": false
+    }
+}
