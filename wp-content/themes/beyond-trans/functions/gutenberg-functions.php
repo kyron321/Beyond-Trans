@@ -1,22 +1,40 @@
 <?php
 
 // Filter the list of allowed block types in the editor
-function allowedBlocks()
+function allowedBlocks($allowed_blocks, $editor_context)
 {
+    if (!isset($editor_context->post)) {
+        return $allowed_blocks;
+    }
+
+    $post_type = $editor_context->post->post_type;
     $allowed_blocks = array();
 
     $blocks_directory = new DirectoryIterator(get_template_directory() . '/blocks/');
     foreach ($blocks_directory as $item) {
-        // add to allowed blocks field blocks
+        // Check if it's a directory and not . or ..
         if ($item->isDir() && !$item->isDot()) {
             $block_name = $item->getFilename();
+
+            // Don't add disclaimer block to regular pages
+            if ($block_name === 'disclaimer' && $post_type !== 'disclaimer') {
+                continue;
+            }
+
+            // Don't show other blocks in disclaimer post type if you want it restricted
+            if ($post_type === 'disclaimer' && $block_name !== 'disclaimer') {
+                // Uncomment the line below if you want ONLY the disclaimer block in disclaimer post type
+                // continue;
+            }
+
             $allowed_blocks[] = 'acf/' . $block_name;
         }
     }
 
     return $allowed_blocks;
 }
-add_filter('allowed_block_types_all', 'allowedBlocks');
+add_filter('allowed_block_types_all', 'allowedBlocks', 10, 2);
+
 
 // Remove the "Advanced" tab by disabling custom class name support
 function remove_the_class_anchor($metadata)
