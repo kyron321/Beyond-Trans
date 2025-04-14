@@ -1,0 +1,16 @@
+{
+    "name": "acf/full-width-image",
+    "title": "Full Width Image",
+    "description": "Display a full width image with optional background color",
+    "style": [ "file:./full-width-image.css" ],
+    "category": "formatting",
+    "icon": "format-image",
+    "keywords": ["image", "full width", "photo"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "full-width-image.php"
+    },
+    "supports": {
+        "align": false
+    }
+}
