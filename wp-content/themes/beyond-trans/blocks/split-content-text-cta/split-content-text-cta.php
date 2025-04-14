@@ -1,6 +1,7 @@
 <?php
 // Get column one content
 $column_one = get_field('column_one');
+$subheading = isset($column_one['subheading']) ? $column_one['subheading'] : '';
 $heading = isset($column_one['heading']) ? $column_one['heading'] : '';
 $text = isset($column_one['text']) ? $column_one['text'] : '';
 
@@ -43,6 +44,10 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
     <div class="container">
         <div class="split-content-text-cta__inner<?php echo $flip_columns ? ' split-content-text-cta__inner--flipped' : ''; ?>">
             <div class="split-content-text-cta__col split-content-text-cta__col--text">
+                <?php if ($subheading): ?>
+                    <p class="split-content-text-cta__subheading"><?php echo esc_html($subheading); ?></p>
+                <?php endif; ?>
+
                 <?php if ($heading): ?>
                     <h2 class="split-content-text-cta__heading"><?php echo esc_html($heading); ?></h2>
                 <?php endif; ?>
