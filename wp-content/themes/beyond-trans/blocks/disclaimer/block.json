@@ -3,6 +3,7 @@
     "title": "Disclaimer",
     "description": "Display disclaimer content with heading, text and CTAs",
     "style": [ "file:./disclaimer.css" ],
+    "script": [ "file:./disclaimer.js" ],
     "category": "formatting",
     "icon": "shield",
     "keywords": ["disclaimer", "legal", "terms"],

@@ -123,3 +123,42 @@ function bt_get_text_color_for_background($background_color)
 
     return 'text-dark';
 }
+
+/**
+ * Check for consent cookie and redirect if needed
+ * 
+ * @param int|WP_Post $disclaimer_page The disclaimer page ID or post object
+ * @param int $current_page The current page ID
+ * @param string $cookie_prefix The prefix for the cookie name (default: 'page_consent_')
+ * @return bool True if redirect occurred, false otherwise
+ */
+function check_therapist_directory_consent($disclaimer_page, $current_page = null, $cookie_prefix = 'page_consent_')
+{
+    // If no current page provided, get the current queried object
+    if (is_null($current_page)) {
+        $current_page = get_queried_object_id();
+    }
+
+    // Only proceed if a disclaimer page exists
+    if (!empty($disclaimer_page) && $current_page != $disclaimer_page) {
+        // Create a specific cookie name for this page
+        $cookie_name = $cookie_prefix . $current_page;
+
+        // Check if the consent cookie exists for this page
+        if (!isset($_COOKIE[$cookie_name])) {
+            // Get permalink for disclaimer page
+            $redirect_url = is_numeric($disclaimer_page) ?
+                get_permalink($disclaimer_page) :
+                get_permalink($disclaimer_page->ID);
+
+            // Add current page ID as a query parameter for return after consent
+            $redirect_url = add_query_arg('return_page', $current_page, $redirect_url);
+
+            // Redirect to the disclaimer page
+            wp_redirect($redirect_url);
+            exit;
+        }
+    }
+
+    return false;
+}
