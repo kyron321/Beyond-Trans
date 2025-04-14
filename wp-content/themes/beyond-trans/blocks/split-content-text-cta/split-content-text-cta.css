@@ -5,6 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4rem;
+  align-items: center;
 }
 .split-content-text-cta__inner--flipped {
   flex-direction: row-reverse;
