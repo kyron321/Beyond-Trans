@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .grid-cards {
   padding: 6rem 0;
   background-color: var(--eggshell-white);
@@ -66,25 +65,8 @@
   flex-direction: column;
   text-align: center;
   justify-content: center;
+  align-items: center;
 }
 .grid-cards__card-text {
   flex: 1;
-}
-.grid-cards__card .btn {
-  align-self: flex-start;
-  margin: auto;
-  display: inline-block;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-.grid-cards__card .btn-underline {
-  position: relative;
-}
-.grid-cards__card .btn-underline::after {
-  content: "→";
-  margin-left: 0.5rem;
-  transition: transform 0.3s ease;
-}
-.grid-cards__card .btn-underline:hover::after {
-  transform: translateX(3px);
 }

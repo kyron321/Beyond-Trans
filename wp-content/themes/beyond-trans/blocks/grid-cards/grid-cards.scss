@@ -69,33 +69,11 @@
             flex-direction: column;
             text-align: center;
             justify-content: center;
+            align-items: center;
         }
 
         &-text {
             flex: 1;
-        }
-
-        // Updated button styling
-        .btn {
-            align-self: flex-start;
-            margin: auto;
-            display: inline-block; // Ensure proper display
-            text-decoration: none;
-            transition: all 0.3s ease;
-
-            &-underline {
-                position: relative;
-
-                &::after {
-                    content: "→"; // Add arrow
-                    margin-left: 0.5rem;
-                    transition: transform 0.3s ease;
-                }
-
-                &:hover::after {
-                    transform: translateX(3px);
-                }
-            }
         }
     }
 }

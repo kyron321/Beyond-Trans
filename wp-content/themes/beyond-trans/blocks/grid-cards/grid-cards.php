@@ -4,6 +4,26 @@ $block_heading = get_field('block_heading');
 $block_subheading = get_field('block_subheading');
 $cards = get_field('cards');
 
+// Get background color class
+$background_colour = get_field('block_background_colour');
+$bg_class = bt_get_background_color($background_colour);
+$text_class = bt_get_text_color_for_background($background_colour);
+
+// Determine button class based on background color
+$cta_class = 'btn btn-underline';
+if ($bg_class === 'bg-light-yellow' || $bg_class === 'bg-grey') {
+    $cta_class = 'btn btn-underline-black';
+}
+
+// Set block classes
+$block_classes = ['block', 'grid-cards'];
+if (!empty($bg_class)) {
+    $block_classes[] = $bg_class;
+}
+if (!empty($text_class)) {
+    $block_classes[] = $text_class;
+}
+
 // Get block position for image loading type
 $position = isset($block['attrs']['position']) ? $block['attrs']['position'] : null;
 $is_first_block = ($position === 0);
@@ -15,7 +35,7 @@ if (!$cards) {
 }
 ?>
 
-<section class="block grid-cards">
+<section class="<?php echo esc_attr(implode(' ', $block_classes)); ?>">
     <div class="container">
         <div class="grid-cards__header">
             <?php if ($block_heading): ?>
@@ -64,7 +84,7 @@ if (!$cards) {
 
                         <?php if ($cta): ?>
                             <a href="<?php echo esc_url($cta['url']); ?>"
-                                class="btn btn-underline-black"
+                                class="<?php echo esc_attr($cta_class); ?>"
                                 target="<?php echo esc_attr($cta['target'] ?: '_self'); ?>">
                                 <?php echo esc_html($cta['title']); ?>
                             </a>
