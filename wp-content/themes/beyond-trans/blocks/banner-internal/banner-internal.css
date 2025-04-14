@@ -6,6 +6,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.banner-internal.block {
   padding: 0;
 }
 .banner-internal__image {

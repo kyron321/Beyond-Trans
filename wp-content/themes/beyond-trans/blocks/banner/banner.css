@@ -6,6 +6,9 @@
   align-items: center;
   justify-content: center;
 }
+.banner.block {
+  padding: 0;
+}
 .banner__image {
   position: absolute;
   top: 0;

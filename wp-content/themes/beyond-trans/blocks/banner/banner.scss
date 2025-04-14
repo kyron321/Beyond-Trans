@@ -6,6 +6,10 @@
     align-items: center;
     justify-content: center;
 
+    &.block {
+        padding: 0;
+    }
+
     &__image {
         position: absolute;
         top: 0;

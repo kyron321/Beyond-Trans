@@ -6,6 +6,9 @@
   align-items: center;
   justify-content: center;
 }
+.banner-tile.block {
+  padding: 0;
+}
 .banner-tile__image {
   position: absolute;
   top: 0;
