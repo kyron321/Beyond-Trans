@@ -95,5 +95,29 @@ function beyond_trans_remove_update_notification($value)
     return $value;
 }
 
+/**
+ * Prevent this plugin from being deactivated
+ */
+function beyond_trans_therapists_prevent_deactivation($actions, $plugin_file, $plugin_data, $context)
+{
+    // Get the basename of the current plugin file
+    $this_plugin = plugin_basename(__FILE__);
+
+    // Check if we're working with this plugin
+    if ($plugin_file == $this_plugin) {
+        // Remove the deactivate link
+        if (isset($actions['deactivate'])) {
+            unset($actions['deactivate']);
+        }
+
+        // Add a notice explaining why it can't be deactivated
+        $actions['required'] = __('Required Plugin');
+    }
+
+    return $actions;
+}
+
+add_filter('plugin_action_links', 'beyond_trans_therapists_prevent_deactivation', 10, 4);
+
 // Hook into the 'init' action
 add_action('init', 'beyond_trans_register_therapists_post_type');

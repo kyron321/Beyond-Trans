@@ -89,6 +89,29 @@ function beyond_trans_disclaimers_remove_update_notification($value)
     return $value;
 }
 
+/**
+ * Prevent this plugin from being deactivated
+ */
+function beyond_trans_prevent_deactivation($actions, $plugin_file, $plugin_data, $context)
+{
+    // Get the basename of the current plugin file
+    $this_plugin = plugin_basename(__FILE__);
+
+    // Check if we're working with this plugin
+    if ($plugin_file == $this_plugin) {
+        // Remove the deactivate link
+        if (isset($actions['deactivate'])) {
+            unset($actions['deactivate']);
+        }
+
+        // Add a notice explaining why it can't be deactivated
+        $actions['required'] = __('Required Plugin');
+    }
+
+    return $actions;
+}
+
 // Hook into the 'init' action
 add_action('init', 'beyond_trans_register_disclaimers_post_type');
 add_action('after_setup_theme', 'beyond_trans_disclaimers_theme_support');
+add_filter('plugin_action_links', 'beyond_trans_prevent_deactivation', 10, 4);
