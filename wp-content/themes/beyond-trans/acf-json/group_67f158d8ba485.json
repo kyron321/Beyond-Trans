@@ -42,6 +42,27 @@
             "new_lines": ""
         },
         {
+            "key": "field_67fd5368f4848",
+            "label": "Block Subheading",
+            "name": "block_subheading",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_67f95bd3f21ab",
             "label": "Cards",
             "name": "cards",
@@ -58,7 +79,7 @@
             "layout": "table",
             "pagination": 0,
             "min": 3,
-            "max": 3,
+            "max": 0,
             "collapsed": "",
             "button_label": "Add Row",
             "rows_per_page": 20,
@@ -209,5 +230,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1744407681
+    "modified": 1744655270
 }

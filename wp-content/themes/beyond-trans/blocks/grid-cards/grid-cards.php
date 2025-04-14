@@ -1,6 +1,7 @@
 <?php
 // Get ACF fields
 $block_heading = get_field('block_heading');
+$block_subheading = get_field('block_subheading');
 $cards = get_field('cards');
 
 // Get block position for image loading type
@@ -16,11 +17,18 @@ if (!$cards) {
 
 <section class="block grid-cards">
     <div class="container">
-        <?php if ($block_heading): ?>
-            <div class="grid-cards__heading">
-                <h3><?php echo $block_heading; ?></h3>
-            </div>
-        <?php endif; ?>
+        <div class="grid-cards__header">
+            <?php if ($block_heading): ?>
+                <div class="grid-cards__heading">
+                    <h3><?php echo $block_heading; ?></h3>
+                </div>
+            <?php endif; ?>
+            <?php if ($block_subheading): ?>
+                <div class="grid-cards__subheading">
+                    <p><?php echo $block_subheading; ?></p>
+                </div>
+            <?php endif; ?>
+        </div>
 
         <div class="grid-cards__container">
             <?php foreach ($cards as $card_data):

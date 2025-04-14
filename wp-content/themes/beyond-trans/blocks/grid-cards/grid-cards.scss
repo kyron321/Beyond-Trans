@@ -2,11 +2,24 @@
     padding: 6rem 0;
     background-color: var(--eggshell-white);
 
+    &__header {
+        margin-bottom: 4rem;
+    }
+
     &__heading {
         text-align: center;
         max-width: 74rem;
-        margin: 0 auto;
-        margin-bottom: 5rem;
+        margin-bottom: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &__subheading {
+        text-align: center;
+        max-width: 74rem;
+        margin-bottom: 2rem;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     &__container {
