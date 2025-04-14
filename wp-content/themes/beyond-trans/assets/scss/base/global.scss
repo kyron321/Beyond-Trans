@@ -1,0 +1,53 @@
+// Base block styling
+.block {
+    padding: 6rem 0;
+
+    @media (max-width: 991px) {
+        padding: 4rem 0;
+    }
+
+    @media (max-width: 767px) {
+        padding: 3rem 0;
+    }
+
+    // Background-specific adjacent selectors
+    &.bg-primary {
+
+        // When a primary bg block follows another primary bg block
+        &+&.bg-primary {
+            padding-top: 0;
+        }
+    }
+
+    &.bg-primary-dark {
+
+        // When a primary-dark bg block follows another primary-dark bg block
+        &+&.bg-primary-dark {
+            padding-top: 0;
+        }
+    }
+
+    &.bg-primary-darker {
+
+        // When a primary-darker bg block follows another primary-darker bg block
+        &+&.bg-primary-darker {
+            padding-top: 0;
+        }
+    }
+
+    &.bg-grey {
+
+        // When a grey bg block follows another grey bg block
+        &+&.bg-grey {
+            padding-top: 0;
+        }
+    }
+
+    &.bg-light-yellow {
+
+        // When a light-yellow bg block follows another light-yellow bg block
+        &+&.bg-light-yellow {
+            padding-top: 0;
+        }
+    }
+}
