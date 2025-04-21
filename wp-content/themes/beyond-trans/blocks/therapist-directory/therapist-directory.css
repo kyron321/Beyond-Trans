@@ -1,0 +1,132 @@
+.therapist-directory__filters {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.therapist-directory__filter-label {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.therapist-directory__filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.therapist-directory__filter-buttons .btn-primary.active:hover {
+  color: black;
+}
+.therapist-directory__filter-buttons .btn-primary.active::before {
+  display: none;
+}
+.therapist-directory__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .therapist-directory__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .therapist-directory__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.therapist-directory .active {
+  color: black;
+  background-color: var(--secondary);
+}
+.therapist-directory .active::after {
+  display: none;
+}
+.therapist-directory .therapist-card {
+  padding: 1.5rem;
+  background-color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.therapist-directory .therapist-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+.therapist-directory .therapist-card__image {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.therapist-directory .therapist-card__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.therapist-directory .therapist-card__content {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  color: var(--white);
+}
+.therapist-directory .therapist-card__name {
+  color: var(--white);
+}
+.therapist-directory .therapist-card__specialties {
+  color: var(--white);
+}
+.therapist-directory .therapist-card__location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--white);
+}
+.therapist-directory .therapist-card__location svg {
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+.therapist-directory .therapist-card__bio {
+  margin-bottom: 1.5rem;
+  color: var(--white);
+  flex-grow: 1;
+}
+.therapist-directory .therapist-card__contact {
+  margin-bottom: 1.5rem;
+}
+.therapist-directory .therapist-card__contact a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.therapist-directory .therapist-card__contact a:hover {
+  text-decoration: underline;
+}
+.therapist-directory .therapist-card .btn.btn-underline {
+  padding-left: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+.therapist-directory__no-results {
+  text-align: center;
+  padding: 3rem 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.therapist-directory .therapist-card.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.therapist-directory .therapist-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.therapist-directory .therapist-directory__grid.is-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}

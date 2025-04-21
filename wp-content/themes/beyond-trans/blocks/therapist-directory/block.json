@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/therapist-directory",
+    "title": "Therapist Directory",
+    "description": "A filterable directory of therapists with specialty filters",
+    "category": "formatting",
+    "icon": "businessperson",
+    "keywords": ["therapist", "directory", "filter", "specialty"],
+    "acf": {
+      "mode": "preview",
+      "renderTemplate": "therapist-directory.php"
+    },
+    "supports": {
+      "align": ["wide", "full"],
+      "anchor": true
+    },
+    "style": "file:./therapist-directory.css",
+    "script": "file:./therapist-directory.js"
+  }
