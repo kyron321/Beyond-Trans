@@ -101,3 +101,13 @@ function bt_remove_block_editor_styles()
     wp_dequeue_style('global-styles');
 }
 add_action('wp_enqueue_scripts', 'bt_remove_block_editor_styles');
+
+// Register Slick Slider
+function theme_enqueue_scripts()
+{
+    wp_register_style('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', array(), '1.8.1');
+    wp_register_style('slick-theme', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css', array('slick'), '1.8.1');
+    wp_register_script('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true);
+}
+add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
+add_action('admin_enqueue_scripts', 'theme_enqueue_scripts');

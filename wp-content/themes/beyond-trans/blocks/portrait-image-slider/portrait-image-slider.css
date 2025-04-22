@@ -1,0 +1,99 @@
+.portrait-image-slider {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.portrait-image-slider .slick-dotted.slick-slider {
+  margin-bottom: 0;
+}
+.portrait-image-slider .slick-dots li.slick-active button:before {
+  color: var(--primary);
+}
+.portrait-image-slider__header {
+  margin-bottom: 4rem;
+  text-align: center;
+  max-width: 74rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.portrait-image-slider__wrapper {
+  max-width: 100%;
+  position: relative;
+  padding: 0 60px;
+}
+.portrait-image-slider__container {
+  width: 100%;
+}
+.portrait-image-slider__slide {
+  width: 280px;
+  height: 470px;
+  margin: 0 15px;
+}
+.portrait-image-slider__slide img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+}
+.portrait-image-slider svg {
+  color: var(--white);
+  fill: var(--white);
+  width: 16px;
+  height: 16px;
+}
+.portrait-image-slider .slick-prev:focus {
+  color: unset !important;
+  outline: unset !important;
+  background: var(--primary-dark) !important;
+}
+.portrait-image-slider .slick-next:focus {
+  color: unset !important;
+  outline: unset !important;
+  background: var(--primary-dark) !important;
+}
+.portrait-image-slider .slick-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: var(--primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.portrait-image-slider .slick-arrow:hover {
+  background: var(--primary-dark);
+}
+.portrait-image-slider .slick-arrow:before {
+  display: none;
+  font-size: 20px;
+  color: #000;
+  opacity: 1;
+}
+.portrait-image-slider .slick-prev {
+  left: -60px;
+}
+.portrait-image-slider .slick-next {
+  right: -60px;
+}
+.portrait-image-slider .slick-dots {
+  position: relative;
+  bottom: 0;
+  margin-top: 16px;
+}
+.portrait-image-slider .slick-dots li {
+  margin: 0 4px;
+}
+.portrait-image-slider .slick-dots li button:before {
+  font-size: 10px;
+  opacity: 0.5;
+}
+.portrait-image-slider .slick-dots li.slick-active button:before {
+  opacity: 1;
+}

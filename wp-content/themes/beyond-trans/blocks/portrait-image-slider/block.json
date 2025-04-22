@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/portrait-image-slider",
+    "title": "Portrait Image Slider",
+    "description": "A slider for portrait images",
+    "icon": "images-alt2",
+    "keywords": ["slider", "portrait", "images", "gallery"],
+    "acf": {
+      "mode": "preview",
+      "renderTemplate": "portrait-image-slider.php"
+    },
+    "supports": {
+        "align": false
+    },
+    "style": "file:./portrait-image-slider.css",
+    "script": "file:./portrait-image-slider.js"
+  }
