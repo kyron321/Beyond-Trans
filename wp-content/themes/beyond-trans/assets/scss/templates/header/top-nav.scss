@@ -40,3 +40,21 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .top-nav {
+        gap: 0.5rem;
+
+        &__related-website {
+            gap: 0;
+
+            &:last-of-type {
+                padding: 8px;
+            }
+
+            &__website-title {
+                display: none;
+            }
+        }
+    }
+}

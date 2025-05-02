@@ -32,6 +32,7 @@
 @media (max-width: 767px) {
   .grid-cards__container {
     grid-template-columns: 1fr;
+    gap: 3rem;
   }
 }
 .grid-cards__card {
@@ -69,4 +70,12 @@
 }
 .grid-cards__card-text {
   flex: 1;
+}
+@media (max-width: 767px) {
+  .grid-cards {
+    padding: 4rem 0;
+  }
+  .grid-cards__header {
+    margin-bottom: 3rem;
+  }
 }

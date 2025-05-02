@@ -14,6 +14,9 @@ $cta_2 = get_field('cta_2', 'option');
                 <?php endif; ?>
             </a>
         </div>
+        <button class="main-nav__toggle" aria-label="Toggle Navigation" aria-expanded="false">
+            <span class="main-nav__toggle-icon"></span>
+        </button>
         <div class="main-nav__menu">
             <?php
             wp_nav_menu(array(

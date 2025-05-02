@@ -33,6 +33,7 @@
 
         @media (max-width: 767px) {
             grid-template-columns: 1fr;
+            gap: 3rem;
         }
     }
 
@@ -74,6 +75,15 @@
 
         &-text {
             flex: 1;
+        }
+    }
+
+    // Responsive adjustments for smaller screens
+    @media (max-width: 767px) {
+        padding: 4rem 0; // Reduce block padding
+
+        &__header {
+            margin-bottom: 3rem; // Reduce header margin
         }
     }
 }
