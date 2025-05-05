@@ -1,0 +1,16 @@
+{
+    "name": "acf/column-text",
+    "title": "Column Text",
+    "description": "A column of text",
+    "style": [ "file:./column-text.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["column", "text"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "column-text.php"
+    },
+    "supports": {
+        "align": false
+    }
+}
