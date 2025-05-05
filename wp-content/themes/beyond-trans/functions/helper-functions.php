@@ -162,3 +162,37 @@ function check_therapist_directory_consent($disclaimer_page, $current_page = nul
 
     return false;
 }
+
+/**
+ * Populate ACF select field with Ninja Form IDs
+ */
+function populate_ninja_forms_acf_field($field)
+{
+    // Check if the field name is 'form_id'
+    if ($field['name'] === 'form_id') {
+
+        // Reset the field's choices
+        $field['choices'] = array();
+
+        // Check if Ninja Forms is active
+        if (function_exists('Ninja_Forms')) {
+            // Get all available Ninja Forms
+            $ninja_forms = Ninja_Forms()->form()->get_forms();
+
+            // Add each form as an option
+            if (!empty($ninja_forms) && is_array($ninja_forms)) {
+                foreach ($ninja_forms as $form) {
+                    $form_id = $form->get_id();
+                    $form_title = $form->get_setting('title');
+
+                    // Add to choices
+                    $field['choices'][$form_id] = $form_title . ' (ID: ' . $form_id . ')';
+                }
+            }
+        }
+    }
+
+    // Return the field
+    return $field;
+}
+add_filter('acf/load_field/name=form_id', 'populate_ninja_forms_acf_field');

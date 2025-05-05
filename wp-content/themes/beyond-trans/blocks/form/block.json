@@ -1,0 +1,17 @@
+{
+    "name": "acf/form",
+    "title": "Form",
+    "description": "A simple form block",
+    "style": [ "file:./form.css" ],
+    "script": [ "file:./form.js" ],
+    "category": "formatting",
+    "icon": "feedback",
+    "keywords": ["form", "contact"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "form.php"
+    },
+    "supports": {
+        "align": false
+    }
+}

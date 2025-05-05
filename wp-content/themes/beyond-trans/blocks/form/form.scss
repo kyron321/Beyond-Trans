@@ -1,0 +1,169 @@
+.form {
+    .form-header {
+        text-align: center;
+    }
+
+    .label-above .nf-field-label label {
+        font-weight: 300;
+        font-size: 1rem;
+    }
+
+    .checkbox-wrap {
+        .nf-field-label {
+            label {
+                font-weight: 300;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .label-right .checkbox-wrap .nf-field-element {
+        width: auto;
+        height: 34px;
+    }
+
+    .label-right .checkbox-wrap .nf-field-label {
+        padding-left: inherit;
+    }
+
+    .nf-form-fields-required {
+        display: none;
+    }
+
+    .nf-error-msg,
+    .ninja-forms-req-symbol {
+        color: var(--primary-dark);
+    }
+
+    .nf-after-form-content {
+        .nf-form-errors {
+            .nf-error-msg {
+                display: flex;
+                align-items: center;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    }
+
+    .nf-field-element {
+
+        input,
+        textarea {
+            padding: 1rem;
+            border-radius: 12px;
+            border: solid 1px;
+            border-color: rgba($color: #000000, $alpha: 0.15);
+            background-color: rgba($color: #000000, $alpha: 0.05);
+            font-size: 1rem;
+            font-size: 1.125rem;
+            font-weight: 300;
+            line-height: 1.5;
+            font-family: "Manrope", sans-serif;
+
+            &:focus {
+                border-color: var(--primary-dark);
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            background-color: rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            position: relative;
+
+            &:checked {
+                border-color: var(--primary);
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 10px;
+                    top: 2px;
+                    width: 12px;
+                    height: 21px;
+                    border: solid var(--primary);
+                    border-width: 0 2px 2px 0;
+                    transform: rotate(45deg);
+                }
+            }
+
+            &:focus {
+                outline: none;
+
+                box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+            }
+        }
+
+        border-color: var(--primary-dark);
+
+        .submit-wrap {
+            .nf-field-element {
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        input[type="submit"] {
+            display: flex;
+            position: relative;
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            overflow: hidden;
+            z-index: 1;
+            text-align: center;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            max-width: fit-content;
+            margin: auto;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: inherit;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: -1;
+            }
+
+            &:hover {
+                color: inherit;
+                text-decoration: none;
+
+                &::before {
+                    transform: translateX(0);
+                }
+            }
+
+            background-color: var(--primary);
+            color: var(--white);
+
+            &::before {
+                background-color: var(--primary-dark);
+            }
+
+            &:hover {
+                color: var(--white);
+            }
+        }
+    }
+
+    .nf-response-msg {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+}
