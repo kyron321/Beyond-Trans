@@ -1,0 +1,192 @@
+// Variable overrides (adjust colors, breakpoints etc. as needed)
+$therapist-profile-breakpoint-md: 768px;
+$therapist-profile-breakpoint-lg: 1024px;
+
+.therapist-profile {
+    padding: 3rem 0;
+    background-color: var(--primary);
+
+    &__details {
+        padding-bottom: 4rem; // pb-16
+    }
+
+    &__content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem; // gap-8
+
+        @media (min-width: $therapist-profile-breakpoint-md) {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 3rem; // md:gap-12
+        }
+    }
+
+    &__image-column {
+        flex-shrink: 0;
+        width: 100%;
+        text-align: center;
+
+        @media (min-width: $therapist-profile-breakpoint-md) {
+            flex-basis: 400px;
+            text-align: left;
+        }
+
+        @media (min-width: $therapist-profile-breakpoint-lg) {
+            flex-basis: 450px;
+        }
+    }
+
+    &__image-wrapper {
+        display: inline-block;
+    }
+
+    &__image {
+        max-width: 100%;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 0.75rem; // rounded-xl
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); // shadow-md
+    }
+
+    &__image-placeholder {
+        width: 100%;
+        max-width: 450px;
+        aspect-ratio: 1 / 1;
+        background-color: black;
+        border-radius: 0.75rem; // rounded-xl
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem; // text-2xl
+        margin-left: auto;
+        margin-right: auto;
+
+        @media (min-width: $therapist-profile-breakpoint-md) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    &__info-column {
+        flex: 1;
+    }
+
+    &__name {
+        margin-top: 0;
+        margin-bottom: 1.5rem; // mb-6
+        font-size: 2.25rem; // text-4xl
+        color: var(--white);
+    }
+
+    &__bio {
+        color: var(--white);
+        margin-bottom: 2rem; // mb-8
+
+        p {
+            margin-top: 1.25em;
+            margin-bottom: 1.25em;
+        }
+        // Add more elements as needed (ul, ol, etc.)
+    }
+
+    &__contact-details {
+        > * + * {
+            margin-top: 1rem; // space-y-4
+        }
+    }
+
+    &__contact-item {
+        display: flex;
+        align-items: center;
+        color: var(--white);
+        margin: 0;
+        font-size: 0.875rem;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        width: 1.25rem; // w-5
+        height: 1.25rem; // h-5
+        stroke: var(--secondary);
+        stroke-width: 1.5;
+    }
+
+    &__link {
+        color: var(--white) !important;
+        text-decoration: none;
+        transition: border-color 0.2s ease-in-out;
+
+        &:hover {
+            border-bottom-color: var(--white) !important;
+        }
+    }
+
+    &__specialties {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem; // gap-2
+        padding-top: 0.5rem; // pt-2
+    }
+
+    &__specialties-label {
+        margin-right: 0.25rem; // mr-1
+        font-weight: bold; // Equivalent to strong tag
+        color: var(--white)
+    }
+
+    &__specialty-tag {
+        display: inline-block;
+        background-color: var(--secondary);
+        color: var(--primary-dark);
+        font-size: 0.875rem; // text-sm
+        font-weight: 500; // font-medium
+        padding: 0.25rem 0.75rem; // px-3 py-1
+        border-radius: 9999px; // rounded-full
+        margin-bottom: 0;
+    }
+}
+
+.contact-form-section {
+    padding-top: 4rem; // py-16
+    padding-bottom: 4rem;
+    background-color: var(--eggshell-white);
+
+    &__container {
+        max-width: 56rem; // max-w-3xl (approx)
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    &__title {
+        margin-bottom: 1rem; // mb-4
+        font-size: 1.875rem; // text-3xl
+
+        @media (min-width: $therapist-profile-breakpoint-md) {
+            font-size: 2.25rem; // md:text-4xl
+        }
+    }
+
+    &__description {
+        margin-bottom: 2.5rem; // mb-10
+        max-width: 36rem; // max-w-xl (approx)
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1rem; // text-base
+    }
+
+    &__form-wrapper {
+        text-align: left;
+    }
+
+    &__placeholder {
+        padding: 1.5rem; // p-6
+        background-color: var(--eggshell-white);
+        border: 1px solid var(--grey);
+        border-radius: 0.25rem; // rounded
+        text-align: center;
+        color: var(--primary-dark)
+    }
+}

@@ -34,3 +34,9 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
+
+@media screen and (max-width: 991px) {
+  .split-content-text-cta__inner {
+    gap: 1rem;
+  }
+}
