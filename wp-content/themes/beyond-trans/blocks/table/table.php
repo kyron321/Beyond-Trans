@@ -81,10 +81,16 @@ if (!empty($subheading) || !empty($heading) || !empty($text) || (!empty($table) 
                             <?php endif; ?>
 
                             <tbody>
-                                <?php foreach ($table['body'] as $tr) : ?>
+                                <?php foreach ($table['body'] as $tr_index => $tr) : ?>
                                     <tr>
-                                        <?php foreach ($tr as $td) : ?>
-                                            <td><?php echo wp_kses_post($td['c']); ?></td>
+                                        <?php foreach ($tr as $td_index => $td) :
+                                            // Get the corresponding header text, strip tags for cleaner data attribute
+                                            $header_label = '';
+                                            if (!empty($table['header'][$td_index]['c'])) {
+                                                $header_label = esc_attr(strip_tags($table['header'][$td_index]['c']));
+                                            }
+                                        ?>
+                                            <td data-label="<?php echo $header_label; ?>"><?php echo wp_kses_post($td['c']); ?></td>
                                         <?php endforeach; ?>
                                     </tr>
                                 <?php endforeach; ?>
