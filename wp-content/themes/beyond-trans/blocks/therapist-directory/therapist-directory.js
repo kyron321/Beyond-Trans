@@ -67,4 +67,25 @@ document.addEventListener('DOMContentLoaded', function() {
         appearOnScroll.observe(card);
       });
     }
+
+    // Get filter elements
+    const countrySelect = document.getElementById('country-filter');
+    const regionContainer = document.getElementById('region-filter-container');
+    const regionSelect = document.getElementById('region-filter');
+
+    // Set up automatic form submission on select change
+    const filterSelects = document.querySelectorAll('.filter-select');
+    filterSelects.forEach(select => {
+        select.addEventListener('change', function() {
+            if (this.id === 'country-filter' && this.value === '') {
+                // If country is cleared, also clear region
+                regionSelect.value = '';
+                regionSelect.disabled = true;
+                regionContainer.style.display = 'none';
+            }
+
+            // Submit the form on any select change
+            this.form.submit();
+        });
+      });
   });
