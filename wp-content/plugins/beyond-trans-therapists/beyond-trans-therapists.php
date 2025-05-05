@@ -87,6 +87,67 @@ function beyond_trans_register_specialty_taxonomy()
 }
 add_action('init', 'beyond_trans_register_specialty_taxonomy');
 
+/**
+ * Register Countries taxonomy for Therapists
+ */
+function beyond_trans_register_countries_taxonomy()
+{
+    $labels = array(
+        'name'              => _x('Countries', 'taxonomy general name', 'beyond-trans-therapists'),
+        'singular_name'     => _x('Country', 'taxonomy singular name', 'beyond-trans-therapists'),
+        'search_items'      => __('Search Countries', 'beyond-trans-therapists'),
+        'all_items'         => __('All Countries', 'beyond-trans-therapists'),
+        'edit_item'         => __('Edit Country', 'beyond-trans-therapists'),
+        'update_item'       => __('Update Country', 'beyond-trans-therapists'),
+        'add_new_item'      => __('Add New Country', 'beyond-trans-therapists'),
+        'new_item_name'     => __('New Country Name', 'beyond-trans-therapists'),
+        'menu_name'         => __('Countries', 'beyond-trans-therapists'),
+    );
+
+    $args = array(
+        'hierarchical'      => false,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'country'),
+    );
+
+    register_taxonomy('country', array('therapist'), $args);
+}
+add_action('init', 'beyond_trans_register_countries_taxonomy');
+
+/**
+ * Register Regions/States/Provinces taxonomy for Therapists
+ */
+function beyond_trans_register_regions_taxonomy()
+{
+    $labels = array(
+        'name'              => _x('Regions/States/Provinces', 'taxonomy general name', 'beyond-trans-therapists'),
+        'singular_name'     => _x('Region/State/Province', 'taxonomy singular name', 'beyond-trans-therapists'),
+        'search_items'      => __('Search Regions/States/Provinces', 'beyond-trans-therapists'),
+        'all_items'         => __('All Regions/States/Provinces', 'beyond-trans-therapists'),
+        'edit_item'         => __('Edit Region/State/Province', 'beyond-trans-therapists'),
+        'update_item'       => __('Update Region/State/Province', 'beyond-trans-therapists'),
+        'add_new_item'      => __('Add New Region/State/Province', 'beyond-trans-therapists'),
+        'new_item_name'     => __('New Region/State/Province Name', 'beyond-trans-therapists'),
+        'menu_name'         => __('Regions, States & Provinces', 'beyond-trans-therapists'),
+    );
+
+    $args = array(
+        'hierarchical'      => false,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array('slug' => 'region'),
+        'description'       => false,
+    );
+
+    register_taxonomy('region-state-province', array('therapist'), $args);
+}
+add_action('init', 'beyond_trans_register_regions_taxonomy');
+
 // Make it so that this plugin doesn't show updates
 add_filter('site_transient_update_plugins', 'beyond_trans_remove_update_notification');
 function beyond_trans_remove_update_notification($value)
@@ -98,6 +159,7 @@ function beyond_trans_remove_update_notification($value)
 /**
  * Prevent this plugin from being deactivated
  */
+
 function beyond_trans_therapists_prevent_deactivation($actions, $plugin_file, $plugin_data, $context)
 {
     // Get the basename of the current plugin file
