@@ -68,8 +68,10 @@ $therapists = new WP_Query($args);
                     $photo = get_the_post_thumbnail_url(get_the_ID());
                     $bio = get_field('bio', get_the_ID());
                     $therapist_specialties = wp_get_post_terms(get_the_ID(), 'specialty', ['fields' => 'names']);
-                    $location = get_field('location', get_the_ID());
+
+                    // Get contact info fields
                     $contact_info = get_field('contact_info', get_the_ID());
+                    $location = get_field('location', get_the_ID());
                 ?>
                     <div class="therapist-card">
                         <?php if ($photo): ?>
@@ -103,21 +105,36 @@ $therapists = new WP_Query($args);
                                 </div>
                             <?php endif; ?>
 
-                            <?php if ($contact_info): ?>
-                                <div class="therapist-card__contact">
-                                    <?php
-                                    if (is_array($contact_info)) {
-                                        foreach ($contact_info as $contact_item) {
-                                            if (is_string($contact_item)) {
-                                                echo '<div>' . wp_kses_post($contact_item) . '</div>';
-                                            }
-                                        }
-                                    } else {
-                                        echo wp_kses_post($contact_info);
-                                    }
-                                    ?>
-                                </div>
-                            <?php endif; ?>
+                            <div class="therapist-card__contact">
+                                <?php if (!empty($contact_info['company'])): ?>
+                                    <div class="therapist-card__contact-item">
+                                        <strong>Company:</strong> <?php echo esc_html($contact_info['company']); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (!empty($contact_info['website'])): ?>
+                                    <div class="therapist-card__contact-item">
+                                        <a href="<?php echo esc_url($contact_info['website']); ?>" target="_blank" rel="noopener noreferrer">
+                                            <?php echo esc_html($contact_info['website']); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (!empty($contact_info['location'])): ?>
+                                    <div class="therapist-card__contact-item">
+                                        <?php echo esc_html($contact_info['location']); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (!empty($contact_info['contact']) && is_array($contact_info['contact'])): ?>
+                                    <div class="therapist-card__contact-item-website">
+                                        <a href="<?php echo esc_url($contact_info['contact']['url']); ?>"
+                                            target="<?php echo esc_attr($contact_info['contact']['target'] ?: '_self'); ?>">
+                                            <?php echo esc_html($contact_info['contact']['title']); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
 
                             <a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn-underline">View Profile</a>
                         </div>
