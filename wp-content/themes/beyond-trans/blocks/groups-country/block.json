@@ -1,0 +1,16 @@
+{
+    "name": "acf/groups-country",
+    "title": "Groups Country",
+    "description": "groups-country",
+    "style": [ "file:./groups-country.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["groups-country"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "groups-country.php"
+    },
+    "supports": {
+        "align": false
+    }
+}

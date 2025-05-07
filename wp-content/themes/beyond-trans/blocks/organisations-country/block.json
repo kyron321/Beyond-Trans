@@ -1,0 +1,16 @@
+{
+    "name": "acf/organisations-country",
+    "title": "Organisations Country",
+    "description": "organisations-country",
+    "style": [ "file:./organisations-country.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["organisations-country"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "organisations-country.php"
+    },
+    "supports": {
+        "align": false
+    }
+}

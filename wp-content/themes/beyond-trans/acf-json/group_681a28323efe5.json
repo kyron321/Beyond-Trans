@@ -1,10 +1,10 @@
 {
-    "key": "group_681909a0daf5f",
-    "title": "Block : Organisations",
+    "key": "group_681a28323efe5",
+    "title": "Block :Groups Country",
     "fields": [
         {
-            "key": "field_681909a0dca0a",
-            "label": "Organisations",
+            "key": "field_681a283240322",
+            "label": "Groups Country",
             "name": "",
             "aria-label": "",
             "type": "accordion",
@@ -21,7 +21,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_681909a0dca0d",
+            "key": "field_681a283240326",
             "label": "Block Content",
             "name": "",
             "aria-label": "",
@@ -39,7 +39,7 @@
             "selected": 0
         },
         {
-            "key": "field_68190e994cb6f",
+            "key": "field_681a283240329",
             "label": "Block Icon",
             "name": "block_icon",
             "aria-label": "",
@@ -71,7 +71,7 @@
             "bidirectional_target": []
         },
         {
-            "key": "field_681909a0dca0f",
+            "key": "field_681a28324032c",
             "label": "Block Heading",
             "name": "block_heading",
             "aria-label": "",
@@ -92,7 +92,7 @@
             "append": ""
         },
         {
-            "key": "field_681909a0dca14",
+            "key": "field_681a28324032e",
             "label": "Single Text",
             "name": "single_text",
             "aria-label": "",
@@ -114,9 +114,42 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_681909a0de4fe",
-                    "label": "Title",
-                    "name": "title",
+                    "key": "field_681a28a8664e6",
+                    "label": "Flag Icon",
+                    "name": "flag_icon",
+                    "aria-label": "",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "svg"
+                    ],
+                    "post_status": "",
+                    "taxonomy": "",
+                    "filters": [
+                        "search",
+                        "post_type",
+                        "taxonomy"
+                    ],
+                    "return_format": "id",
+                    "min": "",
+                    "max": "",
+                    "allow_in_bindings": 0,
+                    "elements": "",
+                    "bidirectional": 0,
+                    "bidirectional_target": [],
+                    "parent_repeater": "field_681a28324032e"
+                },
+                {
+                    "key": "field_681a283242331",
+                    "label": "Country",
+                    "name": "country",
                     "aria-label": "",
                     "type": "text",
                     "instructions": "",
@@ -133,12 +166,12 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_681909a0dca14"
+                    "parent_repeater": "field_681a28324032e"
                 },
                 {
-                    "key": "field_681909a0de501",
-                    "label": "Subtitle",
-                    "name": "subtitle",
+                    "key": "field_681a283242337",
+                    "label": "Group Type",
+                    "name": "group_type",
                     "aria-label": "",
                     "type": "text",
                     "instructions": "",
@@ -155,10 +188,54 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "parent_repeater": "field_681909a0dca14"
+                    "parent_repeater": "field_681a28324032e"
                 },
                 {
-                    "key": "field_681909a0de504",
+                    "key": "field_681a2927664e7",
+                    "label": "Group Name",
+                    "name": "group_name",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_681a28324032e"
+                },
+                {
+                    "key": "field_681a293e664e8",
+                    "label": "Group Description",
+                    "name": "group_description",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_681a28324032e"
+                },
+                {
+                    "key": "field_681a28324233c",
                     "label": "Title Link",
                     "name": "title_link",
                     "aria-label": "",
@@ -173,12 +250,12 @@
                     },
                     "return_format": "array",
                     "allow_in_bindings": 0,
-                    "parent_repeater": "field_681909a0dca14"
+                    "parent_repeater": "field_681a28324032e"
                 }
             ]
         },
         {
-            "key": "field_681909a0dca16",
+            "key": "field_681a283240330",
             "label": "Background Options",
             "name": "",
             "aria-label": "",
@@ -196,7 +273,7 @@
             "selected": 0
         },
         {
-            "key": "field_681909a0dca19",
+            "key": "field_681a283240333",
             "label": "Background Colour",
             "name": "background_colour",
             "aria-label": "",
@@ -223,7 +300,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/organisations"
+                "value": "acf\/groups-country"
             }
         ]
     ],
@@ -236,5 +313,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1746472667
+    "modified": 1746547151
 }

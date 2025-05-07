@@ -1,0 +1,56 @@
+.groups-country.block {
+  padding: 6rem 0;
+}
+.groups-country__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.groups-country__icon svg {
+  width: 3rem;
+  height: 3rem;
+}
+.groups-country h2 {
+  margin-bottom: 0rem;
+}
+.groups-country__subheading {
+  margin-bottom: 2rem;
+}
+.groups-country__items {
+  display: grid;
+  gap: 2rem;
+}
+.groups-country__item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.groups-country__flag svg {
+  width: 2rem;
+  height: auto;
+}
+.groups-country__item h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+.groups-country__item h3 a {
+  text-decoration: underline;
+  color: #007bff;
+  transition: color 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out;
+}
+.groups-country__item h3 a:hover, .groups-country__item h3 a:focus {
+  color: #0056b3;
+  text-decoration-color: #0056b3;
+}
+.groups-country__item p {
+  margin-bottom: 0.5rem;
+}
+.groups-country__item p:last-child {
+  margin-bottom: 0;
+}
+.groups-country__item > .groups-country__item-header + p {
+  font-weight: bold;
+}
