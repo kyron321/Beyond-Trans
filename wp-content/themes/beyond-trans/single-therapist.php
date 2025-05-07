@@ -94,18 +94,25 @@ echo render_block([
 
 
         <section id="contact-form-section" class="contact-form-section">
-            <div class="container contact-form-section__container">
-                <h2 class="contact-form-section__title">Send Message</h2>
-                <p class="contact-form-section__description">Use this form to contact <?php echo esc_html($name); ?> directly. Your message will go straight to them and will be kept completely confidential.</p>
-                <div class="contact-form-section__form-wrapper">
-                    <?php
-                    // Consider replacing this placeholder with an actual form implementation (e.g., using a plugin like Contact Form 7 or WPForms)
-                    // For now, keeping the placeholder but styled with BEM
-                    echo "<p class='contact-form-section__placeholder'><i>[Contact Form Placeholder]</i></p>";
-                    ?>
-                </div>
-            </div>
-        </section>
+    <div class="container contact-form-section__container">
+        <h2 class="contact-form-section__title">Send Message</h2>
+        <p class="contact-form-section__description">
+            Use this form to contact <?php echo esc_html($name); ?> directly. Your message will go straight to them and will be kept completely confidential.
+        </p>
+        <div class="contact-form-section__form-wrapper">
+            <?php
+            // Check if Ninja Forms is active
+            if (function_exists('Ninja_Forms')) {
+                echo do_shortcode('[ninja_form id=2]');
+            } else {
+                echo "<p class='contact-form-section__placeholder'><i>Ninja Forms plugin is not active or the form ID is missing.</i></p>";
+            }
+            ?>
+           
+        </div>
+    </div>
+</section>
+
 
     <?php
     endwhile;
