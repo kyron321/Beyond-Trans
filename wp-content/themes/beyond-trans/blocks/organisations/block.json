@@ -1,0 +1,16 @@
+{
+    "name": "acf/organisations",
+    "title": "Organisations",
+    "description": "organisations",
+    "style": [ "file:./organisations.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["organisations"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "organisations.php"
+    },
+    "supports": {
+        "align": false
+    }
+}

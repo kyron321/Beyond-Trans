@@ -1,0 +1,28 @@
+.organisations.block {
+  padding: 6rem 0;
+}
+.organisations__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.organisations__icon svg {
+  width: 3rem;
+  height: 3rem;
+}
+.organisations h2 {
+  margin-bottom: 0rem;
+}
+.organisations a:hover {
+  color: #0056b3 !important;
+  text-decoration: underline;
+}
+.organisations a:hover a {
+  text-decoration: underline;
+  color: #007bff;
+  transition: color 0.2s ease-in-out, text-decoration-color 0.2s ease-in-out;
+}
+.organisations a:hover a:hover, .organisations a:hover a:focus {
+  color: #0056b3;
+  text-decoration-color: #0056b3;
+}
