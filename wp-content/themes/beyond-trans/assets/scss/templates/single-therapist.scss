@@ -3,11 +3,11 @@ $therapist-profile-breakpoint-md: 768px;
 $therapist-profile-breakpoint-lg: 1024px;
 
 .therapist-profile {
-    padding: 3rem 0;
+    padding-top: 6rem;
     background-color: var(--primary);
 
     &__details {
-        padding-bottom: 4rem; 
+        padding-bottom: 6rem; 
     }
 
     &__content-wrapper {
@@ -155,8 +155,8 @@ $therapist-profile-breakpoint-lg: 1024px;
 }
 
 .contact-form-section {
-    padding-top: 4rem; // py-16
-    padding-bottom: 4rem;
+    padding-top: 6rem; // py-16
+    padding-bottom: 6rem;
     background-color: var(--eggshell-white);
 
     &__container {

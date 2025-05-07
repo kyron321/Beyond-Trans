@@ -1,0 +1,94 @@
+.testimonials-slider {
+    padding: 6rem 0;
+    background-color: var(--primary-darker);
+
+    &__header {
+        margin-bottom: 4rem;
+        width: 50%;
+    }
+
+    &__subheading {
+        color: inherit;
+    }
+
+    &__heading {
+        color: inherit;
+    }
+
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        margin-bottom: 4rem;
+
+        @media (max-width: 991px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 767px) {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    &__stars {
+        display: flex;
+        gap: 0.25rem;
+        margin-bottom: 2rem;
+
+        svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            fill: inherit; // Changed to white
+        }
+    }
+
+    &__star {
+        color: inherit; // Changed to white
+        font-size: 1.25rem;
+
+        &--empty {
+            opacity: 0.3;
+        }
+    }
+
+    &__quote {
+        blockquote {
+            color: inherit;
+
+            h6 {
+                color: inherit;
+                margin-bottom: 2rem;
+                width: 80%;
+            }
+        }
+    }
+
+    &__author {
+        margin-top: auto;
+    }
+
+    &__author-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__author-name {
+        color: inherit;
+        margin-bottom: 0.25rem;
+    }
+
+    &__author-affiliation {
+        color: inherit;
+        font-size: 1rem;
+    }
+}
