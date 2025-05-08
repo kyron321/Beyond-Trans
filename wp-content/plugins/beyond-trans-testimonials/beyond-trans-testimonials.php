@@ -89,6 +89,68 @@ function beyond_trans_register_testimonial_type_taxonomy()
 }
 
 /**
+ * Add pending testimonial count to admin menu
+ */
+function beyond_trans_pending_testimonials_count()
+{
+    global $menu;
+
+    // Count pending testimonials
+    $pending_count = wp_count_posts('testimonial')->pending;
+
+    // Only proceed if there are pending testimonials
+    if ($pending_count > 0) {
+        // Find the testimonial menu item
+        foreach ($menu as $key => $value) {
+            if ($value[2] == 'edit.php?post_type=testimonial') {
+                // Add the pending count to the menu label
+                $menu[$key][0] .= ' <span class="awaiting-mod update-plugins count-' . $pending_count . '">' .
+                    '<span class="pending-count">' . $pending_count . '</span>' .
+                    '</span>';
+                break;
+            }
+        }
+    }
+}
+add_action('admin_menu', 'beyond_trans_pending_testimonials_count');
+
+/**
+ * Add admin notice for pending testimonials on the testimonials list page
+ */
+function beyond_trans_pending_testimonials_notice()
+{
+    $screen = get_current_screen();
+
+    // Only show on testimonials screen
+    if ($screen->post_type !== 'testimonial') {
+        return;
+    }
+
+    // Count pending testimonials
+    $pending_count = wp_count_posts('testimonial')->pending;
+
+    // Only show if there are pending testimonials
+    if ($pending_count > 0) {
+        $url = admin_url('edit.php?post_status=pending&post_type=testimonial');
+
+        echo '<div class="notice notice-info is-dismissible">';
+        echo '<p><strong>';
+        printf(
+            _n(
+                'There is %s pending testimonial that needs review.',
+                'There are %s pending testimonials that need review.',
+                $pending_count,
+                'beyond-trans-testimonials'
+            ),
+            '<a href="' . esc_url($url) . '">' . $pending_count . '</a>'
+        );
+        echo '</strong></p>';
+        echo '</div>';
+    }
+}
+add_action('admin_notices', 'beyond_trans_pending_testimonials_notice');
+
+/**
  * Prevent this plugin from being deactivated
  */
 function beyond_trans_testimonials_prevent_deactivation($actions, $plugin_file, $plugin_data, $context)
