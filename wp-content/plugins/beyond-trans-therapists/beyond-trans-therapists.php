@@ -148,6 +148,69 @@ function beyond_trans_register_regions_taxonomy()
 }
 add_action('init', 'beyond_trans_register_regions_taxonomy');
 
+/**
+ * Add pending therapist count to admin menu
+ */
+function beyond_trans_pending_therapists_count()
+{
+    global $menu;
+
+    // Count pending therapists
+    $pending_count = wp_count_posts('therapist')->pending;
+
+    // Only proceed if there are pending therapists
+    if ($pending_count > 0) {
+        // Find the therapist menu item
+        foreach ($menu as $key => $value) {
+            if ($value[2] == 'edit.php?post_type=therapist') {
+                // Add the pending count to the menu label
+                $menu[$key][0] .= ' <span class="awaiting-mod update-plugins count-' . $pending_count . '">' .
+                    '<span class="pending-count">' . $pending_count . '</span>' .
+                    '</span>';
+                break;
+            }
+        }
+    }
+}
+add_action('admin_menu', 'beyond_trans_pending_therapists_count');
+
+/**
+ * Add admin notice for pending therapists on the therapists list page
+ */
+function beyond_trans_pending_therapists_notice()
+{
+    $screen = get_current_screen();
+
+    // Only show on therapists screen
+    if ($screen->post_type !== 'therapist') {
+        return;
+    }
+
+    // Count pending therapists
+    $pending_count = wp_count_posts('therapist')->pending;
+
+    // Only show if there are pending therapists
+    if ($pending_count > 0) {
+        $url = admin_url('edit.php?post_status=pending&post_type=therapist');
+
+        echo '<div class="notice notice-info is-dismissible">';
+        echo '<p><strong>';
+        printf(
+            _n(
+                'There is %s pending therapist profile that needs review.',
+                'There are %s pending therapist profiles that need review.',
+                $pending_count,
+                'beyond-trans-therapists'
+            ),
+            '<a href="' . esc_url($url) . '">' . $pending_count . '</a>'
+        );
+        echo '</strong></p>';
+        echo '</div>';
+    }
+}
+add_action('admin_notices', 'beyond_trans_pending_therapists_notice');
+
+
 // Make it so that this plugin doesn't show updates
 add_filter('site_transient_update_plugins', 'beyond_trans_remove_update_notification');
 function beyond_trans_remove_update_notification($value)
