@@ -59,3 +59,151 @@ function create_testimonial_from_ninja_form($form_data)
     return $form_data;
 }
 add_action('ninja_forms_after_submission', 'create_testimonial_from_ninja_form');
+
+/**
+ * Create therapist post from Ninja Forms submission
+ */
+function create_therapist_from_ninja_form($form_data)
+{
+    // Only process submissions from the therapist form (form ID 7)
+    if ($form_data['form_id'] != 7) {
+        return $form_data;
+    }
+
+    // Initialize variables
+    $name = '';
+    $description = '';
+    $company = '';
+    $website = '';
+    $location = '';
+    $country = '';
+    $email = '';
+    $specialties = array();
+    $image_url = '';
+
+    // Extract data from the form submission based on actual field IDs/keys
+    if (isset($form_data['fields_by_key']['name_1746732593811']) && !empty($form_data['fields_by_key']['name_1746732593811']['value'])) {
+        $name = sanitize_text_field($form_data['fields_by_key']['name_1746732593811']['value']);
+    }
+
+    if (isset($form_data['fields_by_key']['about_you_1746732750587']) && !empty($form_data['fields_by_key']['about_you_1746732750587']['value'])) {
+        $description = sanitize_textarea_field($form_data['fields_by_key']['about_you_1746732750587']['value']);
+    }
+
+    if (isset($form_data['fields_by_key']['company_1746732640040']) && !empty($form_data['fields_by_key']['company_1746732640040']['value'])) {
+        $company = sanitize_text_field($form_data['fields_by_key']['company_1746732640040']['value']);
+    }
+
+    if (isset($form_data['fields_by_key']['website_1746732727998']) && !empty($form_data['fields_by_key']['website_1746732727998']['value'])) {
+        $website = esc_url_raw($form_data['fields_by_key']['website_1746732727998']['value']);
+        // Make sure website has a proper protocol
+        if (!empty($website) && !preg_match("~^(?:f|ht)tps?://~i", $website)) {
+            $website = "https://" . $website;
+        }
+    }
+
+    if (isset($form_data['fields_by_key']['region_state_province_1746732697327']) && !empty($form_data['fields_by_key']['region_state_province_1746732697327']['value'])) {
+        $location = sanitize_text_field($form_data['fields_by_key']['region_state_province_1746732697327']['value']);
+    }
+
+    if (isset($form_data['fields_by_key']['country_1746733998322']) && !empty($form_data['fields_by_key']['country_1746733998322']['value'])) {
+        $country = sanitize_text_field($form_data['fields_by_key']['country_1746733998322']['value']);
+    }
+
+    if (isset($form_data['fields_by_key']['email_1746732710335']) && !empty($form_data['fields_by_key']['email_1746732710335']['value'])) {
+        $email = sanitize_email($form_data['fields_by_key']['email_1746732710335']['value']);
+    }
+
+    // Get specialties (multiple checkboxes)
+    if (isset($form_data['fields_by_key']['areas_of_speciality_1746734103584']) && !empty($form_data['fields_by_key']['areas_of_speciality_1746734103584']['value'])) {
+        $specialties = (array) $form_data['fields_by_key']['areas_of_speciality_1746734103584']['value'];
+    }
+
+    // Get uploaded image if available
+    if (
+        isset($form_data['fields_by_key']['file_upload_1746732113358']) &&
+        !empty($form_data['fields_by_key']['file_upload_1746732113358']['value'])
+    ) {
+
+        if (is_array($form_data['fields_by_key']['file_upload_1746732113358']['value'])) {
+            // Get the first image URL if it's an array
+            $image_url = reset($form_data['fields_by_key']['file_upload_1746732113358']['value']);
+        } else {
+            $image_url = $form_data['fields_by_key']['file_upload_1746732113358']['value'];
+        }
+    }
+
+    // Create location string combining region and country
+    $full_location = $location;
+    if (!empty($country)) {
+        $full_location = !empty($location) ? $location . ', ' . $country : $country;
+    }
+
+    // Create post data
+    $therapist_data = array(
+        'post_title'    => $name,
+        'post_content'  => '', // We'll store description in ACF
+        'post_status'   => 'pending', // Set as pending for review
+        'post_type'     => 'therapist',
+    );
+
+    // Insert the post
+    $post_id = wp_insert_post($therapist_data);
+
+    // Add custom fields if the post was created successfully
+    if ($post_id && !is_wp_error($post_id)) {
+        // Save the ACF fields
+        update_field('description', $description, $post_id);
+
+        // Create the contact_info group
+        $contact_info = array();
+
+        if (!empty($company)) {
+            $contact_info['company'] = $company;
+        }
+
+        if (!empty($website)) {
+            $contact_info['website'] = $website;
+        }
+
+        if (!empty($full_location)) {
+            $contact_info['location'] = $full_location;
+        }
+
+        if (!empty($email)) {
+            $contact_info['email'] = $email;
+        }
+
+        update_field('contact_info', $contact_info, $post_id);
+
+        // Save specialties as taxonomy terms
+        if (!empty($specialties)) {
+            wp_set_object_terms($post_id, $specialties, 'specialty');
+        }
+
+        // Also save region and country as their own taxonomies
+        if (!empty($location)) {
+            wp_set_object_terms($post_id, $location, 'region-state-province');
+        }
+
+        if (!empty($country)) {
+            wp_set_object_terms($post_id, $country, 'country');
+        }
+
+        // Set the featured image if uploaded
+        if (!empty($image_url)) {
+            // Check if the image URL corresponds to an attachment ID
+            $attachment_id = attachment_url_to_postid($image_url);
+
+            if ($attachment_id) {
+                set_post_thumbnail($post_id, $attachment_id);
+            }
+        }
+
+        // Add submission source metadata
+        add_post_meta($post_id, '_submitted_via', 'Therapist submission form');
+    }
+
+    return $form_data;
+}
+add_action('ninja_forms_after_submission', 'create_therapist_from_ninja_form');
