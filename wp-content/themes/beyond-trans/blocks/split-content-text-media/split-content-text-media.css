@@ -79,6 +79,7 @@
 }
 .split-content-text-media__key-point-text {
   font-size: 1.125rem;
+  margin-bottom: 0;
 }
 .split-content-text-media__ctas {
   display: flex;
