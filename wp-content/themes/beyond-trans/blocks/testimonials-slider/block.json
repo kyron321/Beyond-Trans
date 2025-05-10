@@ -10,6 +10,7 @@
         "mode": "edit",
         "renderTemplate": "testimonials-slider.php"
     },
+    "script": [ "file:./testimonials-slider.js" ],
     "supports": {
         "align": false
     }
