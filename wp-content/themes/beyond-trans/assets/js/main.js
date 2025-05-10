@@ -28,38 +28,47 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Get all elements with fade-in class
   const fadeElements = document.querySelectorAll('.fade-in');
   
-  // Create intersection observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // Add is-visible class when element enters viewport
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        // Optional: stop observing after animation
-        // observer.unobserve(entry.target);
       }
     });
   }, {
-    root: null, // viewport
-    threshold: 0.1, // trigger when 10% of the element is visible
-    rootMargin: '0px 0px -50px 0px' // adjust as needed
+    root: null, 
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px' 
   });
-  
-  // Observe each fade element
+
   fadeElements.forEach(el => observer.observe(el));
 });
 
-// Optional JS for adding shadow on scroll
+// adding on scroll class
 document.addEventListener('DOMContentLoaded', function() {
   const navContainer = document.querySelector('.main-nav');
+  const adminBarHeight = 32;
+  const topNavHeight = 54;
+  let isScrolled = false; 
+  let isWPAdminBar = false; 
   
-  window.addEventListener('scroll', function() {
-    if (window.scrollY >= 54) {
+  if (document.body.classList.contains('admin-bar')) {
+    isWPAdminBar = true;
+  }
+  
+  function checkScroll() {
+    const threshold = isWPAdminBar ? topNavHeight + adminBarHeight : topNavHeight;
+    
+    if (window.scrollY >= threshold && !isScrolled) {
       navContainer.classList.add('scrolled');
-    } else {
+      isScrolled = true;
+    } else if (window.scrollY < threshold && isScrolled) {
       navContainer.classList.remove('scrolled');
+      isScrolled = false;
     }
-  });
+  }
+
+  checkScroll();
+  window.addEventListener('scroll', checkScroll);
 });
