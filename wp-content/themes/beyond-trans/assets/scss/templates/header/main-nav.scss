@@ -269,6 +269,7 @@
             padding: 1rem 0; // Padding for the dropdown container
             z-index: 1000;
             display: block;
+            overflow: hidden;
 
             // Initial hidden state
             transform: translateY(-10px);

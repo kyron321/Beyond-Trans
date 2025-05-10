@@ -35,7 +35,7 @@ $heading-font-family: 'Poppins', sans-serif;
 
 h1,
 .h1 {
-    font-size: $h1-font-size;
+    font-size: clamp(($h1-font-size - 1rem), 5vw, $h1-font-size);
     font-weight: $h1-font-weight;
     line-height: $h1-line-height;
     font-family: $heading-font-family;
@@ -43,7 +43,7 @@ h1,
 
 h2,
 .h2 {
-    font-size: $h2-font-size;
+    font-size: clamp(($h2-font-size - 1rem), 4.5vw, $h2-font-size);
     font-weight: $h2-font-weight;
     line-height: $h2-line-height;
     font-family: $heading-font-family;
@@ -51,7 +51,7 @@ h2,
 
 h3,
 .h3 {
-    font-size: $h3-font-size;
+    font-size: clamp(($h3-font-size - 1rem), 4vw, $h3-font-size);
     font-weight: $h3-font-weight;
     line-height: $h3-line-height;
     font-family: $heading-font-family;
@@ -59,7 +59,7 @@ h3,
 
 h4,
 .h4 {
-    font-size: $h4-font-size;
+    font-size: clamp(($h4-font-size - 1rem), 3.5vw, $h4-font-size);
     font-weight: $h4-font-weight;
     line-height: $h4-line-height;
     font-family: $heading-font-family;
@@ -67,7 +67,7 @@ h4,
 
 h5,
 .h5 {
-    font-size: $h5-font-size;
+    font-size: clamp(($h5-font-size - 0.5rem), 3vw, $h5-font-size);
     font-weight: $h5-font-weight;
     line-height: $h5-line-height;
     font-family: $heading-font-family;
@@ -75,7 +75,7 @@ h5,
 
 h6,
 .h6 {
-    font-size: $h6-font-size;
+    font-size: clamp(($h6-font-size - 0.5rem), 2.5vw, $h6-font-size);
     font-weight: $h6-font-weight;
     line-height: $h6-line-height;
     font-family: $heading-font-family;

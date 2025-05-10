@@ -45,6 +45,12 @@
   padding-top: 12rem;
   padding-bottom: 12rem;
 }
+@media screen and (max-width: 1024px) {
+  .banner__content.container {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
 .banner__content__title {
   color: var(--white);
   margin-bottom: 1.5rem;
