@@ -108,14 +108,6 @@ function theme_enqueue_scripts()
     wp_register_style('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', array(), '1.8.1');
     wp_register_style('slick-theme', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css', array('slick'), '1.8.1');
     wp_register_script('slick', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array('jquery'), '1.8.1', true);
-
-    // Enqueue Slick Slider (was missing)
-    wp_enqueue_style('slick');
-    wp_enqueue_style('slick-theme');
-    wp_enqueue_script('slick');
-
-    // Enqueue our custom testimonial slider script
-    wp_enqueue_script('testimonial-slider', get_template_directory_uri() . '/dist/js/testimonial-slider.js', array('jquery', 'slick'), THEME_VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
 add_action('admin_enqueue_scripts', 'theme_enqueue_scripts');
