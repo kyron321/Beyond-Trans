@@ -58,6 +58,16 @@
 
                 &__logo {
                     padding-bottom: 1.5rem;
+
+                    svg {
+                        width: 150px;
+                        height: auto;
+                        transition: transform 0.3s ease;
+
+                        &:hover {
+                            transform: scale(1.025);
+                        }
+                    }
                 }
 
                 &__newsletter {
@@ -159,7 +169,9 @@
                     }
                 }
 
-                &__menu__one, &__menu__two, &__menu__socials {
+                &__menu__one,
+                &__menu__two,
+                &__menu__socials {
                     max-width: 160px;
                 }
             }
@@ -206,7 +218,9 @@
                     flex-direction: column;
                     gap: 2rem;
 
-                    &__menu__one, &__menu__two, &__menu__socials {
+                    &__menu__one,
+                    &__menu__two,
+                    &__menu__socials {
                         max-width: 100%;
                     }
                 }
@@ -240,6 +254,7 @@
                 }
             }
         }
+
         &__bottom {
             margin-top: 1.5rem;
         }
