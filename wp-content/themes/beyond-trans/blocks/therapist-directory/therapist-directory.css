@@ -73,6 +73,7 @@
   flex-direction: column;
   flex-grow: 1;
   color: var(--white);
+  width: 100%;
 }
 .therapist-directory .therapist-card__name {
   color: var(--white);

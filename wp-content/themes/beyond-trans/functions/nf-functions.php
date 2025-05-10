@@ -207,3 +207,31 @@ function create_therapist_from_ninja_form($form_data)
     return $form_data;
 }
 add_action('ninja_forms_after_submission', 'create_therapist_from_ninja_form');
+
+
+/**
+ * Replace Ninja Forms email with therapist email on submission
+ */
+function replace_ninja_forms_to_email_with_therapist_email($form_data)
+{
+    // get hidden field value named therapist_id
+    $therapist_id = isset($form_data['fields'][60]['value']) ? $form_data['fields'][60]['value'] : '';
+
+    // using therapist_id, get the email address of the therapist from acf
+    $therapist_email = '';
+    if (!empty($therapist_id)) {
+        // Get ACF fields for this therapist
+        $fields = get_fields($therapist_id);
+
+        // Extract email from contact_info group
+        if (isset($fields['contact_info']['email']) && !empty($fields['contact_info']['email'])) {
+            $therapist_email = trim($fields['contact_info']['email']);
+        }
+    }
+
+    // Modify the email field value, set to the actual therapist email
+    $form_data['fields'][59]['value'] = $therapist_email;
+
+    return $form_data;
+}
+add_filter('ninja_forms_submit_data', 'replace_ninja_forms_to_email_with_therapist_email', 10, 1);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying single Therapist posts
  */
@@ -32,6 +33,7 @@ echo render_block([
         $bio = isset($fields['description']) ? $fields['description'] : '';
         $website = isset($fields['contact_info']['website']) ? trim($fields['contact_info']['website']) : '';
         $location_string = isset($fields['contact_info']['location']) ? $fields['contact_info']['location'] : '';
+        $email = isset($fields['contact_info']['email']) ? trim($fields['contact_info']['email']) : '';
         $contact_form_link = '#contact-form-section';
         $specialties_terms = get_the_terms($therapist_id, 'specialty');
     ?>
@@ -42,10 +44,6 @@ echo render_block([
                         <?php if ($photo_url): ?>
                             <div class="therapist-profile__image-wrapper">
                                 <img src="<?php echo esc_url($photo_url); ?>" alt="<?php echo esc_attr($name); ?>" class="therapist-profile__image">
-                            </div>
-                        <?php else: ?>
-                            <div class="therapist-profile__image-placeholder">
-                                <!-- Optional: Placeholder image or icon -->
                             </div>
                         <?php endif; ?>
                     </div>
@@ -65,7 +63,7 @@ echo render_block([
                                     <a href="<?php echo esc_url((strpos($website, 'http') !== 0 ? 'https://' : '') . $website); ?>" target="_blank" rel="noopener noreferrer" class="therapist-profile__link"><?php echo esc_html(parse_url((strpos($website, 'http') !== 0 ? 'https://' : '') . $website, PHP_URL_HOST)); ?></a>
                                 </p>
                             <?php endif; ?>
-                           
+
                             <?php if (!empty($location_string)): ?>
                                 <p class="therapist-profile__contact-item">
                                     <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -94,30 +92,23 @@ echo render_block([
 
 
         <section id="contact-form-section" class="contact-form-section">
-    <div class="container contact-form-section__container">
-        <h2 class="contact-form-section__title">Send Message</h2>
-        <p class="contact-form-section__description">
-            Use this form to contact <?php echo esc_html($name); ?> directly. Your message will go straight to them and will be kept completely confidential.
-        </p>
-        <div class="contact-form-section__form-wrapper">
-            <?php
-            // Check if Ninja Forms is active
-            if (function_exists('Ninja_Forms')) {
-                echo do_shortcode('[ninja_form id=2]');
-            } else {
-                echo "<p class='contact-form-section__placeholder'><i>Ninja Forms plugin is not active or the form ID is missing.</i></p>";
-            }
-            ?>
-           
-        </div>
-    </div>
-</section>
-
-
+            <div class="container contact-form-section__container">
+                <h2 class="contact-form-section__title">Send Message</h2>
+                <p class="contact-form-section__description">
+                    Use this form to contact <?php echo esc_html($name); ?> directly. Your message will go straight to them and will be kept completely confidential.
+                </p>
+                <div class="contact-form-section__form-wrapper">
+                    <?php
+                    if (function_exists('Ninja_Forms')) {
+                        echo do_shortcode('[ninja_form id=8]');
+                    }
+                    ?>
+                </div>
+            </div>
+        </section>
     <?php
     endwhile;
     ?>
-
 </main>
 
-<?php get_footer(); ?> 
+<?php get_footer(); ?>
