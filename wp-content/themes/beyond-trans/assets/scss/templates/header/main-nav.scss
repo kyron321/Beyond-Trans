@@ -188,7 +188,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 10px;
+    // padding: 10px;
     z-index: 1001; // Ensure it's above other elements
 
     .main-nav__toggle-icon {
@@ -196,6 +196,7 @@
         position: relative;
         width: 24px;
         height: 2px;
+        margin-bottom: 0;
         background-color: var(--white);
         transition: background-color 0s 0.3s ease; // Delay background disappearance
 
@@ -237,7 +238,9 @@
 }
 
 // Responsive adjustments
-@media (max-width: 1200px) { // Adjust breakpoint as needed
+@media (max-width: 1200px) {
+
+    // Adjust breakpoint as needed
     .main-nav__toggle {
         display: block; // Show the toggle button
         order: 3;
@@ -245,13 +248,13 @@
     }
 
     .main-nav__menu {
-        position: absolute;   // Position relative to .main-nav
-        top: 100%;          // Start right below the .main-nav container
+        position: absolute; // Position relative to .main-nav
+        top: 100%; // Start right below the .main-nav container
         left: 0;
         width: 100%;
-        height: auto;         // Height based on content
+        height: auto; // Height based on content
         background-color: var(--primary-dark);
-        padding: 1rem 0;      // Padding for the dropdown container
+        padding: 1rem 0; // Padding for the dropdown container
         z-index: 1000;
         display: block;
 
@@ -291,51 +294,53 @@
 
                 // Submenu handling remains the same as previous attempt
                 &.menu-item-has-children {
-                   > a::after {
-                      transition: transform 0.3s ease;
-                   }
+                    >a::after {
+                        transition: transform 0.3s ease;
+                    }
 
-                   &.submenu-open > a::after {
-                       transform: rotate(180deg);
-                   }
+                    &.submenu-open>a::after {
+                        transform: rotate(180deg);
+                    }
 
-                   ul.sub-menu {
-                       position: static;
-                       overflow: hidden;
-                       transform: none;
-                       opacity: 0;
-                       visibility: hidden;
-                       max-height: 0;
-                       box-shadow: none;
-                       background-color: transparent;
-                       padding-left: 1rem;
-                       padding-top: 0;
-                       padding-bottom: 0;
-                       min-width: auto;
-                       width: 100%;
-                       border-radius: 0;
-                       max-width: none;
-                       transition: max-height 0.4s ease-out, padding 0.4s ease-out, opacity 0.3s ease-in, visibility 0s linear 0.4s;
+                    ul.sub-menu {
+                        position: static;
+                        overflow: hidden;
+                        transform: none;
+                        opacity: 0;
+                        visibility: hidden;
+                        max-height: 0;
+                        box-shadow: none;
+                        background-color: transparent;
+                        padding-left: 1rem;
+                        padding-top: 0;
+                        padding-bottom: 0;
+                        min-width: auto;
+                        width: 100%;
+                        border-radius: 0;
+                        max-width: none;
+                        transition: max-height 0.4s ease-out, padding 0.4s ease-out, opacity 0.3s ease-in, visibility 0s linear 0.4s;
 
-                       li {
-                           margin-bottom: 0;
-                           a {
-                               padding: 0.5rem 1rem;
-                               &::after {
-                                  display: none;
-                               }
-                           }
-                       }
-                   }
+                        li {
+                            margin-bottom: 0;
 
-                   &.submenu-open > ul.sub-menu {
-                       max-height: 500px;
-                       opacity: 1;
-                       visibility: visible;
-                       padding-top: 0.5rem;
-                       padding-bottom: 0.5rem;
-                       transition: max-height 0.4s ease-in, padding 0.4s ease-in, opacity 0.3s ease-out, visibility 0s linear 0s;
-                   }
+                            a {
+                                padding: 0.5rem 1rem;
+
+                                &::after {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+
+                    &.submenu-open>ul.sub-menu {
+                        max-height: 500px;
+                        opacity: 1;
+                        visibility: visible;
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        transition: max-height 0.4s ease-in, padding 0.4s ease-in, opacity 0.3s ease-out, visibility 0s linear 0s;
+                    }
                 }
             }
         }
