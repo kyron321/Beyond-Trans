@@ -50,3 +50,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Observe each fade element
   fadeElements.forEach(el => observer.observe(el));
 });
+
+// Optional JS for adding shadow on scroll
+document.addEventListener('DOMContentLoaded', function() {
+  const navContainer = document.querySelector('.main-nav');
+  
+  window.addEventListener('scroll', function() {
+    if (window.scrollY >= 54) {
+      navContainer.classList.add('scrolled');
+    } else {
+      navContainer.classList.remove('scrolled');
+    }
+  });
+});
