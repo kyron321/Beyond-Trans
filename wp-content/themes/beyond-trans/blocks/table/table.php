@@ -47,15 +47,15 @@ if (!empty($subheading) || !empty($heading) || !empty($text) || (!empty($table) 
             <?php if (!empty($subheading) || !empty($heading) || !empty($text)) : ?>
                 <div class="table-block__content">
                     <?php if (!empty($subheading)) : ?>
-                        <p class="table-block__subheading"><?php echo esc_html($subheading); ?></p>
+                        <p class="table-block__subheading fade-in"><?php echo esc_html($subheading); ?></p>
                     <?php endif; ?>
 
                     <?php if (!empty($heading)) : ?>
-                        <h2 class="table-block__heading"><?php echo esc_html($heading); ?></h2>
+                        <h2 class="table-block__heading fade-in"><?php echo esc_html($heading); ?></h2>
                     <?php endif; ?>
 
                     <?php if (!empty($text)) : ?>
-                        <div class="table-block__text">
+                        <div class="table-block__text fade-in">
                             <?php echo wpautop(esc_html($text)); ?>
                         </div>
                     <?php endif; ?>
@@ -65,11 +65,11 @@ if (!empty($subheading) || !empty($heading) || !empty($text) || (!empty($table) 
             <?php if (!empty($table) && is_array($table)) : ?>
                 <div class="table-block__wrapper">
                     <?php if (!empty($table['caption'])) : ?>
-                        <h3 class="table-block__caption"><?php echo esc_html($table['caption']); ?></h3>
+                        <h3 class="table-block__caption fade-in"><?php echo esc_html($table['caption']); ?></h3>
                     <?php endif; ?>
 
                     <div class="table-block__responsive">
-                        <table class="table-block__table col-count-<?php echo esc_attr($column_count); ?>">
+                        <table class="table-block__table col-count-<?php echo esc_attr($column_count); ?> fade-in">
                             <?php if (!empty($table['header'])) : ?>
                                 <thead>
                                     <tr>

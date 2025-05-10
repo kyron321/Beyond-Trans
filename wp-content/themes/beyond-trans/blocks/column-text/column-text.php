@@ -32,7 +32,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
         <?php endif; ?>
 
         <?php if ($block_subheading) : ?>
-            <div class="column-text__subheading"><?php echo wp_kses_post($block_subheading); ?></div>
+            <div class="column-text__subheading fade-in"><?php echo wp_kses_post($block_subheading); ?></div>
         <?php endif; ?>
 
         <?php if ($single_text) : ?>
@@ -42,7 +42,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
                     $subtitle = $item['subtitle'];
                     $link = $item['title_link'];
                 ?>
-                    <div class="column-text__item">
+                    <div class="column-text__item fade-in">
                         <?php if ($title) : ?>
                             <?php if ($link && $link['url']) : ?>
                                 <h3><a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target'] ?: '_self'); ?>"><?php echo esc_html($title); ?></a></h3>

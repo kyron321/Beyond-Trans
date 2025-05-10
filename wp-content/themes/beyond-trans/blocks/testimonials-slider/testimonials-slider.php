@@ -43,26 +43,26 @@ if ($testimonial_count < 3) {
 
 <section id="<?php echo esc_attr($slider_id); ?>" class="<?php echo esc_attr(implode(' ', $block_classes)); ?>">
     <div class="container">
-        <div class="testimonials-slider__header">
+        <div class="testimonials-slider__header fade-in">
             <?php if ($heading): ?>
-                <h2 class="testimonials-slider__heading"><?php echo esc_html($heading); ?></h2>
+                <h2 class="testimonials-slider__heading fade-in"><?php echo esc_html($heading); ?></h2>
             <?php endif; ?>
             <?php if ($subheading): ?>
-                <p class="testimonials-slider__subheading"><?php echo esc_html($subheading); ?></p>
+                <p class="testimonials-slider__subheading fade-in"><?php echo esc_html($subheading); ?></p>
             <?php endif; ?>
         </div>
 
         <div class="<?php echo esc_attr(implode(' ', $slick_classes)); ?>"> <?php // This is the main Slick container class used in JS
-            foreach ($testimonials as $testimonial):
-                // Get testimonial data
-                $quote = get_field('quote', $testimonial->ID);
-                $star_rating = get_field('star_rating', $testimonial->ID);
-                $affiliation = get_field('affiliation', $testimonial->ID);
-                $author_name = get_the_title($testimonial->ID);
-            ?>
+                                                                            foreach ($testimonials as $testimonial):
+                                                                                // Get testimonial data
+                                                                                $quote = get_field('quote', $testimonial->ID);
+                                                                                $star_rating = get_field('star_rating', $testimonial->ID);
+                                                                                $affiliation = get_field('affiliation', $testimonial->ID);
+                                                                                $author_name = get_the_title($testimonial->ID);
+                                                                            ?>
                 <div class="testimonials-slider__item">
                     <?php if ($star_rating): ?>
-                        <div class="testimonials-slider__stars">
+                        <div class="testimonials-slider__stars fade-in">
                             <?php for ($i = 0; $i < $star_rating; $i++): ?>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                     <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
@@ -77,14 +77,14 @@ if ($testimonial_count < 3) {
                     <?php endif; ?>
 
                     <?php if ($quote): ?>
-                        <div class="testimonials-slider__quote">
+                        <div class="testimonials-slider__quote fade-in">
                             <blockquote>
                                 <h6>"<?php echo esc_html($quote); ?>"</h6>
                             </blockquote>
                         </div>
                     <?php endif; ?>
 
-                    <div class="testimonials-slider__author">
+                    <div class="testimonials-slider__author fade-in">
                         <div class="testimonials-slider__author-info">
                             <p class="testimonials-slider__author-name"><?php echo esc_html($author_name); ?></p>
                             <?php if ($affiliation): ?>
@@ -97,7 +97,7 @@ if ($testimonial_count < 3) {
         </div>
 
         <?php if ($cta): ?>
-            <div class="testimonials-grid__cta">
+            <div class="testimonials-grid__cta fade-in">
                 <a href="<?php echo esc_url($cta['url']); ?>" class="btn btn-secondary" <?php echo $cta['target'] ? 'target="' . esc_attr($cta['target']) . '"' : ''; ?>>
                     <?php echo esc_html($cta['title']); ?>
                 </a>

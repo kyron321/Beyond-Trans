@@ -15,18 +15,18 @@ $has_form = !empty($form_id) && $form_id !== 'select-form';
         <?php if (!empty($title) || !empty($subtitle)): ?>
             <div class="form-header text-center">
                 <?php if (!empty($title)): ?>
-                    <h2 class="form-title"><?php echo esc_html($title); ?></h2>
+                    <h2 class="form-title fade-in"><?php echo esc_html($title); ?></h2>
                 <?php endif; ?>
 
                 <?php if (!empty($subtitle)): ?>
-                    <p class="form-subtitle">
+                    <p class="form-subtitle fade-in">
                         <?php echo wp_kses_post($subtitle); ?>
                     </p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
 
-        <div class="form-content">
+        <div class="form-content fade-in">
             <?php if ($has_form): ?>
                 <?php echo do_shortcode('[ninja_form id="' . esc_attr($form_id) . '"]'); ?>
             <?php elseif (is_admin()): ?>

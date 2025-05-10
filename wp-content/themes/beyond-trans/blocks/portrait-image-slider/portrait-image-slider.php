@@ -37,18 +37,18 @@ wp_enqueue_script('slick');
     <div class="container">
         <div class="portrait-image-slider__header">
             <?php if (!empty($heading)): ?>
-                <div class="portrait-image-slider__heading">
+                <div class="portrait-image-slider__heading fade-in">
                     <h2><?php echo esc_html($heading); ?></h2>
                 </div>
             <?php endif; ?>
             <?php if (!empty($subheading)): ?>
-                <div class="portrait-image-slider__subheading">
+                <div class="portrait-image-slider__subheading fade-in">
                     <p><?php echo esc_html($subheading); ?></p>
                 </div>
             <?php endif; ?>
         </div>
 
-        <div class="portrait-image-slider__wrapper" id="<?php echo esc_attr($id); ?>">
+        <div class="portrait-image-slider__wrapper fade-in" id="<?php echo esc_attr($id); ?>">
             <div class="portrait-image-slider__container">
                 <?php
                 if ($image_rows && count($image_rows) > 0):

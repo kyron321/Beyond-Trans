@@ -33,25 +33,25 @@ $is_first_block = ($position === 0);
         <div class="disclaimer__inner">
             <div class="disclaimer__content">
                 <?php if ($subheading): ?>
-                    <div class="disclaimer__subheading">
+                    <div class="disclaimer__subheading fade-in">
                         <p><?php echo $subheading; ?></p>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($heading): ?>
-                    <div class="disclaimer__heading">
+                    <div class="disclaimer__heading fade-in">
                         <h2><?php echo $heading; ?></h2>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($text): ?>
-                    <div class="disclaimer__text">
+                    <div class="disclaimer__text fade-in">
                         <?php echo $text; ?>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($cta_one || $cta_two): ?>
-                    <div class="disclaimer__ctas">
+                    <div class="disclaimer__ctas fade-in">
                         <?php if ($cta_one): ?>
                             <a href="<?php echo esc_url($cta_one['url']); ?>"
                                 class="btn btn-secondary consent-button"

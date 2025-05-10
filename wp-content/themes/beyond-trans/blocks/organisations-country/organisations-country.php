@@ -24,17 +24,17 @@ if (!empty($text_class)) {
 
 <section class="<?php echo esc_attr(implode(' ', $block_classes)); ?>">
     <div class="container">
-        <div class="organisations-country__header">
-        <div class="organisations-country__icon">
-            <?php echo get_svg_by_post_id($icon_id); ?>
-        </div>
-        <?php if ($block_heading) : ?>
+        <div class="organisations-country__header fade-in">
+            <div class="organisations-country__icon">
+                <?php echo get_svg_by_post_id($icon_id); ?>
+            </div>
+            <?php if ($block_heading) : ?>
                 <h2><?php echo esc_html($block_heading); ?></h2>
             <?php endif; ?>
         </div>
 
         <?php if ($block_subheading) : ?>
-            <div class="organisations-country__subheading"><?php echo wp_kses_post($block_subheading); ?></div>
+            <div class="organisations-country__subheading fade-in"><?php echo wp_kses_post($block_subheading); ?></div>
         <?php endif; ?>
 
         <?php if ($single_text) : ?>
@@ -44,21 +44,21 @@ if (!empty($text_class)) {
                     $subtitle = $item['subtitle'];
                     $link = $item['title_link'];
                 ?>
-                    <div class="organisations-country__item">
+                    <div class="organisations-country__item ">
                         <?php if ($title) : ?>
                             <?php if ($link && $link['url']) : ?>
-                                <h3><a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target'] ?: '_self'); ?>"><?php echo esc_html($title); ?></a></h3>
+                                <h3 class="fade-in"><a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target'] ?: '_self'); ?>"><?php echo esc_html($title); ?></a></h3>
                             <?php else : ?>
-                                <h3><?php echo esc_html($title); ?></h3>
+                                <h3 class="fade-in"><?php echo esc_html($title); ?></h3>
                             <?php endif; ?>
                         <?php endif; ?>
 
                         <?php if ($subtitle) : ?>
-                            <p><?php echo esc_html($subtitle); ?></p>
+                            <p class="fade-in"><?php echo esc_html($subtitle); ?></p>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
     </div>
-                        </section>
+</section>

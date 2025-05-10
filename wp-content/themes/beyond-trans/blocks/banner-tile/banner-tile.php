@@ -26,14 +26,14 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
     <div class="banner-tile__content">
         <div class="banner-tile__content__inner container">
             <?php if ($title): ?>
-                <h1 class="banner-tile__content__title"><?= $title; ?></h1>
+                <h1 class="banner-tile__content__title fade-in"><?= $title; ?></h1>
             <?php endif; ?>
 
             <?php if ($sub_title): ?>
-                <p class="banner-tile__content__subtitle"><?= $sub_title; ?></p>
+                <p class="banner-tile__content__subtitle fade-in"><?= $sub_title; ?></p>
             <?php endif; ?>
 
-            <div class="banner-tile__content__ctas">
+            <div class="banner-tile__content__ctas fade-in">
                 <?php if ($cta): ?>
                     <a href="<?= $cta['url']; ?>" class="btn btn-primary"
                         target="<?= $cta['target'] ?: '_blank'; ?>">

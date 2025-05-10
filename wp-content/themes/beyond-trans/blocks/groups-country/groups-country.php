@@ -25,16 +25,16 @@ if (!empty($text_class)) {
 <section class="<?php echo esc_attr(implode(' ', $block_classes)); ?>">
     <div class="container">
         <div class="groups-country__header">
-        <div class="groups-country__icon">
-            <?php echo get_svg_by_post_id($icon_id); ?>
-        </div>
-        <?php if ($block_heading) : ?>
+            <div class="groups-country__icon">
+                <?php echo get_svg_by_post_id($icon_id); ?>
+            </div>
+            <?php if ($block_heading) : ?>
                 <h2><?php echo esc_html($block_heading); ?></h2>
             <?php endif; ?>
         </div>
 
         <?php if ($block_subheading) : ?>
-            <div class="groups-country__subheading"><?php echo wp_kses_post($block_subheading); ?></div>
+            <div class="groups-country__subheading fade-in"><?php echo wp_kses_post($block_subheading); ?></div>
         <?php endif; ?>
 
         <?php if ($single_text) : ?>
@@ -81,4 +81,4 @@ if (!empty($text_class)) {
             </div>
         <?php endif; ?>
     </div>
-                        </section>
+</section>

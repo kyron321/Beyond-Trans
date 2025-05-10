@@ -26,15 +26,15 @@ if (empty($team_members_selection)) {
         <?php if ($subheading || $heading || $text): ?>
             <div class="team-members__header">
                 <?php if ($subheading): ?>
-                    <p class="team-members__subheading"><?= $subheading; ?></p>
+                    <p class="team-members__subheading fade-in"><?= $subheading; ?></p>
                 <?php endif; ?>
 
                 <?php if ($heading): ?>
-                    <h2 class="team-members__heading"><?= $heading; ?></h2>
+                    <h2 class="team-members__heading fade-in"><?= $heading; ?></h2>
                 <?php endif; ?>
 
                 <?php if ($text): ?>
-                    <p class="team-members__text"><?= $text; ?></p>
+                    <p class="team-members__text fade-in"><?= $text; ?></p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
@@ -51,7 +51,7 @@ if (empty($team_members_selection)) {
                     $image = get_the_post_thumbnail_url($member_id, 'medium_large');
                     ?>
 
-                    <div class="team-member">
+                    <div class="team-member fade-in">
                         <?php if ($image): ?>
                             <div class="team-member__image">
                                 <img src="<?= $image; ?>" alt="<?= $title; ?>">
