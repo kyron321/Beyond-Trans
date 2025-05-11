@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+$(document).ready(function() {
     var $slider = $('.testimonials-slider__slick');
     if ($slider.length) {
         var slideCount = $slider.children().length;
@@ -41,7 +41,6 @@ jQuery(document).ready(function($) {
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 adaptiveHeight: true,
-                arrows: false,
                 autoplay: true,
                 autoplaySpeed: 5000,
                 responsive: [
@@ -64,4 +63,4 @@ jQuery(document).ready(function($) {
         }
         $slider.slick(slickOptions);
     }
-}); 
+});
