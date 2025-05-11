@@ -150,86 +150,86 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // File upload handler for Ninja Forms
-document.addEventListener('DOMContentLoaded', function() {
-  // Track if we've already set up listeners to prevent duplication
-  let listenersInitialized = false;
+// document.addEventListener('DOMContentLoaded', function() {
+//   // Track if we've already set up listeners to prevent duplication
+//   let listenersInitialized = false;
   
-  const findAndSetupFileUpload = function() {
-    // First try to get the element directly
-    let fileUploadWrap = document.querySelector('.file_upload-wrap');
+//   const findAndSetupFileUpload = function() {
+//     // First try to get the element directly
+//     let fileUploadWrap = document.querySelector('.file_upload-wrap');
     
-    if (fileUploadWrap && !listenersInitialized) {
-      console.log('File upload wrap found:', fileUploadWrap);
-      setupFileUploadListener(fileUploadWrap);
-      listenersInitialized = true;
-      return;
-    }
+//     if (fileUploadWrap && !listenersInitialized) {
+//       console.log('File upload wrap found:', fileUploadWrap);
+//       setupFileUploadListener(fileUploadWrap);
+//       listenersInitialized = true;
+//       return;
+//     }
     
-    // If not found, set up a MutationObserver to watch for changes
-    const observer = new MutationObserver(function(mutations) {
-      if (listenersInitialized) {
-        observer.disconnect();
-        return;
-      }
+//     // If not found, set up a MutationObserver to watch for changes
+//     const observer = new MutationObserver(function(mutations) {
+//       if (listenersInitialized) {
+//         observer.disconnect();
+//         return;
+//       }
       
-      fileUploadWrap = document.querySelector('.file_upload-wrap');
-      if (fileUploadWrap) {
-        console.log('File upload wrap found after DOM changes:', fileUploadWrap);
-        observer.disconnect(); // Stop observing once found
-        setupFileUploadListener(fileUploadWrap);
-        listenersInitialized = true;
-      }
-    });
+//       fileUploadWrap = document.querySelector('.file_upload-wrap');
+//       if (fileUploadWrap) {
+//         console.log('File upload wrap found after DOM changes:', fileUploadWrap);
+//         observer.disconnect(); // Stop observing once found
+//         setupFileUploadListener(fileUploadWrap);
+//         listenersInitialized = true;
+//       }
+//     });
     
-    // Start observing the document with the configured parameters
-    observer.observe(document.body, { childList: true, subtree: true });
-  };
+//     // Start observing the document with the configured parameters
+//     observer.observe(document.body, { childList: true, subtree: true });
+//   };
 
-  // Set up the listener for file input changes
-  const setupFileUploadListener = function(wrapElement) {
-    const fileInput = wrapElement.querySelector('input[type="file"]');
+//   // Set up the listener for file input changes
+//   const setupFileUploadListener = function(wrapElement) {
+//     const fileInput = wrapElement.querySelector('input[type="file"]');
     
-    if (fileInput) {
-      // Remove any existing listeners first (to prevent duplicates)
-      const newFileInput = fileInput.cloneNode(true);
-      fileInput.parentNode.replaceChild(newFileInput, fileInput);
+//     if (fileInput) {
+//       // Remove any existing listeners first (to prevent duplicates)
+//       const newFileInput = fileInput.cloneNode(true);
+//       fileInput.parentNode.replaceChild(newFileInput, fileInput);
       
-      newFileInput.addEventListener('change', function(event) {
-        const files = event.target.files;
+//       newFileInput.addEventListener('change', function(event) {
+//         const files = event.target.files;
         
-        if (files && files.length > 0) {
-          // Remove any existing info containers first
-          const existingContainers = wrapElement.querySelectorAll('.file-upload-info');
-          existingContainers.forEach(container => container.remove());
+//         if (files && files.length > 0) {
+//           // Remove any existing info containers first
+//           const existingContainers = wrapElement.querySelectorAll('.file-upload-info');
+//           existingContainers.forEach(container => container.remove());
           
-          // Create a new container to display file info
-          const fileInfoContainer = document.createElement('div');
-          fileInfoContainer.className = 'file-upload-info';
-          wrapElement.appendChild(fileInfoContainer);
+//           // Create a new container to display file info
+//           const fileInfoContainer = document.createElement('div');
+//           fileInfoContainer.className = 'file-upload-info';
+//           wrapElement.appendChild(fileInfoContainer);
           
-          // Display file information
-          const file = files[0];
-          const fileInfo = document.createElement('p');
-          fileInfo.innerHTML = `File uploaded: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`;
-          fileInfoContainer.appendChild(fileInfo);
+//           // Display file information
+//           const file = files[0];
+//           const fileInfo = document.createElement('p');
+//           fileInfo.innerHTML = `File uploaded: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(2)} KB)`;
+//           fileInfoContainer.appendChild(fileInfo);
           
-          // Optional: Add a thumbnail preview if it's an image
-          if (file.type.match('image.*')) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-              const img = document.createElement('img');
-              img.src = e.target.result;
-              fileInfoContainer.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-          }
-        }
-      });
-    } else {
-      console.log('File input element not found inside wrapper');
-    }
-  };
+//           // Optional: Add a thumbnail preview if it's an image
+//           if (file.type.match('image.*')) {
+//             const reader = new FileReader();
+//             reader.onload = function(e) {
+//               const img = document.createElement('img');
+//               img.src = e.target.result;
+//               fileInfoContainer.appendChild(img);
+//             };
+//             reader.readAsDataURL(file);
+//           }
+//         }
+//       });
+//     } else {
+//       console.log('File input element not found inside wrapper');
+//     }
+//   };
 
-  // Start the process
-  findAndSetupFileUpload();
-});
+//   // Start the process
+//   findAndSetupFileUpload();
+// });
