@@ -139,13 +139,20 @@ function check_therapist_directory_consent($disclaimer_page, $current_page = nul
         $current_page = get_queried_object_id();
     }
 
-    // Only proceed if a disclaimer page exists
+    // Only proceed if a disclaimer page exists and we're not already on the disclaimer page
     if (!empty($disclaimer_page) && $current_page != $disclaimer_page) {
         // Create a specific cookie name for this page
         $cookie_name = $cookie_prefix . $current_page;
 
+
         // Check if the consent cookie exists for this page
         if (!isset($_COOKIE[$cookie_name])) {
+            // Don't redirect if this is a direct access to the disclaimer page with return_page param
+            if (isset($_GET['return_page']) && $_GET['return_page'] == $current_page) {
+                error_log('Avoiding redirect loop - already on disclaimer with return_page param');
+                return false;
+            }
+
             // Get permalink for disclaimer page
             $redirect_url = is_numeric($disclaimer_page) ?
                 get_permalink($disclaimer_page) :
@@ -157,6 +164,8 @@ function check_therapist_directory_consent($disclaimer_page, $current_page = nul
             // Redirect to the disclaimer page
             wp_redirect($redirect_url);
             exit;
+        } else {
+            error_log('Cookie found: ' . $cookie_name . ' = ' . $_COOKIE[$cookie_name]);
         }
     }
 
