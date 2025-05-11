@@ -239,13 +239,13 @@ add_filter('ninja_forms_submit_data', 'replace_ninja_forms_to_email_with_therapi
 /** 
  * Log form data from ninja forms to debug.log
  */
-function log_ninja_forms_data($form_data)
-{
-    // Check if the form ID is 6 or 7
-    if ($form_data['form_id'] == 6 || $form_data['form_id'] == 7) {
-        // Log the form data
-        error_log(print_r($form_data, true));
-    }
-}
-add_action('ninja_forms_after_submission', 'log_ninja_forms_data');
-add_action('ninja_forms_after_display', 'log_ninja_forms_data');
+// function log_ninja_forms_data($form_data)
+// {
+//     // Check if the form ID is 6 or 7
+//     if ($form_data['form_id'] == 6 || $form_data['form_id'] == 7) {
+//         // Log the form data
+//         error_log(print_r($form_data, true));
+//     }
+// }
+// add_action('ninja_forms_after_submission', 'log_ninja_forms_data');
+// add_action('ninja_forms_after_display', 'log_ninja_forms_data');
