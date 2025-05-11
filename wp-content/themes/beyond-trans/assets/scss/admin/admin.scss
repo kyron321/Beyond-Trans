@@ -325,3 +325,9 @@ a {
 #wpadminbar:not(.mobile)>#wp-toolbar li:hover span.ab-label {
     color: var(--white) !important;
 }
+
+.editor-visual-editor {
+    .block-editor-block-toolbar__slot.css-0 {
+        display: none;
+    }
+}
