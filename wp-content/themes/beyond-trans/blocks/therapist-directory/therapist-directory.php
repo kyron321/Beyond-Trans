@@ -140,8 +140,8 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                                 </div>
                             <?php endif; ?>
 
-                            <div class="therapist-directory__filter-select-group" id="region-filter-container" <?php echo empty($regions) ? 'style="display: none;"' : ''; ?>>
-                                <select name="region" id="region-filter" class="filter-select" <?php echo empty($regions) ? 'disabled' : ''; ?>>
+                            <div class="therapist-directory__filter-select-group" id="region-filter-container">
+                                <select name="region" id="region-filter" class="filter-select" <?php echo empty($current_country) ? 'disabled' : ''; ?>>
                                     <option value="">Region/State/Province</option>
                                     <?php if (!empty($regions) && !is_wp_error($regions)): ?>
                                         <?php foreach ($regions as $region): ?>
@@ -153,9 +153,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                                 </select>
                             </div>
                             <div class="therapist-directory__filter-submit">
-                                <?php if (!empty($current_specialty) || !empty($current_country) || !empty($current_region)): ?>
-                                    <a href="<?php echo esc_url($current_url); ?>" class="btn btn-secondary">Clear Filters</a>
-                                <?php endif; ?>
+                                <a href="<?php echo esc_url($current_url); ?>" class="btn btn-secondary">Clear Filters</a>
                             </div>
                         </div>
                     </div>
