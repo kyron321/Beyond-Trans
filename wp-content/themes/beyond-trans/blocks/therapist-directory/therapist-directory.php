@@ -102,53 +102,62 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
         <div class="therapist-directory__filters-container">
             <form class="therapist-directory__filter-form fade-in" method="get" action="<?php echo esc_url($current_url); ?>">
                 <div class="therapist-directory__filter-selects">
-                    <!-- Specialty Select -->
+
+                    <!-- Specialty Filters -->
                     <?php if (!empty($specialties) && !is_wp_error($specialties)): ?>
-                        <div class="therapist-directory__filter-select-group">
-                            <select name="specialty" id="specialty-filter" class="filter-select">
-                                <option value="">Specialty</option>
+                        <div class="therapist-directory__filters">
+                            <div class="therapist-directory__filter-label">Filter by specialty:</div>
+                            <div class="therapist-directory__filter-buttons">
+                                <a href="<?php echo esc_url(remove_query_arg('specialty')); ?>"
+                                    class="btn btn-primary <?php echo empty($current_specialty) ? 'active' : ''; ?>">
+                                    All
+                                </a>
+
                                 <?php foreach ($specialties as $specialty): ?>
-                                    <option value="<?php echo esc_attr($specialty->slug); ?>" <?php selected($current_specialty, $specialty->slug); ?>>
+                                    <a href="<?php echo esc_url(add_query_arg('specialty', $specialty->slug)); ?>"
+                                        class="btn btn-primary <?php echo $current_specialty === $specialty->slug ? 'active' : ''; ?>">
                                         <?php echo esc_html($specialty->name); ?>
-                                    </option>
+                                    </a>
                                 <?php endforeach; ?>
-                            </select>
+                            </div>
                         </div>
                     <?php endif; ?>
 
-                    <!-- Country Select -->
-                    <?php if (!empty($countries) && !is_wp_error($countries)): ?>
-                        <div class="therapist-directory__filter-select-group">
-                            <select name="country" id="country-filter" class="filter-select">
-                                <option value="">Country</option>
-                                <?php foreach ($countries as $country): ?>
-                                    <option value="<?php echo esc_attr($country->slug); ?>" <?php selected($current_country, $country->slug); ?>>
-                                        <?php echo esc_html($country->name); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    <?php endif; ?>
-
-                    <!-- Region Select (shows options based on selected country) -->
-                    <div class="therapist-directory__filter-select-group" id="region-filter-container" <?php echo empty($regions) ? 'style="display: none;"' : ''; ?>>
-                        <select name="region" id="region-filter" class="filter-select" <?php echo empty($regions) ? 'disabled' : ''; ?>>
-                            <option value="">Region/State/Province</option>
-                            <?php if (!empty($regions) && !is_wp_error($regions)): ?>
-                                <?php foreach ($regions as $region): ?>
-                                    <option value="<?php echo esc_attr($region->slug); ?>" <?php selected($current_region, $region->slug); ?>>
-                                        <?php echo esc_html($region->name); ?>
-                                    </option>
-                                <?php endforeach; ?>
+                    <!-- Country Select & Region select container -->
+                    <div class="therapist-directory__filter-selects">
+                        <div class="therapist-directory__filter-label">Filter by location & Region / State / Province</div>
+                        <div class="therapist-directory__filter-selects-inner">
+                            <?php if (!empty($countries) && !is_wp_error($countries)): ?>
+                                <div class="therapist-directory__filter-select-group">
+                                    <select name="country" id="country-filter" class="filter-select">
+                                        <option value="">Country</option>
+                                        <?php foreach ($countries as $country): ?>
+                                            <option value="<?php echo esc_attr($country->slug); ?>" <?php selected($current_country, $country->slug); ?>>
+                                                <?php echo esc_html($country->name); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
                             <?php endif; ?>
-                        </select>
-                    </div>
 
-                    <div class="therapist-directory__filter-submit">
-                        <button type="submit" class="btn btn-primary">Apply Filters</button>
-                        <?php if (!empty($current_specialty) || !empty($current_country) || !empty($current_region)): ?>
-                            <a href="<?php echo esc_url($current_url); ?>" class="btn btn-secondary">Clear Filters</a>
-                        <?php endif; ?>
+                            <div class="therapist-directory__filter-select-group" id="region-filter-container" <?php echo empty($regions) ? 'style="display: none;"' : ''; ?>>
+                                <select name="region" id="region-filter" class="filter-select" <?php echo empty($regions) ? 'disabled' : ''; ?>>
+                                    <option value="">Region/State/Province</option>
+                                    <?php if (!empty($regions) && !is_wp_error($regions)): ?>
+                                        <?php foreach ($regions as $region): ?>
+                                            <option value="<?php echo esc_attr($region->slug); ?>" <?php selected($current_region, $region->slug); ?>>
+                                                <?php echo esc_html($region->name); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+                            </div>
+                            <div class="therapist-directory__filter-submit">
+                                <?php if (!empty($current_specialty) || !empty($current_country) || !empty($current_region)): ?>
+                                    <a href="<?php echo esc_url($current_url); ?>" class="btn btn-secondary">Clear Filters</a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
