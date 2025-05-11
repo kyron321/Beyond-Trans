@@ -1,177 +1,190 @@
-.main-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--primary);
-    height: 120px;
-    gap: 2rem;
-    position: relative;
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease;
+    background-color: white;
 
-    &__logo {
-        display: flex;
-        align-items: center;
-
-        a svg {
-            width: 150px;
-            height: auto;
-            transition: transform 0.3s ease;
-
-            &:hover {
-                transform: scale(1.025);
-            }
-        }
+    .scrolled {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
 
-    &__menu {
+    .main-nav {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        width: 100%;
+        justify-content: space-between;
+        background-color: var(--primary);
+        height: 120px;
+        gap: 2rem;
+        position: relative;
 
-        &__ctas {
+        &__logo {
             display: flex;
-            gap: 1rem;
+            align-items: center;
+
+            a svg {
+                width: 150px;
+                height: auto;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.025);
+                }
+            }
         }
 
-        &__list {
+        &__menu {
             display: flex;
-            gap: 2rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
 
-            li {
-                position: relative;
-                margin-bottom: 0;
+            &__ctas {
+                display: flex;
+                gap: 1rem;
+            }
 
-                // Base link styles
-                a {
-                    height: 100%;
-                    text-decoration: none;
-                    color: var(--white);
-                    font-size: 1rem;
-                    font-weight: 500;
-                    transition: color 0.3s ease-in-out;
-                    display: flex;
-                    align-items: center;
-                    padding-bottom: 1rem;
+            &__list {
+                display: flex;
+                gap: 2rem;
+                list-style: none;
+                margin: 0;
+                padding: 0;
 
-                    &:hover {
-                        color: var(--secondary);
-                    }
-                }
+                li {
+                    position: relative;
+                    margin-bottom: 0;
 
-                // Dropdown menu styles
-                &.menu-item-has-children {
-                    >a::after {
-                        transition: all 0.3s ease;
-                        content: '';
-                        display: inline-block;
-                        width: 14px;
-                        height: 14px;
-                        background-image: url("data:image/svg+xml,%3Csvg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        margin-left: 0.5rem;
+                    // Base link styles
+                    a {
+                        height: 100%;
+                        text-decoration: none;
+                        color: var(--white);
+                        font-size: 1rem;
+                        font-weight: 500;
+                        transition: color 0.3s ease-in-out;
+                        display: flex;
+                        align-items: center;
+                        padding-bottom: 1rem;
+
+                        &:hover {
+                            color: var(--secondary);
+                        }
                     }
 
-                    >a:hover::after,
-                    &:hover>a::after {
-                        transform: rotate(180deg);
-                        background-image: url("data:image/svg+xml,%3Csvg fill='%23FCE181' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
-                    }
-
-                    &:hover>a {
-                        color: var(--secondary);
-                    }
-                }
-
-                // Show submenu on hover with animation
-                &:hover>ul.sub-menu {
-                    opacity: 1;
-                    visibility: visible;
-                    transform: translateX(-50%) translateY(0);
-
-                    // Animate each submenu item when parent is hovered
-                    li {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-
-                // Submenu styling
-                ul.sub-menu {
-                    display: block;
-                    position: absolute;
-                    top: calc(100% + 8px);
-                    left: 50%;
-                    transform: translateX(-50%) translateY(10px);
-                    background-color: var(--primary-dark);
-                    min-width: 200px;
-                    width: max-content;
-                    max-width: 280px;
-                    z-index: 999;
-                    padding: 1rem;
-                    border-radius: 1.25em;
-                    opacity: 0;
-                    visibility: hidden;
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-                    // Enhanced shadow glow effect
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
-                        0 0 0 1px rgba(255, 255, 255, 0.05),
-                        0 0 20px rgba(0, 0, 0, 0.1);
-
-                    li {
-                        display: block;
-                        width: 100%;
-                        opacity: 0;
-                        transform: translateY(10px);
-                        transition: all 0.3s ease;
-                        transition-delay: calc(0.05s * var(--item-index, 0));
-
-                        @for $i from 1 through 10 {
-                            &:nth-child(#{$i}) {
-                                --item-index: #{$i};
-                            }
+                    // Dropdown menu styles
+                    &.menu-item-has-children {
+                        >a::after {
+                            transition: all 0.3s ease;
+                            content: '';
+                            display: inline-block;
+                            width: 14px;
+                            height: 14px;
+                            background-image: url("data:image/svg+xml,%3Csvg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            margin-left: 0.5rem;
                         }
 
-                        a {
-                            padding: 8px 15px;
-                            display: flex;
-                            align-items: center;
-                            white-space: normal; // Allow text to wrap
-                            word-break: normal; // Normal word breaking
-                            hyphens: auto; // Enable hyphenation for long words
-                            position: relative;
-                            padding-right: 48px;
-                            transition: 0.2s ease-in-out;
-                            text-align: left; // Left align text for better readability
-                            line-height: 1.4; // Better line height for wrapped text
+                        >a:hover::after,
+                        &:hover>a::after {
+                            transform: rotate(180deg);
+                            background-image: url("data:image/svg+xml,%3Csvg fill='%23FCE181' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
+                        }
 
-                            &::after {
-                                content: "";
-                                position: absolute;
-                                right: 15px;
-                                top: 50%;
-                                transform: translateY(-50%);
-                                width: 14px;
-                                height: 14px;
-                                flex-shrink: 0; // Prevent icon from shrinking
-                                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill=' white' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/%3E%3C/svg%3E");
-                                background-size: contain;
-                                background-repeat: no-repeat;
-                                margin-left: 0;
-                                transition: right 0.2s ease-in-out, background-image 0.2s ease;
+                        &:hover>a {
+                            color: var(--secondary);
+                        }
+                    }
+
+                    // Show submenu on hover with animation
+                    &:hover>ul.sub-menu {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateX(-50%) translateY(0);
+
+                        // Animate each submenu item when parent is hovered
+                        li {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    // Submenu styling
+                    ul.sub-menu {
+                        display: block;
+                        position: absolute;
+                        top: calc(100% + 8px);
+                        left: 50%;
+                        transform: translateX(-50%) translateY(10px);
+                        background-color: var(--primary-dark);
+                        min-width: 200px;
+                        width: max-content;
+                        max-width: 280px;
+                        z-index: 999;
+                        padding: 1rem;
+                        border-radius: 1.25em;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+                        // Enhanced shadow glow effect
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
+                            0 0 0 1px rgba(255, 255, 255, 0.05),
+                            0 0 20px rgba(0, 0, 0, 0.1);
+
+                        li {
+                            display: block;
+                            width: 100%;
+                            opacity: 0;
+                            transform: translateY(10px);
+                            transition: all 0.3s ease;
+                            transition-delay: calc(0.05s * var(--item-index, 0));
+
+                            @for $i from 1 through 10 {
+                                &:nth-child(#{$i}) {
+                                    --item-index: #{$i};
+                                }
                             }
 
-                            &:hover {
-                                // margin-left: 6px;
-                                // padding-right: 48px; // Maintain consistent padding on hover
+                            a {
+                                padding: 8px 15px;
+                                display: flex;
+                                align-items: center;
+                                white-space: normal; // Allow text to wrap
+                                word-break: normal; // Normal word breaking
+                                hyphens: auto; // Enable hyphenation for long words
+                                position: relative;
+                                padding-right: 48px;
+                                transition: 0.2s ease-in-out;
+                                text-align: left; // Left align text for better readability
+                                line-height: 1.4; // Better line height for wrapped text
 
                                 &::after {
-                                    right: 9px;
-                                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23FCE181' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/%3E%3C/svg%3E");
+                                    content: "";
+                                    position: absolute;
+                                    right: 15px;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                    width: 14px;
+                                    height: 14px;
+                                    flex-shrink: 0; // Prevent icon from shrinking
+                                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill=' white' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/%3E%3C/svg%3E");
+                                    background-size: contain;
+                                    background-repeat: no-repeat;
+                                    margin-left: 0;
+                                    transition: right 0.2s ease-in-out, background-image 0.2s ease;
+                                }
+
+                                &:hover {
+                                    // margin-left: 6px;
+                                    // padding-right: 48px; // Maintain consistent padding on hover
+
+                                    &::after {
+                                        right: 9px;
+                                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23FCE181' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/%3E%3C/svg%3E");
+                                    }
                                 }
                             }
                         }
@@ -180,175 +193,181 @@
             }
         }
     }
-}
 
-// Toggle Button Styles
-.main-nav__toggle {
-    display: none; // Hidden by default
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1001; // Ensure it's above other elements
-
-    .main-nav__toggle-icon {
-        display: block;
-        position: relative;
-        width: 24px;
-        height: 2px;
-        background-color: var(--white);
-        transition: background-color 0s 0.3s ease; // Delay background disappearance
-
-        &::before,
-        &::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--white);
-            transition: transform 0.3s ease, top 0.3s ease;
-        }
-
-        &::before {
-            top: -7px;
-        }
-
-        &::after {
-            top: 7px;
-        }
-    }
-
-    // "X" icon state when active
-    &.active .main-nav__toggle-icon {
-        background-color: transparent; // Middle bar disappears
-        transition-delay: 0s;
-
-        &::before {
-            top: 0;
-            transform: rotate(45deg);
-        }
-
-        &::after {
-            top: 0;
-            transform: rotate(-45deg);
-        }
-    }
-}
-
-// Responsive adjustments
-@media (max-width: 1200px) { // Adjust breakpoint as needed
+    // Toggle Button Styles
     .main-nav__toggle {
-        display: block; // Show the toggle button
-        order: 3;
-        margin-left: auto;
-    }
+        display: none; // Hidden by default
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        // padding: 10px;
+        z-index: 1001; // Ensure it's above other elements
 
-    .main-nav__menu {
-        position: absolute;   // Position relative to .main-nav
-        top: 100%;          // Start right below the .main-nav container
-        left: 0;
-        width: 100%;
-        height: auto;         // Height based on content
-        background-color: var(--primary-dark);
-        padding: 1rem 0;      // Padding for the dropdown container
-        z-index: 1000;
-        display: block;
+        .main-nav__toggle-icon {
+            display: block;
+            position: relative;
+            width: 24px;
+            height: 2px;
+            margin-bottom: 0;
+            background-color: var(--white);
+            transition: background-color 0s 0.3s ease; // Delay background disappearance
 
-        // Initial hidden state
-        transform: translateY(-10px);
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none; // Prevent interaction when hidden
-        transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0s linear 0.3s;
-
-        &.active {
-            // Visible state
-            transform: translateY(0);
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto; // Allow interaction when visible
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0s linear 0s;
-        }
-
-        &__list {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.5rem;
-            padding: 0 1rem; // Horizontal padding for list items within the dropdown
-
-            li {
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
                 width: 100%;
-                margin-bottom: 0;
+                height: 2px;
+                background-color: var(--white);
+                transition: transform 0.3s ease, top 0.3s ease;
+            }
 
-                a {
-                    padding: 0.75rem 1rem;
-                    padding-bottom: 0.75rem;
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                }
+            &::before {
+                top: -7px;
+            }
 
-                // Submenu handling remains the same as previous attempt
-                &.menu-item-has-children {
-                   > a::after {
-                      transition: transform 0.3s ease;
-                   }
-
-                   &.submenu-open > a::after {
-                       transform: rotate(180deg);
-                   }
-
-                   ul.sub-menu {
-                       position: static;
-                       overflow: hidden;
-                       transform: none;
-                       opacity: 0;
-                       visibility: hidden;
-                       max-height: 0;
-                       box-shadow: none;
-                       background-color: transparent;
-                       padding-left: 1rem;
-                       padding-top: 0;
-                       padding-bottom: 0;
-                       min-width: auto;
-                       width: 100%;
-                       border-radius: 0;
-                       max-width: none;
-                       transition: max-height 0.4s ease-out, padding 0.4s ease-out, opacity 0.3s ease-in, visibility 0s linear 0.4s;
-
-                       li {
-                           margin-bottom: 0;
-                           a {
-                               padding: 0.5rem 1rem;
-                               &::after {
-                                  display: none;
-                               }
-                           }
-                       }
-                   }
-
-                   &.submenu-open > ul.sub-menu {
-                       max-height: 500px;
-                       opacity: 1;
-                       visibility: visible;
-                       padding-top: 0.5rem;
-                       padding-bottom: 0.5rem;
-                       transition: max-height 0.4s ease-in, padding 0.4s ease-in, opacity 0.3s ease-out, visibility 0s linear 0s;
-                   }
-                }
+            &::after {
+                top: 7px;
             }
         }
 
-        &__ctas {
-            flex-direction: column;
-            margin-top: 1rem;
-            gap: 0.75rem;
-            padding: 0 1rem; // Horizontal padding for CTAs within the dropdown
+        // "X" icon state when active
+        &.active .main-nav__toggle-icon {
+            background-color: transparent; // Middle bar disappears
+            transition-delay: 0s;
 
-            .btn {
-                text-align: center;
-                max-width: 100%;
+            &::before {
+                top: 0;
+                transform: rotate(45deg);
+            }
+
+            &::after {
+                top: 0;
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+    // Responsive adjustments
+    @media (max-width: 1200px) {
+
+        // Adjust breakpoint as needed
+        .main-nav__toggle {
+            display: block; // Show the toggle button
+            order: 3;
+            margin-left: auto;
+        }
+
+        .main-nav__menu {
+            position: absolute; // Position relative to .main-nav
+            top: 100%; // Start right below the .main-nav container
+            left: 0;
+            width: 100%;
+            height: auto; // Height based on content
+            background-color: var(--primary-dark);
+            padding: 1rem 0; // Padding for the dropdown container
+            z-index: 1000;
+            display: block;
+            overflow: hidden;
+
+            // Initial hidden state
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; // Prevent interaction when hidden
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0s linear 0.3s;
+
+            &.active {
+                // Visible state
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto; // Allow interaction when visible
+                transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0s linear 0s;
+            }
+
+            &__list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                padding: 0 1rem; // Horizontal padding for list items within the dropdown
+
+                li {
+                    width: 100%;
+                    margin-bottom: 0;
+
+                    a {
+                        padding: 0.75rem 1rem;
+                        padding-bottom: 0.75rem;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    // Submenu handling remains the same as previous attempt
+                    &.menu-item-has-children {
+                        >a::after {
+                            transition: transform 0.3s ease;
+                        }
+
+                        &.submenu-open>a::after {
+                            transform: rotate(180deg);
+                        }
+
+                        ul.sub-menu {
+                            position: static;
+                            overflow: hidden;
+                            transform: none;
+                            opacity: 0;
+                            visibility: hidden;
+                            max-height: 0;
+                            box-shadow: none;
+                            background-color: transparent;
+                            padding-left: 1rem;
+                            padding-top: 0;
+                            padding-bottom: 0;
+                            min-width: auto;
+                            width: 100%;
+                            border-radius: 0;
+                            max-width: none;
+                            transition: max-height 0.4s ease-out, padding 0.4s ease-out, opacity 0.3s ease-in, visibility 0s linear 0.4s;
+
+                            li {
+                                margin-bottom: 0;
+
+                                a {
+                                    padding: 0.5rem 1rem;
+
+                                    &::after {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+
+                        &.submenu-open>ul.sub-menu {
+                            max-height: 500px;
+                            opacity: 1;
+                            visibility: visible;
+                            padding-top: 0.5rem;
+                            padding-bottom: 0.5rem;
+                            transition: max-height 0.4s ease-in, padding 0.4s ease-in, opacity 0.3s ease-out, visibility 0s linear 0s;
+                        }
+                    }
+                }
+            }
+
+            &__ctas {
+                flex-direction: column;
+                margin-top: 1rem;
+                gap: 0.75rem;
+                padding: 0 1rem; // Horizontal padding for CTAs within the dropdown
+
+                .btn {
+                    text-align: center;
+                    max-width: 100%;
+                }
             }
         }
     }

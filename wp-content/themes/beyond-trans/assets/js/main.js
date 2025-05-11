@@ -26,3 +26,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all elements with fade-in class
+  const fadeElements = document.querySelectorAll('.fade-in');
+  
+  // Create intersection observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // Add is-visible class when element enters viewport
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        // Optional: stop observing after animation
+        // observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null, // viewport
+    threshold: 0.1, // trigger when 10% of the element is visible
+    rootMargin: '0px 0px -50px 0px' // adjust as needed
+  });
+  
+  // Observe each fade element
+  fadeElements.forEach(el => observer.observe(el));
+});
+
+// Optional JS for adding shadow on scroll
+document.addEventListener('DOMContentLoaded', function() {
+  const navContainer = document.querySelector('.main-nav');
+  
+  window.addEventListener('scroll', function() {
+    if (window.scrollY >= 54) {
+      navContainer.classList.add('scrolled');
+    } else {
+      navContainer.classList.remove('scrolled');
+    }
+  });
+});

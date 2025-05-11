@@ -46,15 +46,15 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
         <div class="split-content-text-media__inner<?php echo $flip_columns ? ' split-content-text-media__inner--flipped' : ''; ?>">
             <div class="split-content-text-media__col split-content-text-media__col--text">
                 <?php if ($subheading): ?>
-                    <p class="split-content-text-media__subheading"><?php echo esc_html($subheading); ?></p>
+                    <p class="split-content-text-media__subheading fade-in"><?php echo esc_html($subheading); ?></p>
                 <?php endif; ?>
 
                 <?php if ($heading): ?>
-                    <h2 class="split-content-text-media__heading"><?php echo esc_html($heading); ?></h2>
+                    <h2 class="split-content-text-media__heading fade-in"><?php echo esc_html($heading); ?></h2>
                 <?php endif; ?>
 
                 <?php if ($text): ?>
-                    <div class="split-content-text-media__text">
+                    <div class="split-content-text-media__text fade-in">
                         <?php echo $text; ?>
                     </div>
                 <?php endif; ?>
@@ -65,7 +65,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
                             $icon_id = isset($key_point['key_point_icon']) ? $key_point['key_point_icon'] : '';
                             $point_text = isset($key_point['key_point_text']) ? $key_point['key_point_text'] : '';
                         ?>
-                            <li class="split-content-text-media__key-point">
+                            <li class="split-content-text-media__key-point fade-in">
                                 <?php if ($icon_id): ?>
                                     <div class="split-content-text-media__key-point-icon">
                                         <?php echo get_svg_by_post_id($icon_id); ?>
@@ -78,7 +78,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
                 <?php endif; ?>
 
                 <?php if ($cta_one || $cta_two): ?>
-                    <div class="split-content-text-media__ctas">
+                    <div class="split-content-text-media__ctas fade-in">
                         <?php if ($cta_one): ?>
                             <a href="<?php echo esc_url($cta_one['url']); ?>"
                                 class="btn btn-secondary"
@@ -100,7 +100,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
 
             <div class="split-content-text-media__col split-content-text-media__col--media">
                 <?php if ($image): ?>
-                    <div class="split-content-text-media__image">
+                    <div class="split-content-text-media__image fade-in">
                         <img src="<?php echo esc_url($image['url']); ?>"
                             alt="<?php echo get_alt_text($image); ?>"
                             loading="<?php echo esc_attr($loading_type); ?>">

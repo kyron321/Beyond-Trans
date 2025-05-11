@@ -51,3 +51,28 @@
         }
     }
 }
+
+/* Base styles for fade elements */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Different delay classes for staggered animations */
+.fade-delay-100 {
+    transition-delay: 0.1s;
+}
+
+.fade-delay-200 {
+    transition-delay: 0.2s;
+}
+
+.fade-delay-300 {
+    transition-delay: 0.3s;
+}

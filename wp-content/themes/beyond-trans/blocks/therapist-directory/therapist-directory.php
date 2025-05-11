@@ -100,7 +100,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
     <div class="container">
         <!-- Filter Section -->
         <div class="therapist-directory__filters-container">
-            <form class="therapist-directory__filter-form" method="get" action="<?php echo esc_url($current_url); ?>">
+            <form class="therapist-directory__filter-form fade-in" method="get" action="<?php echo esc_url($current_url); ?>">
                 <div class="therapist-directory__filter-selects">
                     <!-- Specialty Select -->
                     <?php if (!empty($specialties) && !is_wp_error($specialties)): ?>
@@ -168,7 +168,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                     $contact_info = get_field('contact_info', get_the_ID());
                     $location = get_field('location', get_the_ID());
                 ?>
-                    <div class="therapist-card">
+                    <div class="therapist-card fade-in">
                         <?php if ($photo): ?>
                             <div class="therapist-card__image">
                                 <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy">

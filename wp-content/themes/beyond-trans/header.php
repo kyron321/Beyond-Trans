@@ -14,7 +14,7 @@
 
 <body <?php body_class(); ?>>
 
+    <?php get_template_part('templates/header/top-nav'); ?>
     <header class="header">
-        <?php get_template_part('templates/header/top-nav'); ?>
         <?php get_template_part('templates/header/main-nav'); ?>
     </header>

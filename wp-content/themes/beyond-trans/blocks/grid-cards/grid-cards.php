@@ -39,12 +39,12 @@ if (!$cards) {
     <div class="container">
         <div class="grid-cards__header">
             <?php if ($block_heading): ?>
-                <div class="grid-cards__heading">
+                <div class="grid-cards__heading fade-in">
                     <h3><?php echo $block_heading; ?></h3>
                 </div>
             <?php endif; ?>
             <?php if ($block_subheading): ?>
-                <div class="grid-cards__subheading">
+                <div class="grid-cards__subheading fade-in">
                     <p><?php echo $block_subheading; ?></p>
                 </div>
             <?php endif; ?>
@@ -59,7 +59,7 @@ if (!$cards) {
                 $text = isset($card['text']) ? $card['text'] : '';
                 $cta = isset($card['cta']) ? $card['cta'] : null;
             ?>
-                <div class="grid-cards__card">
+                <div class="grid-cards__card fade-in">
                     <?php if ($image): ?>
                         <div class="grid-cards__card-image">
                             <a href="<?php echo esc_url($cta['url']); ?>" class="grid-cards__card-image-link" target="<?php echo esc_attr($cta['target'] ?: '_self'); ?>">

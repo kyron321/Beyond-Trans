@@ -45,15 +45,15 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
         <div class="split-content-text-cta__inner<?php echo $flip_columns ? ' split-content-text-cta__inner--flipped' : ''; ?>">
             <div class="split-content-text-cta__col split-content-text-cta__col--text">
                 <?php if ($subheading): ?>
-                    <p class="split-content-text-cta__subheading"><?php echo esc_html($subheading); ?></p>
+                    <p class="split-content-text-cta__subheading fade-in"><?php echo esc_html($subheading); ?></p>
                 <?php endif; ?>
 
                 <?php if ($heading): ?>
-                    <h2 class="split-content-text-cta__heading"><?php echo esc_html($heading); ?></h2>
+                    <h2 class="split-content-text-cta__heading fade-in"><?php echo esc_html($heading); ?></h2>
                 <?php endif; ?>
 
                 <?php if ($text): ?>
-                    <div class="split-content-text-cta__text">
+                    <div class="split-content-text-cta__text fade-in">
                         <?php echo wpautop(esc_html($text)); ?>
                     </div>
                 <?php endif; ?>
@@ -61,13 +61,13 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
 
             <div class="split-content-text-cta__col split-content-text-cta__col--cta">
                 <?php if ($column_text): ?>
-                    <p class="split-content-text-cta__column-text">
+                    <p class="split-content-text-cta__column-text fade-in">
                         <?php echo esc_html($column_text); ?>
                     </p>
                 <?php endif; ?>
 
                 <?php if ($cta_one || $cta_two): ?>
-                    <div class="split-content-text-cta__ctas">
+                    <div class="split-content-text-cta__ctas fade-in">
                         <?php if ($cta_one): ?>
                             <a href="<?php echo esc_url($cta_one['url']); ?>"
                                 class="btn btn-secondary"

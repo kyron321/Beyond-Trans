@@ -47,6 +47,12 @@
             flex-direction: column;
             padding-top: 12rem;
             padding-bottom: 12rem;
+
+            @media screen and (max-width: 1024px) {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+
+            }
         }
 
         &__title {
