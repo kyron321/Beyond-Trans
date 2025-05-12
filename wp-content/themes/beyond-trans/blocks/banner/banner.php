@@ -42,8 +42,8 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
 
             <?php if ($cta_two): ?>
                 <a href="<?= $cta_two['url']; ?>" class="btn btn-white"
-                    target="<?= $cta_two['target'] ?: '_blank'; ?>">
-                    <?= $cta_two['title']; ?>
+                <?= $cta_two['target'] ? 'target="' . esc_attr($cta_two['target']) . '"' : ''; ?>>
+                   
                 </a>
             <?php endif; ?>
         </div>
