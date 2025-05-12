@@ -174,6 +174,101 @@ function beyond_trans_pending_therapists_count()
 }
 add_action('admin_menu', 'beyond_trans_pending_therapists_count');
 
+
+/**
+ * Export Regions/States/Provinces taxonomy terms to a text file
+ */
+function beyond_trans_export_regions_to_file()
+{
+    // Check if user has permission to export
+    if (!current_user_can('manage_options')) {
+        wp_die(__('You do not have sufficient permissions to access this page.', 'beyond-trans-therapists'));
+    }
+
+    // Get all terms from the taxonomy
+    $terms = get_terms([
+        'taxonomy' => 'region-state-province',
+        'hide_empty' => false,
+    ]);
+
+    if (is_wp_error($terms)) {
+        wp_die(__('Error retrieving terms: ', 'beyond-trans-therapists') . $terms->get_error_message());
+    }
+
+    // Create the content for the text file
+    $content = "Label, Value, Calc Value\n"; // Header line
+    $counter = 1;
+
+    foreach ($terms as $term) {
+        $label = $term->name;
+        $value = $term->slug;
+        $calc_value = $counter++;
+
+        $content .= "$label, $value, $calc_value\n";
+    }
+
+    // Set the file path in the WordPress uploads directory
+    $upload_dir = wp_upload_dir();
+    $file_path = $upload_dir['basedir'] . '/regions-export-' . date('Y-m-d') . '.txt';
+
+    // Write content to file
+    $file = fopen($file_path, 'w');
+    if ($file === false) {
+        wp_die(__('Unable to create file for export.', 'beyond-trans-therapists'));
+    }
+
+    fwrite($file, $content);
+    fclose($file);
+
+    // Provide a download link
+    $file_url = $upload_dir['baseurl'] . '/regions-export-' . date('Y-m-d') . '.txt';
+
+    echo '<div class="notice notice-success is-dismissible"><p>';
+    echo __('Export successful! ', 'beyond-trans-therapists');
+    echo '<a href="' . esc_url($file_url) . '" download>' . __('Download the file', 'beyond-trans-therapists') . '</a>';
+    echo '</p></div>';
+}
+
+/**
+ * Add export page to the WordPress admin menu
+ */
+function beyond_trans_add_export_page()
+{
+    add_submenu_page(
+        'edit.php?post_type=therapist',  // Parent slug
+        __('Export Regions', 'beyond-trans-therapists'),  // Page title
+        __('Export Regions', 'beyond-trans-therapists'),  // Menu title
+        'manage_options',  // Capability
+        'export-regions',  // Menu slug
+        'beyond_trans_export_regions_page'  // Function
+    );
+}
+add_action('admin_menu', 'beyond_trans_add_export_page');
+
+/**
+ * Display the export page content
+ */
+function beyond_trans_export_regions_page()
+{
+?>
+    <div class="wrap">
+        <h1><?php echo esc_html__('Export Regions/States/Provinces', 'beyond-trans-therapists'); ?></h1>
+        <p><?php echo esc_html__('Click the button below to export all region terms to a text file in the format: Label, Value, Calc Value', 'beyond-trans-therapists'); ?></p>
+
+        <form method="post">
+            <?php wp_nonce_field('beyond_trans_export_regions_nonce', 'beyond_trans_nonce'); ?>
+            <input type="submit" name="beyond_trans_export_regions" class="button button-primary" value="<?php echo esc_attr__('Export Regions', 'beyond-trans-therapists'); ?>" />
+        </form>
+    </div>
+<?php
+
+    // Process export if form is submitted
+    if (isset($_POST['beyond_trans_export_regions']) && check_admin_referer('beyond_trans_export_regions_nonce', 'beyond_trans_nonce')) {
+        beyond_trans_export_regions_to_file();
+    }
+}
+
+
 /**
  * Add admin notice for pending therapists on the therapists list page
  */

@@ -245,3 +245,38 @@
 .nf-form-title {
   display: none;
 }
+
+.file-upload-info p {
+  display: none;
+}
+.file-upload-info img {
+  height: 250px;
+  width: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.file_upload-wrap {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+}
+.file_upload-wrap .nf-field-element {
+  display: inherit;
+  justify-content: center;
+}
+.file_upload-wrap input[type=file] {
+  padding: 0;
+}
+
+#nf-field-52-wrap ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0;
+}
