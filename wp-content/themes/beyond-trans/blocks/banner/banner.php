@@ -34,10 +34,10 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
 
         <div class="banner__content__ctas fade-in">
             <?php if ($cta): ?>
-                <a href="<?= $cta['url']; ?>" class="btn btn-secondary"
-                    target="<?= $cta['target'] ?: '_blank'; ?>">
-                    <?= $cta['title']; ?>
-                </a>
+                <a href="#grid-cards-section" class="btn btn-secondary"
+   <?= $cta['target'] ? 'target="' . esc_attr($cta['target']) . '"' : ''; ?>>
+   <?= $cta['title']; ?>
+</a>
             <?php endif; ?>
 
             <?php if ($cta_two): ?>

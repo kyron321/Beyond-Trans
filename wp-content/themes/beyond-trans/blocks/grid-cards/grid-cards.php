@@ -35,7 +35,7 @@ if (!$cards) {
 }
 ?>
 
-<section class="<?php echo esc_attr(implode(' ', $block_classes)); ?>">
+<section id="grid-cards-section" class="<?php echo esc_attr(implode(' ', $block_classes)); ?>">
     <div class="container">
         <div class="grid-cards__header">
             <?php if ($block_heading): ?>
