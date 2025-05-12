@@ -43,7 +43,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
             <?php if ($cta_two): ?>
                 <a href="<?= $cta_two['url']; ?>" class="btn btn-white"
                 <?= $cta_two['target'] ? 'target="' . esc_attr($cta_two['target']) . '"' : ''; ?>>
-                   
+                <?= $cta_two['title']; ?>
                 </a>
             <?php endif; ?>
         </div>
