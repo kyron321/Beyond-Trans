@@ -10,9 +10,10 @@ $genspect_related_websites = get_field('genspect_related_websites', 'option');
             $website_icon = isset($website['website_icon']) ? $website['website_icon'] : '';
             $svg_code = $website_icon ? get_svg_by_post_id($website_icon) : '';
         ?>
-            <a href="<?php echo $url; ?>" target="_blank" class="top-nav__related-website">
+            <a href="<?php echo $url; ?>" target="_blank" class="top-nav__related-website"
+                aria-label="<?php echo $title ? $title : 'Related website'; ?>">
                 <?php if ($svg_code): ?>
-                    <span class="top-nav__related-website__website-icon"><?php echo $svg_code; ?></span>
+                    <span class="top-nav__related-website__website-icon" aria-hidden="true"><?php echo $svg_code; ?></span>
                 <?php endif; ?>
                 <span class="top-nav__related-website__website-title"><?php echo $title; ?></span>
             </a>
