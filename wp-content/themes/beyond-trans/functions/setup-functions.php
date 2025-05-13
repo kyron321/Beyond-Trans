@@ -39,12 +39,14 @@ add_action('wp_enqueue_scripts', 'theme_fonts');
 function define_jquery()
 {
     wp_deregister_script('jquery');
-    wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.6.0.min.js', [], null, true);
+    wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/vendor/jquery-3.7.1.min.js', [], null, true);
 }
 add_action('wp_enqueue_scripts', 'define_jquery');
 
 // Add theme support for post thumbnails
 add_theme_support('post-thumbnails');
+// Add theme support for title tag (for Yoast and WP SEO plugins)
+add_theme_support('title-tag');
 
 function remove_comments()
 {
