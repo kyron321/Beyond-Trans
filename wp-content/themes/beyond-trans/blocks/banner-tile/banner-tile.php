@@ -35,14 +35,14 @@ $is_first_block = ($position === 0);
             <div class="banner-tile__content__ctas fade-in">
                 <?php if ($cta): ?>
                     <a href="<?= $cta['url']; ?>" class="btn btn-primary"
-                        target="<?= $cta['target'] ?: '_blank'; ?>">
+                        <?php if (!empty($cta['target'])): ?>target="<?= $cta['target']; ?>" <?php endif; ?>>
                         <?= $cta['title']; ?>
                     </a>
                 <?php endif; ?>
 
                 <?php if ($cta_two): ?>
                     <a href="<?= $cta_two['url']; ?>" class="btn btn-white"
-                        target="<?= $cta_two['target'] ?: '_blank'; ?>">
+                        <?php if (!empty($cta_two['target'])): ?>target="<?= $cta_two['target']; ?>" <?php endif; ?>>
                         <?= $cta_two['title']; ?>
                     </a>
                 <?php endif; ?>
