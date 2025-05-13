@@ -175,13 +175,13 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                     $contact_info = get_field('contact_info', get_the_ID());
                     $location = get_field('location', get_the_ID());
                 ?>
-                    <div class="therapist-card fade-in">
+                    <div class="therapist-card fade-in" >
+                    <a class="therapist-card__link" href="<?php echo esc_url(get_permalink()); ?>">
                         <?php if ($photo): ?>
                             <div class="therapist-card__image">
                                 <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy">
                             </div>
                         <?php endif; ?>
-
                         <div class="therapist-card__content">
                             <h5 class="therapist-card__name"><?php echo esc_html($title); ?></h5>
 
@@ -190,13 +190,10 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                                     <?php echo esc_html(implode(', ', $therapist_specialties)); ?>
                                 </p>
                             <?php endif; ?>
-
+                          
                             <?php if ($location): ?>
                                 <div class="therapist-card__location">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
-                                        <circle cx="12" cy="9" r="2.5"></circle>
-                                    </svg>
+                                  
                                     <?php echo esc_html($location); ?>
                                 </div>
                             <?php endif; ?>
@@ -209,13 +206,18 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
                             <div class="therapist-card__contact">
                                 <?php if (!empty($contact_info['company'])): ?>
-                                    <div class="therapist-card__contact-item">
+                                    <div class="therapist-card__contact-items">
                                         <strong>Company:</strong> <?php echo esc_html($contact_info['company']); ?>
                                     </div>
                                 <?php endif; ?>
 
                                 <?php if (!empty($contact_info['website'])): ?>
                                     <div class="therapist-card__contact-item">
+                                        <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
                                         <a href="<?php echo esc_url($contact_info['website']); ?>" target="_blank" rel="noopener noreferrer">
                                             <?php echo esc_html($contact_info['website']); ?>
                                         </a>
@@ -223,7 +225,12 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                                 <?php endif; ?>
 
                                 <?php if (!empty($contact_info['location'])): ?>
+                                   
                                     <div class="therapist-card__contact-item">
+                                    <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
                                         <?php echo esc_html($contact_info['location']); ?>
                                     </div>
                                 <?php endif; ?>
@@ -240,6 +247,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
                             <a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn-underline">View Profile</a>
                         </div>
+                        </a>
                     </div>
                 <?php endwhile; ?>
             </div>

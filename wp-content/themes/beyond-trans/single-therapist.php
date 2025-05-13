@@ -36,6 +36,7 @@ echo render_block([
         $email = isset($fields['contact_info']['email']) ? trim($fields['contact_info']['email']) : '';
         $contact_form_link = '#contact-form-section';
         $specialties_terms = get_the_terms($therapist_id, 'specialty');
+        $contact_info = isset($fields['contact_info']) ? $fields['contact_info'] : [];
     ?>
         <section class="therapist-profile__details">
             <div class="container">
@@ -49,6 +50,9 @@ echo render_block([
                     </div>
                     <div class="therapist-profile__info-column">
                         <h1 class="therapist-profile__name"><?php echo esc_html($name); ?></h1>
+                        <div class="therapist-profile__contact-items">
+                                        <strong>Company:</strong> <?php echo esc_html($contact_info['company']); ?>
+                                    </div>
                         <?php if ($bio): ?>
                             <div class="therapist-profile__bio"><?php echo wp_kses_post($bio); ?></div>
                         <?php endif; ?>

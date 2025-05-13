@@ -22,6 +22,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  position: relative;
+  overflow: visible;
 }
 @media (min-width: 768px) {
   .therapist-directory__grid {
@@ -40,6 +42,18 @@
 .therapist-directory .active::after {
   display: none;
 }
+.therapist-directory .therapist-card__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.therapist-directory .therapist-card__contact-items {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+.therapist-directory .therapist-card__specialties {
+  font-weight: bold;
+}
 .therapist-directory .therapist-card {
   padding: 1.5rem;
   background-color: var(--primary);
@@ -49,9 +63,11 @@
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  cursor: pointer;
 }
 .therapist-directory .therapist-card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.01);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .therapist-directory .therapist-card__image {
@@ -75,10 +91,7 @@
   color: var(--white);
   width: 100%;
 }
-.therapist-directory .therapist-card__name {
-  color: var(--white);
-}
-.therapist-directory .therapist-card__specialties {
+.therapist-directory .therapist-card__name, .therapist-directory .therapist-card__specialties, .therapist-directory .therapist-card__bio {
   color: var(--white);
 }
 .therapist-directory .therapist-card__location {
@@ -89,11 +102,10 @@
 }
 .therapist-directory .therapist-card__location svg {
   flex-shrink: 0;
-  color: var(--color-primary);
+  color: wheat;
 }
 .therapist-directory .therapist-card__bio {
   margin-bottom: 1.5rem;
-  color: var(--white);
   flex-grow: 1;
 }
 .therapist-directory .therapist-card__contact {
@@ -119,21 +131,10 @@
   color: #666;
   font-size: 1.1rem;
 }
-
-.therapist-directory .therapist-card.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.therapist-directory .therapist-card.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 .therapist-directory .therapist-directory__grid.is-loading {
   opacity: 0.6;
   pointer-events: none;
 }
-
 .therapist-directory__filter-form {
   margin-bottom: 4rem;
 }
