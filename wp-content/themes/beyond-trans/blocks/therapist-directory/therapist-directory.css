@@ -143,6 +143,11 @@
   gap: 2rem;
   flex-direction: row;
 }
+@media screen and (max-width: 768px) {
+  .therapist-directory__filter-selects-inner {
+    flex-direction: column;
+  }
+}
 .therapist-directory__filter-selects {
   display: flex;
   flex-direction: column;
