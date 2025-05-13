@@ -25,14 +25,14 @@ $is_first_block = ($position === 0);
 $loading_type = $is_first_block ? 'eager' : 'lazy';
 ?>
 
-<section class="<?php echo esc_attr(implode(' ', $block_classes)); ?>">
+<section class="<?php echo implode(' ', $block_classes); ?>">
     <div class="container">
         <?php if ($block_heading) : ?>
-            <h2><?php echo esc_html($block_heading); ?></h2>
+            <h2 class="fade-in"><?php echo $block_heading; ?></h2>
         <?php endif; ?>
 
         <?php if ($block_subheading) : ?>
-            <div class="column-text__subheading fade-in"><?php echo wp_kses_post($block_subheading); ?></div>
+            <div class="column-text__subheading fade-in"><?php echo $block_subheading; ?></div>
         <?php endif; ?>
 
         <?php if ($single_text) : ?>
@@ -45,14 +45,14 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
                     <div class="column-text__item fade-in">
                         <?php if ($title) : ?>
                             <?php if ($link && $link['url']) : ?>
-                                <h3><a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target'] ?: '_self'); ?>"><?php echo esc_html($title); ?></a></h3>
+                                <h3><a href="<?php echo $link['url']; ?>" target="<?php echo $link['target'] ?: '_self'; ?>"><?php echo $title; ?></a></h3>
                             <?php else : ?>
-                                <h3><?php echo esc_html($title); ?></h3>
+                                <h3><?php echo $title; ?></h3>
                             <?php endif; ?>
                         <?php endif; ?>
 
                         <?php if ($subtitle) : ?>
-                            <p><?php echo esc_html($subtitle); ?></p>
+                            <p><?php echo $subtitle; ?></p>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
