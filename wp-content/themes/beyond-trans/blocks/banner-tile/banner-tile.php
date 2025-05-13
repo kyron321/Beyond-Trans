@@ -9,7 +9,6 @@ $cta_two = get_field('cta_two');
 // Get block position
 $position = isset($block['attrs']['position']) ? $block['attrs']['position'] : null;
 $is_first_block = ($position === 0);
-$loading_type = $is_first_block ? 'eager' : 'lazy';
 ?>
 
 <section class="block banner-tile">
@@ -18,7 +17,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
             <img
                 src="<?= $image['url']; ?>"
                 alt="<?= get_alt_text($image); ?>"
-                loading="<?= $loading_type; ?>">
+                loading="eager">
             </img>
         </div>
     <?php endif; ?>

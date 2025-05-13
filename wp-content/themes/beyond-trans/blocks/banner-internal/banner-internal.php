@@ -7,7 +7,6 @@ $sub_title = get_field('sub_title');
 // Get block position
 $position = isset($block['attrs']['position']) ? $block['attrs']['position'] : null;
 $is_first_block = ($position === 0);
-$loading_type = $is_first_block ? 'eager' : 'lazy';
 ?>
 
 <section class="block banner-internal">
@@ -16,7 +15,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
             <img
                 src="<?= $image['url']; ?>"
                 alt="<?= get_alt_text($image); ?>"
-                loading="<?= $loading_type; ?>">
+                loading="eager">
         </div>
     <?php endif; ?>
 

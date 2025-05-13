@@ -9,7 +9,6 @@ $cta_two = get_field('cta_two');
 // Get block position 
 $position = isset($block['attrs']['position']) ? $block['attrs']['position'] : null;
 $is_first_block = ($position === 0);
-$loading_type = $is_first_block ? 'eager' : 'lazy';
 ?>
 
 <section class="block banner">
@@ -18,7 +17,7 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
             <img
                 src="<?= $image['url']; ?>"
                 alt="<?= get_alt_text($image); ?>"
-                loading="<?= $loading_type; ?>">
+                loading="eager">
             </img>
         </div>
     <?php endif; ?>
@@ -35,15 +34,15 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
         <div class="banner__content__ctas fade-in">
             <?php if ($cta): ?>
                 <a href="#grid-cards-section" class="btn btn-secondary"
-   <?= $cta['target'] ? 'target="' . esc_attr($cta['target']) . '"' : ''; ?>>
-   <?= $cta['title']; ?>
-</a>
+                    <?= $cta['target'] ? 'target="' . esc_attr($cta['target']) . '"' : ''; ?>>
+                    <?= $cta['title']; ?>
+                </a>
             <?php endif; ?>
 
             <?php if ($cta_two): ?>
                 <a href="<?= $cta_two['url']; ?>" class="btn btn-white"
-                <?= $cta_two['target'] ? 'target="' . esc_attr($cta_two['target']) . '"' : ''; ?>>
-                <?= $cta_two['title']; ?>
+                    <?= $cta_two['target'] ? 'target="' . esc_attr($cta_two['target']) . '"' : ''; ?>>
+                    <?= $cta_two['title']; ?>
                 </a>
             <?php endif; ?>
         </div>
