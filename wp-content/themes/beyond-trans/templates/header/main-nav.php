@@ -7,7 +7,7 @@ $cta_2 = get_field('cta_2', 'option');
 <nav class="main-nav">
     <div class="main-nav container">
         <div class="main-nav__logo">
-            <a href="/">
+            <a href="/" aria-label="Home">
                 <?php $svg_code = $website_logo ? get_svg_by_post_id($website_logo) : ''; ?>
                 <?php if ($svg_code): ?>
                     <?= $svg_code; ?>
@@ -29,10 +29,14 @@ $cta_2 = get_field('cta_2', 'option');
             ?>
             <div class="main-nav__menu__ctas">
                 <?php if ($cta_1): ?>
-                    <a href="<?= esc_url($cta_1['url']); ?>" class="btn btn-transparent"><?= esc_html($cta_1['title']); ?></a>
+                    <a href="<?= esc_url($cta_1['url']); ?>" class="btn btn-transparent" aria-label="<?= esc_html($cta_1['title']); ?>">
+                        <?= esc_html($cta_1['title']); ?>
+                    </a>
                 <?php endif; ?>
                 <?php if ($cta_2): ?>
-                    <a href="<?= esc_url($cta_2['url']); ?>" class="btn btn-secondary"><?= esc_html($cta_2['title']); ?></a>
+                    <a href="<?= esc_url($cta_2['url']); ?>" class="btn btn-secondary" aria-label="<?= esc_html($cta_2['title']); ?>">
+                        <?= esc_html($cta_2['title']); ?>
+                    </a>
                 <?php endif; ?>
             </div>
         </div>

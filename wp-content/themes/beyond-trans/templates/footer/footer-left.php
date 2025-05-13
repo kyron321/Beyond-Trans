@@ -3,7 +3,7 @@ $website_logo = get_field('website_logo', 'option');
 ?>
 
 <div class="footer__main__inner__left">
-    <a class="footer__main__inner__left__logo" href="/">
+    <a class="footer__main__inner__left__logo" href="/" aria-label="Home">
         <?php $svg_code = $website_logo ? get_svg_by_post_id($website_logo) : ''; ?>
         <?php if ($svg_code): ?>
             <?= $svg_code; ?>
