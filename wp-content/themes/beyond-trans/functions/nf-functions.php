@@ -102,8 +102,24 @@ function create_therapist_from_ninja_form($form_data)
         }
     }
 
-    if (isset($form_data['fields_by_key']['region_state_province_1746732697327']) && !empty($form_data['fields_by_key']['region_state_province_1746732697327']['value'])) {
-        $location = sanitize_text_field($form_data['fields_by_key']['region_state_province_1746732697327']['value']);
+    // usa location field
+    if (isset($form_data['fields_by_key']['region_state_provinces']) && !empty($form_data['fields_by_key']['region_state_provinces']['value'])) {
+        $location = sanitize_text_field($form_data['fields_by_key']['region_state_provinces']['value']);
+    }
+
+    // uk location field
+    if (isset($form_data['fields_by_key']['rsp_england']) && !empty($form_data['fields_by_key']['rsp_england']['value'])) {
+        $location = sanitize_text_field($form_data['fields_by_key']['rsp_england']['value']);
+    }
+
+    // canada location field
+    if (isset($form_data['fields_by_key']['listselect_canada']) && !empty($form_data['fields_by_key']['listselect_canada']['value'])) {
+        $location = sanitize_text_field($form_data['fields_by_key']['listselect_canada']['value']);
+    }
+
+    // australia location field
+    if (isset($form_data['fields_by_key']['listselect_australia']) && !empty($form_data['fields_by_key']['listselect_australia']['value'])) {
+        $location = sanitize_text_field($form_data['fields_by_key']['listselect_australia']['value']);
     }
 
     if (isset($form_data['fields_by_key']['country_1746733998322']) && !empty($form_data['fields_by_key']['country_1746733998322']['value'])) {
@@ -239,13 +255,13 @@ add_filter('ninja_forms_submit_data', 'replace_ninja_forms_to_email_with_therapi
 /** 
  * Log form data from ninja forms to debug.log
  */
-// function log_ninja_forms_data($form_data)
-// {
-//     // Check if the form ID is 6 or 7
-//     if ($form_data['form_id'] == 6 || $form_data['form_id'] == 7) {
-//         // Log the form data
-//         error_log(print_r($form_data, true));
-//     }
-// }
-// add_action('ninja_forms_after_submission', 'log_ninja_forms_data');
-// add_action('ninja_forms_after_display', 'log_ninja_forms_data');
+function log_ninja_forms_data($form_data)
+{
+    // Check if the form ID is 6 or 7
+    if ($form_data['form_id'] == 6 || $form_data['form_id'] == 7) {
+        // Log the form data
+        error_log(print_r($form_data, true));
+    }
+}
+add_action('ninja_forms_after_submission', 'log_ninja_forms_data');
+add_action('ninja_forms_after_display', 'log_ninja_forms_data');
