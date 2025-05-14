@@ -178,7 +178,7 @@ add_action('admin_menu', 'beyond_trans_pending_therapists_count');
 /**
  * Export Regions/States/Provinces taxonomy terms to a text file
  */
-function beyond_trans_export_regions_to_file()
+function beyond_trans_export_regions_to_file($filter_country_id = null)
 {
     // Check if user has permission to export
     if (!current_user_can('manage_options')) {
@@ -195,6 +195,16 @@ function beyond_trans_export_regions_to_file()
         wp_die(__('Error retrieving terms: ', 'beyond-trans-therapists') . $terms->get_error_message());
     }
 
+    // Get all countries for mapping term_id to name
+    $countries = get_terms([
+        'taxonomy' => 'country',
+        'hide_empty' => false,
+    ]);
+    $country_map = array();
+    foreach ($countries as $country) {
+        $country_map[$country->term_id] = $country->name;
+    }
+
     // Create the content for the text file
     $content = "Label, Value, Calc Value\n"; // Header line
     $counter = 1;
@@ -203,7 +213,19 @@ function beyond_trans_export_regions_to_file()
         $label = $term->name;
         $value = $term->slug;
         $calc_value = $counter++;
-
+        $linked_country_id = get_field('linked_country', 'region-state-province_' . $term->term_id);
+        $linked_country_name = '';
+        if ($linked_country_id) {
+            // If ACF returns an array of IDs, get the first one
+            if (is_array($linked_country_id)) {
+                $linked_country_id = reset($linked_country_id);
+            }
+            $linked_country_name = isset($country_map[$linked_country_id]) ? $country_map[$linked_country_id] : $linked_country_id;
+        }
+        // If filtering, skip if not matching
+        if ($filter_country_id && $linked_country_id != $filter_country_id) {
+            continue;
+        }
         $content .= "$label, $value, $calc_value\n";
     }
 
@@ -250,21 +272,39 @@ add_action('admin_menu', 'beyond_trans_add_export_page');
  */
 function beyond_trans_export_regions_page()
 {
+    // Get all countries for button generation
+    $countries = get_terms([
+        'taxonomy' => 'country',
+        'hide_empty' => false,
+    ]);
 ?>
     <div class="wrap">
         <h1><?php echo esc_html__('Export Regions/States/Provinces', 'beyond-trans-therapists'); ?></h1>
-        <p><?php echo esc_html__('Click the button below to export all region terms to a text file in the format: Label, Value, Calc Value', 'beyond-trans-therapists'); ?></p>
+        <p><?php echo esc_html__('Click a button below to export all region terms, or just those for a specific country, to a text file in the format: Label, Value, Calc Value, Linked Country', 'beyond-trans-therapists'); ?></p>
 
-        <form method="post">
+        <form method="post" style="margin-bottom: 1em;">
             <?php wp_nonce_field('beyond_trans_export_regions_nonce', 'beyond_trans_nonce'); ?>
-            <input type="submit" name="beyond_trans_export_regions" class="button button-primary" value="<?php echo esc_attr__('Export Regions', 'beyond-trans-therapists'); ?>" />
+            <input type="submit" name="beyond_trans_export_regions" class="button button-primary" value="<?php echo esc_attr__('Export All Regions', 'beyond-trans-therapists'); ?>" />
         </form>
+        <?php foreach ($countries as $country): ?>
+            <form method="post" style="display:inline-block; margin-right: 0.5em;">
+                <?php wp_nonce_field('beyond_trans_export_regions_nonce', 'beyond_trans_nonce'); ?>
+                <input type="hidden" name="linked_country_id" value="<?php echo esc_attr($country->term_id); ?>" />
+                <input type="submit" name="beyond_trans_export_regions_by_country" class="button button-secondary" value="<?php echo esc_attr__('Export for ', 'beyond-trans-therapists') . esc_html($country->name); ?>" />
+            </form>
+        <?php endforeach; ?>
     </div>
 <?php
 
     // Process export if form is submitted
     if (isset($_POST['beyond_trans_export_regions']) && check_admin_referer('beyond_trans_export_regions_nonce', 'beyond_trans_nonce')) {
         beyond_trans_export_regions_to_file();
+    }
+    if (isset($_POST['beyond_trans_export_regions_by_country']) && check_admin_referer('beyond_trans_export_regions_nonce', 'beyond_trans_nonce')) {
+        $linked_country_id = isset($_POST['linked_country_id']) ? intval($_POST['linked_country_id']) : 0;
+        if ($linked_country_id) {
+            beyond_trans_export_regions_to_file($linked_country_id);
+        }
     }
 }
 
