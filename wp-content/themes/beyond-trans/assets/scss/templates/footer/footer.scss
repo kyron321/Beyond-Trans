@@ -6,6 +6,7 @@
 
     .container {
         flex-direction: column;
+        width: 100%;
     }
 
     &__bottom {
@@ -36,7 +37,6 @@
 
     &__main {
         display: flex;
-        height: 340px;
         width: 100%;
         background-color: var(--primary);
         border: solid 1px;
@@ -130,13 +130,15 @@
             &__right {
                 display: flex;
                 width: 100%;
-                justify-content: space-between;
+                justify-content: flex-end;
+                gap: 4rem;
 
                 h6 {
                     color: var(--white);
                     font-size: 1.125rem;
                     font-weight: 500;
                     margin-bottom: 0.5rem;
+                    width: fit-content;
                 }
 
                 menu {
@@ -144,6 +146,7 @@
                     flex-direction: column;
                     gap: 1rem;
                     width: 100%;
+                    width: fit-content;
                     max-width: 500px;
 
                     li {
@@ -202,7 +205,8 @@
                                 gap: 1rem;
 
                                 input {
-                                    max-width: 100%;
+                                    // max-width: 100%;
+                                    width: auto;
                                     margin-right: 0;
                                 }
 
@@ -248,15 +252,21 @@
             &__inner {
                 padding: 24px;
                 gap: 2rem;
-
-                &__right {
-                    // Potentially add more mobile-specific adjustments here if needed
-                }
             }
         }
 
         &__bottom {
             margin-top: 1.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1340px) {
+    .footer__main__inner__left__newsletter__form {
+        form {
+            button {
+                display: none;
+            }
         }
     }
 }

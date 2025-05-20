@@ -1,20 +1,17 @@
 .container {
-    width: 100%;
     max-width: 1312px;
     padding: 0 32px;
     margin: 0 auto;
 }
 
 @media (max-width: 1024px) {
-    .container {
-        padding: 0;
-        max-width: 90%;
-    }
-
-    .main-nav.container{
-        max-width: 100%;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
+    // .container {
+    //     width: 100%;
+    //     padding: 0;
+    //     max-width: 90%;
+    // }
 }
 
+.main-nav.container {
+    width: 100%;
+}

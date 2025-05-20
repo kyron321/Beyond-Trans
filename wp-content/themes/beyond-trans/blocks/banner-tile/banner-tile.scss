@@ -42,6 +42,10 @@
                 border-radius: 40px;
                 padding: 4rem 0;
 
+                @media screen and (max-width: 1024px) {
+                    max-width: auto;
+                }
+
                 @media (max-width: 768px) {
                     padding: 2rem 1rem;
                     border-radius: 20px;
