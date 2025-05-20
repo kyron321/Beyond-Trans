@@ -68,6 +68,13 @@
   gap: 1rem;
   justify-content: center;
 }
+@media screen and (max-width: 768px) {
+  .banner__content__ctas {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+}
 .banner__content__ctas a {
   margin: 0 0.5rem;
 }

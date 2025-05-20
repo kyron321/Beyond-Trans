@@ -37,7 +37,6 @@
 
     &__main {
         display: flex;
-        height: 340px;
         width: 100%;
         background-color: var(--primary);
         border: solid 1px;
@@ -258,6 +257,16 @@
 
         &__bottom {
             margin-top: 1.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1340px) {
+    .footer__main__inner__left__newsletter__form {
+        form {
+            button {
+                display: none;
+            }
         }
     }
 }
