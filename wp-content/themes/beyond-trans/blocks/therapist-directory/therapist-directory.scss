@@ -64,6 +64,7 @@
 
   .therapist-card__specialties {
     font-weight: bold;
+    font-size: 1rem;
   }
 
   .therapist-card {
@@ -78,13 +79,20 @@
     will-change: transform;
     cursor: pointer;
 
+    &__link {
+      display: block;
+      text-decoration: none !important;
+      color: inherit;
+    }
+
     &:hover {
       transform: scale(1.01);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
     }
 
     &__image {
-      width: 100%;
+      width: 360px;
+      object-fit: cover;
       height: 350px;
       overflow: hidden;
       border-radius: 8px;
@@ -117,6 +125,7 @@
       align-items: center;
       gap: 0.4rem;
       color: var(--white);
+      text-decoration: none;
 
       svg {
         flex-shrink: 0;

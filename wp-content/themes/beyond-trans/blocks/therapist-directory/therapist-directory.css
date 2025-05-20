@@ -53,6 +53,7 @@
 }
 .therapist-directory .therapist-card__specialties {
   font-weight: bold;
+  font-size: 1rem;
 }
 .therapist-directory .therapist-card {
   padding: 1.5rem;
@@ -66,12 +67,19 @@
   will-change: transform;
   cursor: pointer;
 }
+.therapist-directory .therapist-card__link {
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
+}
 .therapist-directory .therapist-card:hover {
   transform: scale(1.01);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .therapist-directory .therapist-card__image {
-  width: 100%;
+  width: 360px;
+  -o-object-fit: cover;
+     object-fit: cover;
   height: 350px;
   overflow: hidden;
   border-radius: 8px;
@@ -99,6 +107,7 @@
   align-items: center;
   gap: 0.4rem;
   color: var(--white);
+  text-decoration: none;
 }
 .therapist-directory .therapist-card__location svg {
   flex-shrink: 0;

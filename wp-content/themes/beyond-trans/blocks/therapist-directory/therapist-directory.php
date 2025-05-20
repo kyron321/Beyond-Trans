@@ -182,7 +182,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                                 <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy">
                             </div>
                         <?php endif; ?>
-                        <div class="therapist-card__content">
+                        <div class="therapist-card__content" style="display: flex; flex-direction: column; height: 100%;">
                             <h5 class="therapist-card__name"><?php echo esc_html($title); ?></h5>
 
                             <?php if (!empty($therapist_specialties)): ?>
@@ -200,7 +200,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
                             <?php if ($bio): ?>
                                 <div class="therapist-card__bio">
-                                    <?php echo wp_trim_words($bio, 20, '...'); ?>
+                                    <?php echo wp_trim_words($bio, 10, '...'); ?>
                                 </div>
                             <?php endif; ?>
 
@@ -245,7 +245,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                                 <?php endif; ?>
                             </div>
 
-                            <a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn-underline">View Profile</a>
+                            <a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn-underline" style="margin-top: auto;">View Profile</a>
                         </div>
                         </a>
                     </div>
