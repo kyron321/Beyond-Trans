@@ -44,6 +44,7 @@
 }
 .banner-internal__content.container {
   flex-direction: column;
+  width: 100%;
 }
 .banner-internal__content__title {
   color: var(--white);
