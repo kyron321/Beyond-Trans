@@ -1,0 +1,16 @@
+{
+    "name": "acf/support-cards",
+    "title": "Support Cards",
+    "description": "A simple support cards block",
+    "style": [ "file:./support-cards.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["support", "cards"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "support-cards.php"
+    },
+    "supports": {
+        "align": false
+    }
+}

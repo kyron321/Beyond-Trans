@@ -1,0 +1,173 @@
+.support-cards {
+  padding: 6rem 0;
+  background-color: var(--eggshell-white);
+}
+.support-cards__heading {
+  text-align: center;
+  max-width: 74rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.support-cards__subheading {
+  text-align: center;
+  max-width: 74rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.support-cards__container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.support-cards__container.no-transitions * {
+  transition: none !important;
+}
+@media (max-width: 991px) {
+  .support-cards__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .support-cards__container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+.support-cards__card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  overflow: hidden;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border: 0px 2px 2px px solid #e0e0e0;
+  border-top: 8px solid var(--primary);
+  border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1.5px 4px rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+}
+.support-cards__card.is-hiding {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+.support-cards__card.is-hidden {
+  display: none;
+}
+.support-cards__card-image {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+}
+.support-cards__card-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.support-cards__card-image:hover img {
+  transform: scale(1.05);
+}
+.support-cards__card-time-tag {
+  background-color: var(--secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  margin-bottom: 1rem;
+  width: 25%;
+  text-align: center;
+}
+.support-cards__card-content {
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.support-cards__card-time {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.support-cards__card-facilitator {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.support-cards__card-facilitator-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+.support-cards__card-text {
+  flex: 1;
+}
+.support-cards .support-cards__switch-toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.support-cards .support-cards__switch-toggle {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 2rem;
+  background: #f5f5f5;
+  border-radius: 2rem;
+  border: 2px solid #ccc;
+  padding: 0.5rem;
+  width: 400px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.support-cards .support-cards__switch-toggle .switch-toggle__input {
+  display: none;
+}
+.support-cards .support-cards__switch-toggle .switch-toggle__label {
+  flex: 1 1 0;
+  z-index: 2;
+  text-align: center;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  border-radius: 2rem;
+  transition: color 0.2s;
+  position: relative;
+  font-size: 1rem;
+}
+.support-cards .support-cards__switch-toggle .switch-toggle__slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: var(--primary);
+  border-radius: 2rem;
+  transition: left 0.3s, background 0.2s;
+  z-index: 1;
+}
+.support-cards .support-cards__switch-toggle #toggle-families:checked ~ .switch-toggle__slider {
+  left: 50%;
+  background: var(--primary);
+}
+.support-cards .support-cards__switch-toggle #toggle-recovery-support:checked ~ .switch-toggle__label[for=toggle-recovery-support],
+.support-cards .support-cards__switch-toggle #toggle-families:checked ~ .switch-toggle__label[for=toggle-families] {
+  color: #fff;
+  z-index: 3;
+}
+@media (max-width: 767px) {
+  .support-cards {
+    padding: 4rem 0;
+  }
+  .support-cards__header {
+    margin-bottom: 3rem;
+  }
+}
