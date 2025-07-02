@@ -119,6 +119,13 @@
             flex: 1;
         }
     }
+
+    .support-cards__footer-cta {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+    }
+
     .support-cards__switch-toggle-wrapper {
         display: flex;
         justify-content: center;

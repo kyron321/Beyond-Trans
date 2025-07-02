@@ -134,5 +134,48 @@ if (!$cards) {
                 </div>
             <?php endforeach; ?>
         </div>
+
+        <div class="support-cards__footer-cta fade-in">
+            <a id="support-cards-cta" href="/apply-for-support/" class="btn btn-primary">Apply For Support</a>
+        </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const recoveryToggle = document.getElementById('toggle-recovery-support');
+    const familiesToggle = document.getElementById('toggle-families');
+    const ctaLink = document.getElementById('support-cards-cta');
+
+    if (!recoveryToggle || !familiesToggle || !ctaLink) {
+        return;
+    }
+
+    const content = {
+        recovery: {
+            href: '/apply-for-support/',
+            text: 'Apply For Recovery Support'
+        },
+        family: {
+            href: '/apply-for-family-support/',
+            text: 'Apply for Family Support'
+        }
+    };
+
+    function updateButton() {
+        if (familiesToggle.checked) {
+            ctaLink.href = content.family.href;
+            ctaLink.textContent = content.family.text;
+        } else {
+            ctaLink.href = content.recovery.href;
+            ctaLink.textContent = content.recovery.text;
+        }
+    }
+
+    recoveryToggle.addEventListener('change', updateButton);
+    familiesToggle.addEventListener('change', updateButton);
+
+    // Set initial state
+    updateButton();
+});
+</script>
