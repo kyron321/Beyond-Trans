@@ -189,3 +189,79 @@
   display: flex;
   gap: 0.5rem;
 }
+.therapist-directory__filter-submit .btn-secondary {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.therapist-directory__filter-submit .btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(252, 225, 129, 0.5);
+}
+.therapist-directory__filter-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.therapist-directory__checkbox-label {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 50px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.therapist-directory__checkbox-label:hover {
+  background-color: var(--primary);
+  color: white;
+}
+.therapist-directory__checkbox-label:has(input:checked) {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: black;
+}
+.therapist-directory__checkbox-label:has(input:checked):hover {
+  color: black;
+}
+.therapist-directory__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+.therapist-directory__checkbox-text {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.therapist-directory #therapist-results {
+  transition: opacity 0.3s ease;
+}
+.therapist-directory #therapist-results.is-loading {
+  position: relative;
+}
+.therapist-directory #therapist-results.is-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

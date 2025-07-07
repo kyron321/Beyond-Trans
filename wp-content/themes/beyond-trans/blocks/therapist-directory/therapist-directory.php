@@ -17,7 +17,7 @@ $countries = get_terms([
 ]);
 
 // Get current filters if set
-$current_specialty = isset($_GET['specialty']) ? sanitize_text_field($_GET['specialty']) : '';
+$current_specialties = isset($_GET['specialty']) ? array_map('sanitize_text_field', (array)$_GET['specialty']) : [];
 $current_country = isset($_GET['country']) ? sanitize_text_field($_GET['country']) : '';
 $current_region = isset($_GET['region']) ? sanitize_text_field($_GET['region']) : '';
 
@@ -53,12 +53,16 @@ $args = [
 // Build tax query for filters
 $tax_queries = [];
 
-if (!empty($current_specialty)) {
-    $tax_queries[] = [
-        'taxonomy' => 'specialty',
-        'field' => 'slug',
-        'terms' => $current_specialty,
-    ];
+// Handle specialties with AND logic - each selected specialty must be present
+if (!empty($current_specialties)) {
+    // Create a separate tax query for each specialty to ensure AND logic
+    foreach ($current_specialties as $specialty) {
+        $tax_queries[] = [
+            'taxonomy' => 'specialty',
+            'field' => 'slug',
+            'terms' => $specialty,
+        ];
+    }
 }
 
 if (!empty($current_country)) {
@@ -100,24 +104,23 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
     <div class="container">
         <!-- Filter Section -->
         <div class="therapist-directory__filters-container">
-            <form class="therapist-directory__filter-form fade-in" method="get" action="<?php echo esc_url($current_url); ?>">
+            <form id="therapist-filter-form" class="therapist-directory__filter-form fade-in" method="get" action="<?php echo esc_url($current_url); ?>">
                 <div class="therapist-directory__filter-selects">
 
                     <!-- Specialty Filters -->
                     <?php if (!empty($specialties) && !is_wp_error($specialties)): ?>
                         <div class="therapist-directory__filters">
                             <div class="therapist-directory__filter-label">Filter by specialty:</div>
-                            <div class="therapist-directory__filter-buttons">
-                                <a href="<?php echo esc_url(remove_query_arg('specialty')); ?>"
-                                    class="btn btn-primary <?php echo empty($current_specialty) ? 'active' : ''; ?>">
-                                    All
-                                </a>
-
+                            <div class="therapist-directory__filter-checkboxes">
                                 <?php foreach ($specialties as $specialty): ?>
-                                    <a href="<?php echo esc_url(add_query_arg('specialty', $specialty->slug)); ?>"
-                                        class="btn btn-primary <?php echo $current_specialty === $specialty->slug ? 'active' : ''; ?>">
-                                        <?php echo esc_html($specialty->name); ?>
-                                    </a>
+                                    <label class="therapist-directory__checkbox-label">
+                                        <input type="checkbox" 
+                                               name="specialty[]" 
+                                               value="<?php echo esc_attr($specialty->slug); ?>"
+                                               <?php echo in_array($specialty->slug, $current_specialties) ? 'checked' : ''; ?>
+                                               class="therapist-directory__checkbox">
+                                        <span class="therapist-directory__checkbox-text"><?php echo esc_html($specialty->name); ?></span>
+                                    </label>
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -153,7 +156,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                                 </select>
                             </div>
                             <div class="therapist-directory__filter-submit">
-                                <a href="<?php echo esc_url($current_url); ?>" class="btn btn-secondary">Clear Filters</a>
+                                <button type="button" id="clear-filters" class="btn btn-secondary">Clear Filters</button>
                             </div>
                         </div>
                     </div>
@@ -162,6 +165,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
         </div>
 
         <!-- Therapists Grid -->
+        <div id="therapist-results">
         <?php if ($therapists->have_posts()): ?>
             <div class="therapist-directory__grid">
                 <?php while ($therapists->have_posts()): $therapists->the_post();
@@ -177,11 +181,13 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                 ?>
                     <div class="therapist-card fade-in" >
                     <a class="therapist-card__link" href="<?php echo esc_url(get_permalink()); ?>">
-                        <?php if ($photo): ?>
-                            <div class="therapist-card__image">
+                        <div class="therapist-card__image">
+                            <?php if ($photo && !empty($photo)): ?>
                                 <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy">
-                            </div>
-                        <?php endif; ?>
+                            <?php else: ?>
+                                <img src="https://stoic-chaplygin.18-171-152-231.plesk.page/wp-content/uploads/2025/07/placeholder.png" alt="<?php echo esc_attr($title); ?>" loading="lazy">
+                            <?php endif; ?>
+                        </div>
                         <div class="therapist-card__content" style="display: flex; flex-direction: column; height: 100%;">
                             <h5 class="therapist-card__name"><?php echo esc_html($title); ?></h5>
 
@@ -256,6 +262,7 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                 <p>No therapists found matching your criteria.</p>
             </div>
         <?php endif; ?>
+        </div>
 
         <?php wp_reset_postdata(); ?>
     </div>

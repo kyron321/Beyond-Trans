@@ -6,86 +6,207 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!therapistDirectory) return;
     
-    // Add smooth scroll to directory when filter is clicked
-    const filterButtons = therapistDirectory.querySelectorAll('.filter-btn');
+    // Get filter elements
+    const filterForm = document.getElementById('therapist-filter-form');
+    const resultsContainer = document.getElementById('therapist-results');
+    const countrySelect = document.getElementById('country-filter');
+    const regionSelect = document.getElementById('region-filter');
+    const checkboxes = filterForm.querySelectorAll('.therapist-directory__checkbox');
+    const filterSelects = filterForm.querySelectorAll('.filter-select');
+    const clearButton = document.getElementById('clear-filters');
     
-    filterButtons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        // Save the href for later navigation
-        const targetHref = this.getAttribute('href');
+    // Function to get form data as URL params
+    function getFormDataAsParams() {
+        const formData = new FormData(filterForm);
+        const params = new URLSearchParams();
         
-        // Optionally, add loading state
-        const therapistGrid = therapistDirectory.querySelector('.therapist-directory__grid');
-        if (therapistGrid) {
-          therapistGrid.classList.add('is-loading');
+        // Handle array values (checkboxes)
+        for (let [key, value] of formData.entries()) {
+            if (key.endsWith('[]')) {
+                params.append(key.slice(0, -2) + '[]', value);
+            } else {
+                params.append(key, value);
+            }
         }
         
-        // Apply active state immediately for better UX
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
+        return params;
+    }
+    
+    // Function to fetch and update results
+    async function updateResults() {
+        // Show loading state
+        resultsContainer.classList.add('is-loading');
+        resultsContainer.style.opacity = '0.5';
         
-        // Optional: scroll to the directory section smoothly before loading new results
-        e.preventDefault();
+        try {
+            // Get current form data as URL params
+            const params = getFormDataAsParams();
+            const url = `${window.location.pathname}?${params.toString()}`;
+            
+            // Fetch the page with filters
+            const response = await fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+            
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            // Parse the response
+            const html = await response.text();
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            // Extract the results section
+            const newResults = tempDiv.querySelector('#therapist-results');
+            
+            if (newResults) {
+                // Fade out current results
+                resultsContainer.style.transition = 'opacity 0.3s ease';
+                resultsContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Replace the content
+                    resultsContainer.innerHTML = newResults.innerHTML;
+                    
+                    // Re-initialize animations for new cards
+                    initializeCardAnimations();
+                    
+                    // Fade in new results
+                    resultsContainer.style.opacity = '1';
+                    resultsContainer.classList.remove('is-loading');
+                }, 300);
+            }
+            
+            // Update the URL without reloading the page
+            window.history.pushState({}, '', url);
+            
+        } catch (error) {
+            console.error('Error fetching results:', error);
+            resultsContainer.classList.remove('is-loading');
+            resultsContainer.style.opacity = '1';
+        }
+    }
+    
+    // Function to initialize card animations
+    function initializeCardAnimations() {
+        const therapistCards = resultsContainer.querySelectorAll('.therapist-card');
         
-        const scrollTarget = therapistDirectory.getBoundingClientRect().top + window.pageYOffset - 100;
+        if ('IntersectionObserver' in window) {
+            const appearOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const appearOnScroll = new IntersectionObserver(
+                function(entries, appearOnScroll) {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        
+                        entry.target.classList.add('is-visible');
+                        appearOnScroll.unobserve(entry.target);
+                    });
+                }, 
+                appearOptions
+            );
+            
+            therapistCards.forEach(card => {
+                card.classList.add('fade-in');
+                appearOnScroll.observe(card);
+            });
+        }
+    }
+    
+    // Function to handle country change and update regions
+    async function handleCountryChange() {
+        const countryValue = countrySelect.value;
+        const currentRegionValue = regionSelect.value;
         
-        window.scrollTo({
-          top: scrollTarget,
-          behavior: 'smooth'
-        });
+        if (!countryValue) {
+            // If country is cleared, disable region select
+            regionSelect.value = '';
+            regionSelect.disabled = true;
+            regionSelect.innerHTML = '<option value="">Region/State/Province</option>';
+        } else {
+            // Show loading state on region select
+            regionSelect.disabled = true;
+            const originalHTML = regionSelect.innerHTML;
+            regionSelect.innerHTML = '<option value="">Loading regions...</option>';
+            
+            // Fetch the page with just the country filter to get regions
+            const params = new URLSearchParams({ country: countryValue });
+            const url = `${window.location.pathname}?${params.toString()}`;
+            
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // Extract the region select options
+                const newRegionSelect = tempDiv.querySelector('#region-filter');
+                if (newRegionSelect) {
+                    regionSelect.innerHTML = newRegionSelect.innerHTML;
+                    regionSelect.disabled = false;
+                    
+                    // Try to restore the previously selected region if it still exists
+                    if (currentRegionValue) {
+                        const optionExists = Array.from(regionSelect.options).some(
+                            option => option.value === currentRegionValue
+                        );
+                        if (optionExists) {
+                            regionSelect.value = currentRegionValue;
+                        }
+                    }
+                } else {
+                    regionSelect.innerHTML = originalHTML;
+                    regionSelect.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error fetching regions:', error);
+                regionSelect.innerHTML = '<option value="">Error loading regions</option>';
+                regionSelect.disabled = false;
+            }
+        }
         
-        // Navigate to the filter URL after a short delay
-        setTimeout(() => {
-          window.location.href = targetHref;
-        }, 500);
-      });
+        // Update results after country change
+        updateResults();
+    }
+    
+    // Add event listeners for checkboxes
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateResults);
     });
     
-    // Optional: Add animation when cards appear
-    const therapistCards = therapistDirectory.querySelectorAll('.therapist-card');
+    // Add event listeners for select elements
+    countrySelect.addEventListener('change', handleCountryChange);
+    regionSelect.addEventListener('change', updateResults);
     
-    if ('IntersectionObserver' in window) {
-      const appearOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-      };
-      
-      const appearOnScroll = new IntersectionObserver(
-        function(entries, appearOnScroll) {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
+    // Initialize card animations on page load
+    initializeCardAnimations();
+    
+    // Prevent form submission on Enter key
+    filterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        updateResults();
+    });
+    
+    // Handle clear filters button
+    if (clearButton) {
+        clearButton.addEventListener('click', function() {
+            // Uncheck all checkboxes
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
             
-            entry.target.classList.add('is-visible');
-            appearOnScroll.unobserve(entry.target);
-          });
-        }, 
-        appearOptions
-      );
-      
-      therapistCards.forEach(card => {
-        card.classList.add('fade-in');
-        appearOnScroll.observe(card);
-      });
-    }
-
-    // Get filter elements
-    const countrySelect = document.getElementById('country-filter');
-    const regionContainer = document.getElementById('region-filter-container');
-    const regionSelect = document.getElementById('region-filter');
-
-    // Set up automatic form submission on select change
-    const filterSelects = document.querySelectorAll('.filter-select');
-    filterSelects.forEach(select => {
-        select.addEventListener('change', function() {
-            if (this.id === 'country-filter' && this.value === '') {
-                // If country is cleared, also clear region
-                regionSelect.value = '';
-                regionSelect.disabled = true;
-                regionContainer.style.display = 'none';
-            }
-
-            // Submit the form on any select change
-            this.form.submit();
+            // Reset select elements
+            countrySelect.value = '';
+            regionSelect.value = '';
+            regionSelect.disabled = true;
+            regionSelect.innerHTML = '<option value="">Region/State/Province</option>';
+            
+            // Update results
+            updateResults();
         });
-      });
-  });
+    }
+});
