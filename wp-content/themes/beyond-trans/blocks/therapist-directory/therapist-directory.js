@@ -19,7 +19,8 @@
     // State management
     const state = {
         elements: {},
-        isInitialized: false
+        isInitialized: false,
+        searchTimeout: null
     };
     
     /**
@@ -37,7 +38,8 @@
             mobileClose: document.getElementById('mobile-filter-close'),
             filtersSidebar: document.getElementById('filters-sidebar'),
             mobileViewResults: document.getElementById('mobile-view-results'),
-            resultsCount: document.getElementById('results-count')
+            resultsCount: document.getElementById('results-count'),
+            searchInput: document.getElementById('name-search')
         };
         
         // Get dynamic collections
@@ -232,8 +234,9 @@
         regionSelect.innerHTML = '<option value="">Region/State/Province</option>';
         
         // Clear search input
-        const searchInput = state.elements.filterForm.querySelector('input[name="search"]');
-        if (searchInput) searchInput.value = '';
+        if (state.elements.searchInput) {
+            state.elements.searchInput.value = '';
+        }
         
         updateResults();
     }
@@ -266,10 +269,25 @@
     };
     
     /**
+     * Handle search input with debounce
+     */
+    function handleSearchInput() {
+        // Clear existing timeout
+        if (state.searchTimeout) {
+            clearTimeout(state.searchTimeout);
+        }
+        
+        // Set new timeout for 500ms delay
+        state.searchTimeout = setTimeout(() => {
+            updateResults();
+        }, 500);
+    }
+    
+    /**
      * Attach event listeners
      */
     function attachEventListeners() {
-        const { filterForm, checkboxes, countrySelect, regionSelect, clearButton, mobileToggle, mobileClose, filtersSidebar, mobileViewResults } = state.elements;
+        const { filterForm, checkboxes, countrySelect, regionSelect, clearButton, mobileToggle, mobileClose, filtersSidebar, mobileViewResults, searchInput } = state.elements;
         
         // Form and filter events
         if (filterForm) {
@@ -299,6 +317,11 @@
         // Clear button
         if (clearButton) {
             clearButton.addEventListener('click', clearFilters);
+        }
+        
+        // Search input
+        if (searchInput) {
+            searchInput.addEventListener('input', handleSearchInput);
         }
         
         // Mobile modal events

@@ -23,6 +23,8 @@
   gap: 0.5rem;
   width: 100%;
   justify-content: center;
+  border: none;
+  outline: none;
 }
 .therapist-directory__mobile-filter-btn button svg {
   width: 20px;
@@ -575,10 +577,14 @@
 
 body.modal-open {
   overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 @media (min-width: 1200px) {
   body.modal-open {
     overflow: visible;
+    position: static;
+    width: auto;
   }
 }
 
