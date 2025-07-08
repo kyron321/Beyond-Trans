@@ -210,3 +210,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const therapistCards = document.querySelectorAll('.therapist-card');
+    
+    therapistCards.forEach(card => {
+        // Get the permalink from the data attribute
+        const permalink = card.getAttribute('data-permalink');
+        
+        if (permalink) {
+            card.style.cursor = 'pointer';
+            
+            // Add click event to the entire card
+            card.addEventListener('click', function(e) {
+                // Don't trigger if clicking on an actual link or button
+                if (!e.target.closest('a') && !e.target.closest('button')) {
+                    window.location.href = permalink;
+                }
+            });
+        }
+    });
+});

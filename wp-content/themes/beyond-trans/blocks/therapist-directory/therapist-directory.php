@@ -20,6 +20,7 @@ $countries = get_terms([
 $current_specialties = isset($_GET['specialty']) ? array_map('sanitize_text_field', (array)$_GET['specialty']) : [];
 $current_country = isset($_GET['country']) ? sanitize_text_field($_GET['country']) : '';
 $current_region = isset($_GET['region']) ? sanitize_text_field($_GET['region']) : '';
+$current_search = isset($_GET['search']) ? sanitize_text_field($_GET['search']) : '';
 
 // Get regions for the selected country (if any)
 $regions = [];
@@ -27,18 +28,33 @@ if (!empty($current_country)) {
     // Get the country term ID
     $country_term = get_term_by('slug', $current_country, 'country');
     if ($country_term && !is_wp_error($country_term)) {
-        // Get regions linked to this country using ACF relationship
-        $regions = get_terms([
+        // Get all regions and filter by linked country
+        $all_regions = get_terms([
             'taxonomy' => 'region-state-province',
-            'hide_empty' => true,
-            'meta_query' => [
-                [
-                    'key' => 'linked_country',
-                    'value' => $country_term->term_id,
-                    'compare' => '='
-                ]
-            ]
+            'hide_empty' => false, // Show all regions, even those without therapists
         ]);
+        
+        foreach ($all_regions as $region) {
+            $linked_country = get_field('linked_country', 'region-state-province_' . $region->term_id);
+            
+            // Check if this region is linked to the selected country
+            if ($linked_country) {
+                // Handle different return formats
+                $linked_country_id = null;
+                if (is_object($linked_country) && isset($linked_country->term_id)) {
+                    $linked_country_id = $linked_country->term_id;
+                } elseif (is_array($linked_country) && !empty($linked_country)) {
+                    $first_country = reset($linked_country);
+                    $linked_country_id = is_object($first_country) ? $first_country->term_id : $first_country;
+                } elseif (is_numeric($linked_country)) {
+                    $linked_country_id = $linked_country;
+                }
+                
+                if ($linked_country_id == $country_term->term_id) {
+                    $regions[] = $region;
+                }
+            }
+        }
     }
 }
 
@@ -49,6 +65,11 @@ $args = [
     'orderby' => 'title',
     'order' => 'ASC',
 ];
+
+// Add name search if provided
+if (!empty($current_search)) {
+    $args['s'] = $current_search;
+}
 
 // Build tax query for filters
 $tax_queries = [];
@@ -102,33 +123,42 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
 
 <section class="block therapist-directory bg-light-yellow">
     <div class="container">
-        <!-- Filter Section -->
-        <div class="therapist-directory__filters-container">
-            <form id="therapist-filter-form" class="therapist-directory__filter-form fade-in" method="get" action="<?php echo esc_url($current_url); ?>">
-                <div class="therapist-directory__filter-selects">
+        <!-- Mobile Filter Button -->
+        <div class="therapist-directory__mobile-filter-btn">
+            <button class="btn btn-primary" id="mobile-filter-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="21" x2="4" y2="14"></line>
+                    <line x1="4" y1="10" x2="4" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="3"></line>
+                    <line x1="20" y1="21" x2="20" y2="16"></line>
+                    <line x1="20" y1="12" x2="20" y2="3"></line>
+                    <line x1="1" y1="14" x2="7" y2="14"></line>
+                    <line x1="9" y1="8" x2="15" y2="8"></line>
+                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                </svg>
+                Filter Therapists
+            </button>
+        </div>
 
-                    <!-- Specialty Filters -->
-                    <?php if (!empty($specialties) && !is_wp_error($specialties)): ?>
-                        <div class="therapist-directory__filters">
-                            <div class="therapist-directory__filter-label">Filter by specialty:</div>
-                            <div class="therapist-directory__filter-checkboxes">
-                                <?php foreach ($specialties as $specialty): ?>
-                                    <label class="therapist-directory__checkbox-label">
-                                        <input type="checkbox" 
-                                               name="specialty[]" 
-                                               value="<?php echo esc_attr($specialty->slug); ?>"
-                                               <?php echo in_array($specialty->slug, $current_specialties) ? 'checked' : ''; ?>
-                                               class="therapist-directory__checkbox">
-                                        <span class="therapist-directory__checkbox-text"><?php echo esc_html($specialty->name); ?></span>
-                                    </label>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
+        <div class="therapist-directory__layout">
+            <!-- Filter Sidebar (Desktop) / Modal (Mobile) -->
+            <aside class="therapist-directory__filters-sidebar" id="filters-sidebar">
+                <div class="therapist-directory__filters-container">
+                    <!-- Mobile Close Button -->
+                    <button class="therapist-directory__mobile-close" id="mobile-filter-close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                    <h3 class="therapist-directory__filters-title">Filter Therapists</h3>
+                    <form id="therapist-filter-form" class="therapist-directory__filter-form" method="get" action="<?php echo esc_url($current_url); ?>">
+                <div class="therapist-directory__filter-selects">
 
                     <!-- Country Select & Region select container -->
                     <div class="therapist-directory__filter-selects">
-                        <div class="therapist-directory__filter-label">Filter by location & Region / State / Province</div>
+                        <div class="therapist-directory__filter-label">Filter by Location & Region / State / Province</div>
                         <div class="therapist-directory__filter-selects-inner">
                             <?php if (!empty($countries) && !is_wp_error($countries)): ?>
                                 <div class="therapist-directory__filter-select-group">
@@ -155,17 +185,51 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                                     <?php endif; ?>
                                 </select>
                             </div>
-                            <div class="therapist-directory__filter-submit">
-                                <button type="button" id="clear-filters" class="btn btn-secondary">Clear Filters</button>
-                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
 
-        <!-- Therapists Grid -->
-        <div id="therapist-results">
+                    <!-- Name Search -->
+                    <div class="therapist-directory__filter-search">
+                        <div class="therapist-directory__filter-label">Search by Therapist Name:</div>
+                        <div class="therapist-directory__search-input-group">
+                            <input type="text" 
+                                   name="search" 
+                                   id="name-search" 
+                                   class="therapist-directory__search-input"
+                                   placeholder="Enter Therapist Name"
+                                   value="<?php echo esc_attr($current_search); ?>">
+                        </div>
+                    </div>
+                       <!-- Specialty Filters -->
+                       <?php if (!empty($specialties) && !is_wp_error($specialties)): ?>
+                        <div class="therapist-directory__filters">
+                            <div class="therapist-directory__filter-label">Filter by Specialty:</div>
+                            <div class="therapist-directory__filter-checkboxes">
+                                <?php foreach ($specialties as $specialty): ?>
+                                    <label class="therapist-directory__checkbox-label">
+                                        <input type="checkbox" 
+                                               name="specialty[]" 
+                                               value="<?php echo esc_attr($specialty->slug); ?>"
+                                               <?php echo in_array($specialty->slug, $current_specialties) ? 'checked' : ''; ?>
+                                               class="therapist-directory__checkbox">
+                                        <span class="therapist-directory__checkbox-text"><?php echo esc_html($specialty->name); ?></span>
+                                    </label>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <div class="therapist-directory__filter-submit">
+                                <a href="<?php echo esc_url($current_url); ?>" class="btn btn-secondary">Clear All Filters</a>
+                            </div>
+                    </div>
+                </form>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="therapist-directory__main-content">
+                <!-- Therapists Grid -->
+                <div id="therapist-results">
         <?php if ($therapists->have_posts()): ?>
             <div class="therapist-directory__grid">
                 <?php while ($therapists->have_posts()): $therapists->the_post();
@@ -179,82 +243,71 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                     $contact_info = get_field('contact_info', get_the_ID());
                     $location = get_field('location', get_the_ID());
                 ?>
-                    <div class="therapist-card fade-in" >
-                    <a class="therapist-card__link" href="<?php echo esc_url(get_permalink()); ?>">
+                    <div class="therapist-card fade-in" data-permalink="<?php echo esc_url(get_permalink()); ?>">
                         <div class="therapist-card__image">
-                            <?php if ($photo && !empty($photo)): ?>
-                                <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy">
-                            <?php else: ?>
-                                <img src="https://stoic-chaplygin.18-171-152-231.plesk.page/wp-content/uploads/2025/07/placeholder.png" alt="<?php echo esc_attr($title); ?>" loading="lazy">
-                            <?php endif; ?>
-                        </div>
-                        <div class="therapist-card__content" style="display: flex; flex-direction: column; height: 100%;">
-                            <h5 class="therapist-card__name"><?php echo esc_html($title); ?></h5>
-
-                            <?php if (!empty($therapist_specialties)): ?>
-                                <p class="therapist-card__specialties">
-                                    <?php echo esc_html(implode(', ', $therapist_specialties)); ?>
-                                </p>
-                            <?php endif; ?>
-                          
-                            <?php if ($location): ?>
-                                <div class="therapist-card__location">
-                                  
-                                    <?php echo esc_html($location); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if ($bio): ?>
-                                <div class="therapist-card__bio">
-                                    <?php echo wp_trim_words($bio, 10, '...'); ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <div class="therapist-card__contact">
-                                <?php if (!empty($contact_info['company'])): ?>
-                                    <div class="therapist-card__contact-items">
-                                        <strong>Company:</strong> <?php echo esc_html($contact_info['company']); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (!empty($contact_info['website'])): ?>
-                                    <div class="therapist-card__contact-item">
-                                        <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                    </svg>
-                                        <a href="<?php echo esc_url($contact_info['website']); ?>" target="_blank" rel="noopener noreferrer">
-                                            <?php echo esc_html($contact_info['website']); ?>
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (!empty($contact_info['location'])): ?>
-                                   
-                                    <div class="therapist-card__contact-item">
-                                    <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                        <circle cx="12" cy="10" r="3"></circle>
-                                    </svg>
-                                        <?php echo esc_html($contact_info['location']); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (!empty($contact_info['contact']) && is_array($contact_info['contact'])): ?>
-                                    <div class="therapist-card__contact-item">
-                                        <a href="<?php echo esc_url($contact_info['contact']['url']); ?>"
-                                            target="<?php echo esc_attr($contact_info['contact']['target'] ?: '_self'); ?>">
-                                            <?php echo esc_html($contact_info['contact']['title']); ?>
-                                        </a>
-                                    </div>
+                                <?php if ($photo && !empty($photo)): ?>
+                                    <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy" onerror="this.src='https://beyond-trans-k.local/wp-content/uploads/2025/07/placeholder.png'; this.onerror=null;">
+                                <?php else: ?>
+                                    <img src="https://beyond-trans-k.local/wp-content/uploads/2025/07/placeholder.png" alt="<?php echo esc_attr($title); ?>" loading="lazy" onerror="this.style.display='none';">
                                 <?php endif; ?>
                             </div>
+                            <div class="therapist-card__content" style="display: flex; flex-direction: column; height: 100%;">
+                                <h5 class="therapist-card__name"><?php echo esc_html($title); ?></h5>
 
-                            <a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn-underline" style="margin-top: auto;">View Profile</a>
+                                <?php if (!empty($therapist_specialties)): ?>
+                                    <p class="therapist-card__specialties">
+                                        <?php echo esc_html(implode(', ', $therapist_specialties)); ?>
+                                    </p>
+                                <?php endif; ?>
+                              
+                                <?php if ($location): ?>
+                                    <div class="therapist-card__location">
+                                        <?php echo esc_html($location); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($bio): ?>
+                                    <div class="therapist-card__bio">
+                                        <?php echo wp_trim_words($bio, 10, '...'); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="therapist-card__contact">
+                                    <?php if (!empty($contact_info['company'])): ?>
+                                        <div class="therapist-card__contact-items">
+                                            <strong>Company:</strong> <?php echo esc_html($contact_info['company']); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($contact_info['website'])): ?>
+                                        <div class="therapist-card__contact-item">
+                                            <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                            </svg>
+                                            <?php echo esc_html($contact_info['website']); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($contact_info['location'])): ?>
+                                        <div class="therapist-card__contact-item">
+                                            <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                                <circle cx="12" cy="10" r="3"></circle>
+                                            </svg>
+                                            <?php echo esc_html($contact_info['location']); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($contact_info['contact']) && is_array($contact_info['contact'])): ?>
+                                        <div class="therapist-card__contact-item">
+                                            <?php echo esc_html($contact_info['contact']['title']); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
-                        </a>
-                    </div>
                 <?php endwhile; ?>
             </div>
         <?php else: ?>
@@ -262,8 +315,50 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                 <p>No therapists found matching your criteria.</p>
             </div>
         <?php endif; ?>
-        </div>
+                </div>
+            </main>
+            </div>
 
         <?php wp_reset_postdata(); ?>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile filter modal functionality
+    const filterToggle = document.getElementById('mobile-filter-toggle');
+    const filterClose = document.getElementById('mobile-filter-close');
+    const filtersSidebar = document.getElementById('filters-sidebar');
+    const body = document.body;
+    
+    if (filterToggle && filterClose && filtersSidebar) {
+        // Open modal
+        filterToggle.addEventListener('click', function() {
+            filtersSidebar.classList.add('is-open');
+            body.classList.add('modal-open');
+        });
+        
+        // Close modal
+        filterClose.addEventListener('click', function() {
+            filtersSidebar.classList.remove('is-open');
+            body.classList.remove('modal-open');
+        });
+        
+        // Close on outside click
+        filtersSidebar.addEventListener('click', function(e) {
+            if (e.target === filtersSidebar) {
+                filtersSidebar.classList.remove('is-open');
+                body.classList.remove('modal-open');
+            }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && filtersSidebar.classList.contains('is-open')) {
+                filtersSidebar.classList.remove('is-open');
+                body.classList.remove('modal-open');
+            }
+        });
+    }
+});
+</script>
