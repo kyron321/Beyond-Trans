@@ -42,11 +42,18 @@ echo render_block([
             <div class="container">
                 <div class="therapist-profile__content-wrapper">
                     <div class="therapist-profile__image-column">
-                        <?php if ($photo_url): ?>
-                            <div class="therapist-profile__image-wrapper">
-                                <img src="<?php echo esc_url($photo_url); ?>" alt="<?php echo esc_attr($name); ?>" class="therapist-profile__image">
-                            </div>
-                        <?php endif; ?>
+                        <div class="therapist-profile__image-wrapper">
+                            <?php if ($photo_url): ?>
+                                <img src="<?php echo esc_url($photo_url); ?>" 
+                                     alt="<?php echo esc_attr($name); ?>" 
+                                     class="therapist-profile__image"
+                                     onerror="this.onerror=null; this.src='https://beyond-trans-k.local/wp-content/uploads/2025/07/placeholder.png'; this.alt='Profile placeholder';">
+                            <?php else: ?>
+                                <img src="https://beyond-trans-k.local/wp-content/uploads/2025/07/placeholder.png" 
+                                     alt="Profile placeholder" 
+                                     class="therapist-profile__image therapist-profile__image--placeholder">
+                            <?php endif; ?>
+                        </div>
                     </div>
                     <div class="therapist-profile__info-column">
                         <h1 class="therapist-profile__name"><?php echo esc_html($name); ?></h1>
