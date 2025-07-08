@@ -11,10 +11,35 @@ $specialties = get_terms([
     'hide_empty' => true,
 ]);
 
-$countries = get_terms([
+// Get all countries that have therapists
+$countries_with_therapists = [];
+$all_countries = get_terms([
     'taxonomy' => 'country',
-    'hide_empty' => true,
+    'hide_empty' => false,
 ]);
+
+// Check each country for therapists
+foreach ($all_countries as $country) {
+    $therapist_check = new WP_Query([
+        'post_type' => 'therapist',
+        'posts_per_page' => 1,
+        'fields' => 'ids',
+        'tax_query' => [
+            [
+                'taxonomy' => 'country',
+                'field' => 'term_id',
+                'terms' => $country->term_id,
+            ]
+        ]
+    ]);
+    
+    if ($therapist_check->have_posts()) {
+        $countries_with_therapists[] = $country;
+    }
+    wp_reset_postdata();
+}
+
+$countries = $countries_with_therapists;
 
 // Get current filters if set
 $current_specialties = isset($_GET['specialty']) ? array_map('sanitize_text_field', (array)$_GET['specialty']) : [];
@@ -31,7 +56,7 @@ if (!empty($current_country)) {
         // Get all regions and filter by linked country
         $all_regions = get_terms([
             'taxonomy' => 'region-state-province',
-            'hide_empty' => false, // Show all regions, even those without therapists
+            'hide_empty' => false,
         ]);
         
         foreach ($all_regions as $region) {
@@ -51,7 +76,30 @@ if (!empty($current_country)) {
                 }
                 
                 if ($linked_country_id == $country_term->term_id) {
-                    $regions[] = $region;
+                    // Check if this region has any therapists
+                    $therapist_check = new WP_Query([
+                        'post_type' => 'therapist',
+                        'posts_per_page' => 1,
+                        'fields' => 'ids',
+                        'tax_query' => [
+                            'relation' => 'AND',
+                            [
+                                'taxonomy' => 'country',
+                                'field' => 'term_id',
+                                'terms' => $country_term->term_id,
+                            ],
+                            [
+                                'taxonomy' => 'region-state-province',
+                                'field' => 'term_id',
+                                'terms' => $region->term_id,
+                            ]
+                        ]
+                    ]);
+                    
+                    if ($therapist_check->have_posts()) {
+                        $regions[] = $region;
+                    }
+                    wp_reset_postdata();
                 }
             }
         }
@@ -157,8 +205,8 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                 <div class="therapist-directory__filter-selects">
 
                     <!-- Country Select & Region select container -->
-                    <div class="therapist-directory__filter-selects">
-                        <div class="therapist-directory__filter-label">Filter by Location & Region / State / Province</div>
+                    <div class="therapist-directory__filter">
+                        <div class="therapist-directory__filter-label">Filter by Location:</div>
                         <div class="therapist-directory__filter-selects-inner">
                             <?php if (!empty($countries) && !is_wp_error($countries)): ?>
                                 <div class="therapist-directory__filter-select-group">
@@ -223,6 +271,12 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                             </div>
                     </div>
                 </form>
+                <!-- Mobile View Results Button -->
+                <div class="therapist-directory__mobile-view-results">
+                    <button type="button" class="btn btn-primary" id="mobile-view-results">
+                        View <span id="results-count"><?php echo $therapists->found_posts; ?></span> Results
+                    </button>
+                </div>
                 </div>
             </aside>
 
