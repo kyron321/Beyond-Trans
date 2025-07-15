@@ -117,6 +117,7 @@
                         "id": ""
                     },
                     "layout": "block",
+                    "parent_repeater": "field_685c52fb27dca",
                     "sub_fields": [
                         {
                             "key": "field_685c52fb2a3b6",
@@ -250,6 +251,27 @@
                             "new_lines": ""
                         },
                         {
+                            "key": "field_687648c4c7c8e",
+                            "label": "Upcoming Dates",
+                            "name": "upcoming_dates",
+                            "aria-label": "",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "rows": "",
+                            "placeholder": "",
+                            "new_lines": ""
+                        },
+                        {
                             "key": "field_685c67db8d103",
                             "label": "Facilitator",
                             "name": "facilitator",
@@ -312,10 +334,11 @@
                             "allow_in_bindings": 0,
                             "ui": 0,
                             "ajax": 0,
-                            "placeholder": ""
+                            "placeholder": "",
+                            "create_options": 0,
+                            "save_options": 0
                         }
-                    ],
-                    "parent_repeater": "field_685c52fb27dca"
+                    ]
                 }
             ]
         },
@@ -378,5 +401,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1750921325
+    "modified": 1752582454
 }

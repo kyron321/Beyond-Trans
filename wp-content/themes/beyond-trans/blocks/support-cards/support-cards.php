@@ -70,6 +70,7 @@ if (!$cards) {
                 $heading = isset($card['heading']) ? $card['heading'] : '';
                 $time = isset($card['time']) ? $card['time'] : '';
                 $text = isset($card['text']) ? $card['text'] : '';
+                $upcoming_dates = isset($card['upcoming_dates']) ? $card['upcoming_dates'] : null;
                 $facilitator = isset($card['facilitator']) ? $card['facilitator'] : null;
                 $cta = isset($card['cta']) ? $card['cta'] : null;
                 $type = isset($card['type']) ? $card['type'] : null;
@@ -127,6 +128,37 @@ if (!$cards) {
                                 <?php echo wpautop(esc_html($text)); ?>
                             </div>
                         <?php endif; ?>
+
+                        <div class="support-cards__card-bottom-section">
+                            <?php if ($upcoming_dates): ?>
+                                <?php 
+                                // Parse upcoming dates - split by common delimiters
+                                $dates_array = array();
+                                if (strpos($upcoming_dates, "\n") !== false) {
+                                    // Split by line breaks
+                                    $dates_array = array_filter(array_map('trim', explode("\n", $upcoming_dates)));
+                                } elseif (strpos($upcoming_dates, ',') !== false) {
+                                    // Split by commas
+                                    $dates_array = array_filter(array_map('trim', explode(',', $upcoming_dates)));
+                                } elseif (strpos($upcoming_dates, ';') !== false) {
+                                    // Split by semicolons
+                                    $dates_array = array_filter(array_map('trim', explode(';', $upcoming_dates)));
+                                } else {
+                                    // Single date
+                                    $dates_array = array(trim($upcoming_dates));
+                                }
+                                ?>
+                                <div class="support-cards__card-upcoming-dates">
+                                    <p class="support-cards__card-upcoming-dates-label">UPCOMING DATES</p>
+                                    <ul class="support-cards__card-upcoming-dates-list">
+                                        <?php foreach ($dates_array as $date): ?>
+                                            <li><?php echo esc_html($date); ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
 
                         <?php if ($type): ?>
                             <div class="support-cards__card-facilitator-label">
