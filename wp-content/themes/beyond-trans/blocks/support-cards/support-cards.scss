@@ -49,6 +49,7 @@
         border-radius: 1.5rem 1.5rem 1.5rem 1.5rem;
         box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.06);
         padding: 2rem;
+        height: 500px;
 
         &.is-hiding {
             opacity: 0;
@@ -86,6 +87,12 @@
             margin-bottom: 1rem;
             width: 25%;
             text-align: center;
+
+            @media (max-width: 767px) {
+                width: auto;
+                display: inline-block;
+                padding: 0.5rem 1.5rem;
+            }
         }
 
         &-content {
@@ -93,6 +100,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
         }
 
         &-time {
@@ -138,12 +146,13 @@
         justify-content: center;
         gap: 0;
         margin-bottom: 2rem;
-        background: #f5f5f5;
+        // background: #f5f5f5;
         border-radius: 2rem;
-        border: 2px solid #ccc;
+        border: 1px solid var(--primary);
         padding: 0.5rem;
         width:400px;
         user-select: none;
+
       
         .switch-toggle__input {
           display: none;
@@ -161,6 +170,10 @@
           transition: color 0.2s;
           position: relative;
           font-size: 1rem;
+
+          @media (max-width: 767px) {
+            font-size: 11.4px;
+          }
         }
       
         .switch-toggle__slider {
@@ -186,6 +199,10 @@
         #toggle-families:checked ~ .switch-toggle__label[for="toggle-families"] {
           color: #fff;
           z-index: 3;
+
+          @media (max-width: 767px) {
+            font-size: 11.4px;
+          }
         }
     }
 
@@ -198,3 +215,5 @@
         }
     }
 }
+
+   

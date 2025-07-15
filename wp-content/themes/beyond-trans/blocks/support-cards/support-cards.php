@@ -106,7 +106,19 @@ if (!$cards) {
 
                         <?php if ($time): ?>
                             <div class="support-cards__card-time">
-                                <?php echo esc_html($time); ?>
+                                <?php 
+                                // Check if time contains commas (multiple time zones)
+                                if (strpos($time, ',') !== false) {
+                                    // Split by comma and display each timezone on a separate line
+                                    $timezones = explode(',', $time);
+                                    foreach ($timezones as $timezone) {
+                                        echo '<div class="support-cards__card-timezone">' . esc_html(trim($timezone)) . '</div>';
+                                    }
+                                } else {
+                                    // Single time zone, display normally
+                                    echo esc_html($time);
+                                }
+                                ?>
                             </div>
                         <?php endif; ?>
 
@@ -116,10 +128,19 @@ if (!$cards) {
                             </div>
                         <?php endif; ?>
 
-                        <?php if ($facilitator): ?>
-                            <div class="support-cards__card-facilitator">
-                                <p class="support-cards__card-facilitator-label">Facilitator:</p>
-                                <?php echo esc_html($facilitator); ?>
+                        <?php if ($type): ?>
+                            <div class="support-cards__card-facilitator-label">
+                              
+                                <?php 
+                                // Set facilitator based on card type
+                                $facilitator_text = '';
+                                if (strtolower($type) === 'recovery-support') {
+                                    $facilitator_text = 'Therapist-Facilitated';
+                                } elseif (strtolower($type) === 'families') {
+                                    $facilitator_text = 'Peer-Facilitated';
+                                }
+                                echo esc_html($facilitator_text);
+                                ?>
                             </div>
                         <?php endif; ?>
 
