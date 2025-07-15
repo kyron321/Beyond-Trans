@@ -1,0 +1,104 @@
+.youtube-videos .container {
+  width: 50% !important;
+}
+@media (max-width: 768px) {
+  .youtube-videos .container {
+    width: 100% !important;
+  }
+  .youtube-videos .container h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .youtube-videos .container .youtube-videos__subheading {
+    font-size: 0.875rem;
+  }
+}
+.youtube-videos .container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.youtube-videos .container .youtube-videos__subheading {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.youtube-videos .container .youtube-videos__subheading a {
+  text-decoration: underline;
+}
+.youtube-videos .container .youtube-videos__items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .youtube-videos .container .youtube-videos__items {
+    gap: 3rem;
+  }
+}
+.youtube-videos__item {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.youtube-videos__item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+.youtube-videos__item iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  border: none;
+  display: block;
+}
+@media (max-width: 768px) {
+  .youtube-videos__item {
+    border-radius: 8px;
+  }
+  .youtube-videos__item iframe {
+    aspect-ratio: 16/9;
+  }
+}
+@media (min-width: 1024px) {
+  .youtube-videos .container {
+    width: 60% !important;
+  }
+  .youtube-videos__items {
+    gap: 4rem;
+  }
+  .youtube-videos__item {
+    border-radius: 16px;
+  }
+}
+.youtube-videos.grid-layout .container {
+  width: 90% !important;
+}
+@media (min-width: 1400px) {
+  .youtube-videos.grid-layout .container {
+    width: 95% !important;
+  }
+}
+.youtube-videos.grid-layout .youtube-videos__items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .youtube-videos.grid-layout .youtube-videos__items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .youtube-videos.grid-layout .youtube-videos__items {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 1200px) {
+  .youtube-videos.grid-layout .youtube-videos__items {
+    gap: 2rem;
+  }
+}

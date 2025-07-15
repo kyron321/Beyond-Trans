@@ -1,0 +1,122 @@
+.youtube-videos {
+    .container {
+        width: 50% !important;
+
+        @media (max-width: 768px) {
+            width: 100% !important;
+
+            h3 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .youtube-videos__subheading {
+                font-size: 0.875rem;
+            }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .youtube-videos__subheading {
+            text-align: center;
+            margin-bottom: 4rem;
+            
+            a {
+                text-decoration: underline;
+            }
+        }
+
+        .youtube-videos__items {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            
+            @media (min-width: 768px) {
+                gap: 3rem;
+            }
+        }
+    }
+
+    &__item {
+        position: relative;
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            display: block;
+        }
+
+        // Responsive iframe sizing
+        @media (max-width: 768px) {
+            border-radius: 8px;
+            
+            iframe {
+                aspect-ratio: 16 / 9;
+            }
+        }
+    }
+
+    // Enhanced styling for larger screens
+    @media (min-width: 1024px) {
+        .container {
+            width: 60% !important;
+        }
+        
+        &__items {
+            gap: 4rem;
+        }
+        
+        &__item {
+            border-radius: 16px;
+        }
+    }
+
+    // Grid layout for four videos in a row
+    &.grid-layout {
+        .container {
+            width: 90% !important;
+            
+            @media (min-width: 1400px) {
+                width: 95% !important;
+            }
+        }
+        
+        .youtube-videos__items {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+
+            @media (min-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            @media (min-width: 1024px) {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+            
+            @media (min-width: 1200px) {
+                gap: 2rem;
+            }
+        }
+    }
+}
+    
+    
+    

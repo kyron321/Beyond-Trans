@@ -1,0 +1,16 @@
+{
+    "name": "acf/youtube-videos",
+    "title": "Youtube Videos",
+    "description": "Youtube Videos Block",
+    "style": [ "file:./youtube-videos.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["youtube", "videos"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "youtube-videos.php"
+    },
+    "supports": {
+        "align": false
+    }
+}
