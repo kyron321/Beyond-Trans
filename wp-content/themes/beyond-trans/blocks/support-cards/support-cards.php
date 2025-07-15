@@ -129,8 +129,8 @@ if (!$cards) {
                             </div>
                         <?php endif; ?>
 
-                        <div class="support-cards__card-bottom-section">
-                            <?php if ($upcoming_dates): ?>
+                        <?php if ($upcoming_dates): ?>
+                            <div class="support-cards__card-upcoming-dates">
                                 <?php 
                                 // Parse upcoming dates - split by common delimiters
                                 $dates_array = array();
@@ -148,16 +148,14 @@ if (!$cards) {
                                     $dates_array = array(trim($upcoming_dates));
                                 }
                                 ?>
-                                <div class="support-cards__card-upcoming-dates">
-                                    <p class="support-cards__card-upcoming-dates-label">UPCOMING DATES</p>
-                                    <ul class="support-cards__card-upcoming-dates-list">
-                                        <?php foreach ($dates_array as $date): ?>
-                                            <li><?php echo esc_html($date); ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </div>
-                            <?php endif; ?>
-                        </div>
+                                <p class="support-cards__card-upcoming-dates-label">UPCOMING DATES</p>
+                                <ul class="support-cards__card-upcoming-dates-list">
+                                    <?php foreach ($dates_array as $date): ?>
+                                        <li><?php echo esc_html($date); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
 
 
                         <?php if ($type): ?>
