@@ -51,6 +51,15 @@
         &:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            
+            iframe {
+                transform: scale(1.02);
+            }
+            
+            .youtube-videos__item-label {
+                transform: translateY(-3px);
+                color: var(--primary);
+            }
         }
 
         iframe {
@@ -59,6 +68,18 @@
             aspect-ratio: 16 / 9;
             border: none;
             display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        &-label {
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--black);
+            text-align: center;
+            transition: transform 0.3s ease, color 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
         }
 
         // Responsive iframe sizing
@@ -67,6 +88,11 @@
             
             iframe {
                 aspect-ratio: 16 / 9;
+            }
+            
+            &-label {
+                padding: 0.75rem;
+                font-size: 1rem;
             }
         }
     }

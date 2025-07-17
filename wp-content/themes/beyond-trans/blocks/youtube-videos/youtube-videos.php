@@ -44,9 +44,11 @@ $loading_type = $is_first_block ? 'eager' : 'lazy';
             <div class="youtube-videos__items">
                 <?php foreach ($single_text as $item) :
                     $url = $item['url'];
+                    $video_label = $item['video_label'];
                 ?>
                     <div class="youtube-videos__item fade-in">
                        <iframe src="https://www.youtube.com/embed/<?php echo $url; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="<?php echo $loading_type; ?>"></iframe>
+                       <div class="youtube-videos__item-label"><?php echo $video_label; ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -120,6 +120,28 @@
                     "allow_in_bindings": 1,
                     "placeholder": "",
                     "parent_repeater": "field_6876bc9cb218c"
+                },
+                {
+                    "key": "field_6876c7c9883ae",
+                    "label": "Video Label",
+                    "name": "video_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6876bc9cb218c"
                 }
             ]
         },
@@ -182,5 +204,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1752612726
+    "modified": 1752614895
 }
