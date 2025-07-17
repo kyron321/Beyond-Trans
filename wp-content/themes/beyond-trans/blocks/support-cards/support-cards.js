@@ -65,3 +65,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     setInitialState();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const recoveryToggle = document.getElementById('toggle-recovery-support');
+    const familiesToggle = document.getElementById('toggle-families');
+    const ctaLink = document.getElementById('support-cards-cta');
+
+    if (!recoveryToggle || !familiesToggle || !ctaLink) {
+        return;
+    }
+
+    const content = {
+        recovery: {
+            href: '/join-facilitated-groups/',
+            text: 'Apply For Recovery Support'
+        },
+        family: {
+            href: '/join-peer-support/',
+            text: 'Apply for Parent Support'
+        }
+    };
+
+    function updateButton() {
+        if (familiesToggle.checked) {
+            ctaLink.href = content.family.href;
+            ctaLink.textContent = content.family.text;
+        } else {
+            ctaLink.href = content.recovery.href;
+            ctaLink.textContent = content.recovery.text;
+        }
+    }
+
+    recoveryToggle.addEventListener('change', updateButton);
+    familiesToggle.addEventListener('change', updateButton);
+
+    // Set initial state
+    updateButton();
+});
