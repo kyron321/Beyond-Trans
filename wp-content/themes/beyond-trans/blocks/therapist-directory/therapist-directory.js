@@ -72,6 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Re-initialize animations for new cards
                     initializeCardAnimations();
                     
+                    // Re-initialize click handlers for new cards
+                    initializeTherapistCardHandlers();
+                    
                     // Fade in new results
                     resultsContainer.style.opacity = '1';
                     resultsContainer.classList.remove('is-loading');
@@ -115,6 +118,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 appearOnScroll.observe(card);
             });
         }
+    }
+    
+    // Function to initialize therapist card click handlers
+    function initializeTherapistCardHandlers() {
+        const therapistCards = resultsContainer.querySelectorAll('.therapist-card[data-permalink]');
+        
+        therapistCards.forEach(function(card) {
+            // Skip if already initialized
+            if (card.dataset.clickInitialized) {
+                return;
+            }
+            
+            // Mark as initialized
+            card.dataset.clickInitialized = 'true';
+            
+            // Add pointer cursor style
+            card.style.cursor = 'pointer';
+            
+            // Add click handler
+            card.addEventListener('click', function(e) {
+                // Don't navigate if clicking on a link or button inside the card
+                if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+                    return;
+                }
+                
+                const permalink = this.getAttribute('data-permalink');
+                if (permalink) {
+                    window.location.href = permalink;
+                }
+            });
+            
+            // Add hover effect
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.transition = 'transform 0.2s ease';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
     }
     
     // Function to handle country change and update regions
@@ -182,8 +226,9 @@ document.addEventListener('DOMContentLoaded', function() {
     countrySelect.addEventListener('change', handleCountryChange);
     regionSelect.addEventListener('change', updateResults);
     
-    // Initialize card animations on page load
+    // Initialize card animations and click handlers on page load
     initializeCardAnimations();
+    initializeTherapistCardHandlers();
     
     // Prevent form submission on Enter key
     filterForm.addEventListener('submit', function(e) {

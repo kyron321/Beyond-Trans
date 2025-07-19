@@ -414,5 +414,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Make therapist cards clickable
+    const therapistCards = document.querySelectorAll('.therapist-card[data-permalink]');
+    therapistCards.forEach(function(card) {
+        // Add pointer cursor style
+        card.style.cursor = 'pointer';
+        
+        // Add click handler
+        card.addEventListener('click', function(e) {
+            // Don't navigate if clicking on a link or button inside the card
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+                return;
+            }
+            
+            const permalink = this.getAttribute('data-permalink');
+            if (permalink) {
+                window.location.href = permalink;
+            }
+        });
+        
+        // Add hover effect
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.transition = 'transform 0.2s ease';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
 });
 </script>
