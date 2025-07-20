@@ -1,0 +1,16 @@
+{
+    "name": "acf/timeline",
+    "title": "Timeline",
+    "description": "Timeline Block",
+    "style": [ "file:./timeline.css" ],
+    "category": "formatting",
+    "icon": "block-default",
+    "keywords": ["timeline"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "timeline.php"
+    },
+    "supports": {
+        "align": false
+    }
+}

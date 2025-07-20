@@ -77,6 +77,7 @@ function beyond_trans_register_specialty_taxonomy()
     $args = array(
         'hierarchical'      => true,
         'labels'            => $labels,
+        'has_archive'       => false,
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => false,
@@ -86,6 +87,26 @@ function beyond_trans_register_specialty_taxonomy()
     register_taxonomy('specialty', array('therapist'), $args);
 }
 add_action('init', 'beyond_trans_register_specialty_taxonomy');
+
+/**
+ * Block direct specialty taxonomy queries
+ */
+function beyond_trans_block_specialty_taxonomy_queries()
+{
+    // Check if this is a direct taxonomy query for specialty
+    if (isset($_GET['taxonomy']) && $_GET['taxonomy'] === 'specialty') {
+        // Redirect to 404 or main therapist directory
+        wp_redirect(home_url('/404/'), 301);
+        exit;
+    }
+    
+    // Also block if someone tries to access specialty archive directly
+    if (is_tax('specialty')) {
+        wp_redirect(home_url('/404/'), 301);
+        exit;
+    }
+}
+add_action('template_redirect', 'beyond_trans_block_specialty_taxonomy_queries');
 
 /**
  * Register Countries taxonomy for Therapists

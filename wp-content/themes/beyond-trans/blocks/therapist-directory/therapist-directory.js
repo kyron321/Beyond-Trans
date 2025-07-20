@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const regionSelect = document.getElementById('region-filter');
     const checkboxes = filterForm.querySelectorAll('.therapist-directory__checkbox');
     const clearButton = document.getElementById('clear-filters');
+    const submitButton = document.querySelector('.therapist-directory__submit-btn');
+    
+    if (submitButton) {
+        submitButton.style.display = 'none';
+    }
     
     function getFormDataAsParams() {
         const formData = new FormData(filterForm);
@@ -156,11 +161,18 @@ document.addEventListener('DOMContentLoaded', function() {
     countrySelect.addEventListener('change', handleCountryChange);
     regionSelect.addEventListener('change', updateResults);
     
+    const initialCards = resultsContainer.querySelectorAll('.therapist-card');
+    initialCards.forEach(card => {
+        card.classList.add('fade-in');
+    });
+    
     initializeCardAnimations();
     
     filterForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        updateResults();
+        if (typeof fetch !== 'undefined') {
+            e.preventDefault();
+            updateResults();
+        }
     });
     
     if (clearButton) {

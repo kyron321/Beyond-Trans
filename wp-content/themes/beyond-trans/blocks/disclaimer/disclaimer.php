@@ -14,6 +14,23 @@ $text = isset($block_content['text']) ? $block_content['text'] : '';
 $cta_one = isset($block_content['cta_one']) ? $block_content['cta_one'] : '';
 $cta_two = isset($block_content['cta_two']) ? $block_content['cta_two'] : '';
 
+// Get page ID for cookie - either from return_page parameter or from target URL
+$cookie_page_id = '';
+if (isset($_GET['return_page']) && !empty($_GET['return_page'])) {
+    $cookie_page_id = intval($_GET['return_page']);
+} elseif (!empty($cta_one['url'])) {
+    // Try to get page ID from the target URL
+    $cookie_page_id = url_to_postid($cta_one['url']);
+    
+    // Fallback for therapist directory if ID not found
+    if (empty($cookie_page_id) && strpos($cta_one['url'], 'therapist-directory') !== false) {
+        $cookie_page_id = '592';
+    }
+}
+
+// Note: Server-side redirect logic removed to prevent conflicts 
+// with the global redirect handler in functions.php
+
 // Set block classes
 $block_classes = ['block', 'disclaimer'];
 if (!empty($bg_class)) {
@@ -53,12 +70,13 @@ $is_first_block = ($position === 0);
                 <?php if ($cta_one || $cta_two): ?>
                     <div class="disclaimer__ctas fade-in">
                         <?php if ($cta_one): ?>
-                            <a href="<?php echo esc_url($cta_one['url']); ?>"
+                            <button type="button"
                                 class="btn btn-secondary consent-button"
-                                data-return-page="<?php echo isset($_GET['return_page']) ? intval($_GET['return_page']) : ''; ?>"
-                                target="<?php echo $cta_one['target'] ?: '_self'; ?>">
+                                style="border: none; cursor: pointer; position: relative; z-index: 10;"
+                                data-target-url="<?php echo esc_url($cta_one['url']); ?>"
+                                data-page-id="<?php echo $cookie_page_id; ?>">
                                 <?php echo esc_html($cta_one['title']); ?>
-                            </a>
+                            </button>
                         <?php endif; ?>
 
                         <?php if ($cta_two): ?>
@@ -73,3 +91,76 @@ $is_first_block = ($position === 0);
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Disclaimer JS loaded');
+    
+    // Find the consent button
+    const consentButton = document.querySelector('.consent-button');
+    console.log('Consent button found:', consentButton);
+    
+    if (consentButton) {
+        const targetUrl = consentButton.dataset.targetUrl;
+        const pageId = consentButton.dataset.pageId;
+        console.log('Target URL:', targetUrl);
+        console.log('Page ID for cookie:', pageId);
+        
+        consentButton.addEventListener('click', function(e) {
+            console.log('Button clicked!');
+            
+            if (targetUrl) {
+                // Prevent the default navigation
+                e.preventDefault();
+                
+                let cookiePageId = pageId;
+                
+                // Fallback: if pageId is empty but URL is therapist directory, use 592
+                if (!cookiePageId && targetUrl.includes('therapist-directory')) {
+                    cookiePageId = '592';
+                    console.log('Using fallback page ID 592 for therapist directory');
+                }
+                
+                if (cookiePageId) {
+                    console.log('Setting cookie for page:', cookiePageId);
+                    
+                    // Set a cookie for this specific page (expires in 30 days)
+                    const domain = window.location.hostname;
+                    const isSecure = window.location.protocol === 'https:';
+                    
+                    let cookieString = `page_consent_${cookiePageId}=1; max-age=2592000; path=/`;
+                
+                // Add domain for better cross-subdomain support
+                if (domain) {
+                    cookieString += `; domain=${domain}`;
+                }
+                
+                // Add secure flag for HTTPS sites
+                if (isSecure) {
+                    cookieString += `; secure`;
+                }
+                
+                console.log('Setting cookie:', cookieString);
+                
+                // Set the cookie
+                document.cookie = cookieString;
+                
+                // Small delay to ensure cookie is set before navigation
+                setTimeout(() => {
+                    console.log('Redirecting to:', targetUrl);
+                    
+                    // Navigate to the target URL from ACF field
+                    window.location.href = targetUrl;
+                }, 100); // 100ms delay to ensure cookie is processed
+                }
+            } else {
+                console.log('Missing target URL:', targetUrl);
+            }
+        });
+        
+        console.log('Click event listener added');
+    } else {
+        console.log('No consent button found on page');
+    }
+});
+</script>   

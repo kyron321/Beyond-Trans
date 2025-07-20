@@ -23,8 +23,8 @@ function allowedBlocks($allowed_blocks, $editor_context)
 
             // Don't show other blocks in disclaimer post type if you want it restricted
             if ($post_type === 'disclaimer' && $block_name !== 'disclaimer') {
-                // Uncomment the line below if you want ONLY the disclaimer block in disclaimer post type
-                // continue;
+                // Only allow disclaimer blocks in disclaimer post type
+                continue;
             }
 
             $allowed_blocks[] = 'acf/' . $block_name;
