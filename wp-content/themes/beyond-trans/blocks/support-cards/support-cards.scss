@@ -252,13 +252,13 @@
           z-index: 1;
         }
       
-        // Move slider when "Families" is checked
+       
         #toggle-families:checked ~ .switch-toggle__slider {
           left: 50%;
           background: var(--primary)
         }
       
-        // Active label color
+     
         #toggle-recovery-support:checked ~ .switch-toggle__label[for="toggle-recovery-support"],
         #toggle-families:checked ~ .switch-toggle__label[for="toggle-families"] {
           color: #fff;
@@ -270,7 +270,7 @@
         }
     }
 
-    // Responsive adjustments for smaller screens
+    
     @media (max-width: 767px) {
         padding: 4rem 0;
 

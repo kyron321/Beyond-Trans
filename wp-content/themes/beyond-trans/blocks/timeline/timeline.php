@@ -3,10 +3,10 @@ $block_content = get_field('block_content');
 $section_title = $block_content['section_title'];
 $section_description = $block_content['section_description'];
 $timeline_items = $block_content['timeline_items'];
-$enable_auto_scroll = $block_content['enable_auto_scroll'] ?: true; // Enable by default for testing
+$enable_auto_scroll = $block_content['enable_auto_scroll'] ?: true; 
 $scroll_speed = $block_content['scroll_speed'] ?: 5000;
 
-// Generate unique ID for this timeline instance
+
 $timeline_id = 'timeline-' . uniqid();
 ?>
 
@@ -26,7 +26,7 @@ $timeline_id = 'timeline-' . uniqid();
 
         <?php if ($timeline_items && is_array($timeline_items)) : ?>
             <div class="timeline__wrapper">
-                <!-- Navigation Controls -->
+               
                 <div class="timeline__controls">
                     <button class="timeline__nav timeline__nav--prev" aria-label="Previous item">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (timeline) {
         initializeTimeline(timeline);
         
-        // Make clickable timeline items work
+        
         const clickableItems = timeline.querySelectorAll('.timeline__item--clickable');
         clickableItems.forEach(item => {
             item.addEventListener('click', function() {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Basic timeline functionality
+
 function initializeTimeline(timelineElement) {
     const container = timelineElement.querySelector('.timeline__container');
     const track = timelineElement.querySelector('.timeline__track');
@@ -137,7 +137,7 @@ function initializeTimeline(timelineElement) {
     const itemWidth = 344; // 320px + 24px gap
     let autoScrollInterval;
     
-    // Navigation functions
+  
     function goToNext() {
         if (currentIndex < totalItems - 1) {
             currentIndex++;
@@ -160,9 +160,9 @@ function initializeTimeline(timelineElement) {
             const scrollPosition = -currentIndex * itemWidth;
             track.style.transform = `translateX(${scrollPosition}px)`;
         } else {
-            // Mobile: use full viewport width for each item
-            const mobileItemWidth = window.innerWidth - 40; // Account for container padding
-            const scrollPosition = -currentIndex * (mobileItemWidth + 16); // Include gap
+        
+            const mobileItemWidth = window.innerWidth - 40; 
+            const scrollPosition = -currentIndex * (mobileItemWidth + 16); 
             track.style.transform = `translateX(${scrollPosition}px)`;
         }
         updateNavigation();
@@ -173,22 +173,22 @@ function initializeTimeline(timelineElement) {
         if (nextBtn) nextBtn.disabled = currentIndex === totalItems - 1;
     }
     
-    // Event listeners
+    
     if (prevBtn) prevBtn.addEventListener('click', goToPrev);
     if (nextBtn) nextBtn.addEventListener('click', goToNext);
     
-    // Auto-scroll functionality
+    
     function startAutoScroll(immediate = false) {
-        // Always clear existing interval first
+       
         stopAutoScroll();
         
         if (autoScroll) {
             if (immediate) {
-                // Start immediately, then continue with regular interval
+               
                 setTimeout(() => {
                     goToNext();
                     autoScrollInterval = setInterval(goToNext, scrollSpeed);
-                }, 200); // Very short delay just to let timeline render
+                }, 200); 
             } else {
                 autoScrollInterval = setInterval(goToNext, scrollSpeed);
             }
@@ -202,19 +202,18 @@ function initializeTimeline(timelineElement) {
         }
     }
     
-    // Pause auto-scroll when hovering over individual cards
+    
     items.forEach(item => {
         item.addEventListener('mouseenter', stopAutoScroll);
         item.addEventListener('mouseleave', () => startAutoScroll(false));
     });
     
-    // Initialize
+    
     updateNavigation();
     if (autoScroll) {
-        startAutoScroll(true); // Start with immediate mode
+        startAutoScroll(true); 
     }
     
-    // Handle window resize
     window.addEventListener('resize', function() {
         updatePosition();
         if (autoScroll) {
