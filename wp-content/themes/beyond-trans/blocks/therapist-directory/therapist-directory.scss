@@ -211,8 +211,26 @@
     }
   }
 
+  // Therapist card link wrapper
+  .therapist-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    
+    &:hover {
+      text-decoration: none;
+      
+      .therapist-card {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      }
+    }
+  }
+
   // Responsive therapist card
   .therapist-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
     gap: 0.75rem; // Smaller gap on mobile

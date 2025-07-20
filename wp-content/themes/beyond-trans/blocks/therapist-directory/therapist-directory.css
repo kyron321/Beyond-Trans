@@ -190,7 +190,21 @@
 .therapist-directory .active::after {
   display: none;
 }
+.therapist-directory .therapist-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.therapist-directory .therapist-card-link:hover {
+  text-decoration: none;
+}
+.therapist-directory .therapist-card-link:hover .therapist-card {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
 .therapist-directory .therapist-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

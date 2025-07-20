@@ -297,71 +297,73 @@ $current_url = strtok($_SERVER["REQUEST_URI"], '?');
                     $contact_info = get_field('contact_info', get_the_ID());
                     $location = get_field('location', get_the_ID());
                 ?>
-                    <div class="therapist-card fade-in" data-permalink="<?php echo esc_url(get_permalink()); ?>">
-                        <div class="therapist-card__image">
-                                <?php if ($photo && !empty($photo)): ?>
-                                    <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy" onerror="this.src='https://beyond-trans-k.local/wp-content/uploads/2025/07/placeholder.png'; this.onerror=null;">
-                                <?php else: ?>
-                                    <img src="https://beyond-trans-k.local/wp-content/uploads/2025/07/placeholder.png" alt="<?php echo esc_attr($title); ?>" loading="lazy" onerror="this.style.display='none';">
-                                <?php endif; ?>
-                            </div>
-                            <div class="therapist-card__content" style="display: flex; flex-direction: column; height: 100%;">
-                                <h5 class="therapist-card__name"><?php echo esc_html($title); ?></h5>
-
-                                <?php if (!empty($therapist_specialties)): ?>
-                                    <p class="therapist-card__specialties">
-                                        <?php echo esc_html(implode(', ', $therapist_specialties)); ?>
-                                    </p>
-                                <?php endif; ?>
-                              
-                                <?php if ($location): ?>
-                                    <div class="therapist-card__location">
-                                        <?php echo esc_html($location); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if ($bio): ?>
-                                    <div class="therapist-card__bio">
-                                        <?php echo wp_trim_words($bio, 10, '...'); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <div class="therapist-card__contact">
-                                    <?php if (!empty($contact_info['company'])): ?>
-                                        <div class="therapist-card__contact-items">
-                                            <strong>Company:</strong> <?php echo esc_html($contact_info['company']); ?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <?php if (!empty($contact_info['website'])): ?>
-                                        <div class="therapist-card__contact-item">
-                                            <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                                <circle cx="12" cy="12" r="10"></circle>
-                                                <line x1="2" y1="12" x2="22" y2="12"></line>
-                                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                            </svg>
-                                            <?php echo esc_html($contact_info['website']); ?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <?php if (!empty($contact_info['location'])): ?>
-                                        <div class="therapist-card__contact-item">
-                                            <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                <circle cx="12" cy="10" r="3"></circle>
-                                            </svg>
-                                            <?php echo esc_html($contact_info['location']); ?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <?php if (!empty($contact_info['contact']) && is_array($contact_info['contact'])): ?>
-                                        <div class="therapist-card__contact-item">
-                                            <?php echo esc_html($contact_info['contact']['title']); ?>
-                                        </div>
+                    <a href="<?php echo esc_url(get_permalink()); ?>" class="therapist-card-link">
+                        <div class="therapist-card fade-in">
+                            <div class="therapist-card__image">
+                                    <?php if ($photo && !empty($photo)): ?>
+                                        <img src="<?php echo esc_url($photo); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy" onerror="this.src='https://beyond-trans-k.local/wp-content/uploads/2025/07/placeholder.png'; this.onerror=null;">
+                                    <?php else: ?>
+                                        <img src="https://beyond-trans-k.local/wp-content/uploads/2025/07/placeholder.png" alt="<?php echo esc_attr($title); ?>" loading="lazy" onerror="this.style.display='none';">
                                     <?php endif; ?>
                                 </div>
+                                <div class="therapist-card__content" style="display: flex; flex-direction: column; height: 100%;">
+                                    <h5 class="therapist-card__name"><?php echo esc_html($title); ?></h5>
+
+                                    <?php if (!empty($therapist_specialties)): ?>
+                                        <p class="therapist-card__specialties">
+                                            <?php echo esc_html(implode(', ', $therapist_specialties)); ?>
+                                        </p>
+                                    <?php endif; ?>
+                                  
+                                    <?php if ($location): ?>
+                                        <div class="therapist-card__location">
+                                            <?php echo esc_html($location); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if ($bio): ?>
+                                        <div class="therapist-card__bio">
+                                            <?php echo wp_trim_words($bio, 10, '...'); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div class="therapist-card__contact">
+                                        <?php if (!empty($contact_info['company'])): ?>
+                                            <div class="therapist-card__contact-items">
+                                                <strong>Company:</strong> <?php echo esc_html($contact_info['company']); ?>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($contact_info['website'])): ?>
+                                            <div class="therapist-card__contact-item">
+                                                <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                                </svg>
+                                                <?php echo esc_html($contact_info['website']); ?>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($contact_info['location'])): ?>
+                                            <div class="therapist-card__contact-item">
+                                                <svg class="therapist-profile__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                                    <circle cx="12" cy="10" r="3"></circle>
+                                                </svg>
+                                                <?php echo esc_html($contact_info['location']); ?>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($contact_info['contact']) && is_array($contact_info['contact'])): ?>
+                                            <div class="therapist-card__contact-item">
+                                                <?php echo esc_html($contact_info['contact']['title']); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                 <?php endwhile; ?>
             </div>
         <?php else: ?>
@@ -414,35 +416,5 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
-    // Make therapist cards clickable
-    const therapistCards = document.querySelectorAll('.therapist-card[data-permalink]');
-    therapistCards.forEach(function(card) {
-        // Add pointer cursor style
-        card.style.cursor = 'pointer';
-        
-        // Add click handler
-        card.addEventListener('click', function(e) {
-            // Don't navigate if clicking on a link or button inside the card
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
-                return;
-            }
-            
-            const permalink = this.getAttribute('data-permalink');
-            if (permalink) {
-                window.location.href = permalink;
-            }
-        });
-        
-        // Add hover effect
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
-            this.style.transition = 'transform 0.2s ease';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
 });
 </script>
