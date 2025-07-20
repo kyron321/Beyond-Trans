@@ -14,24 +14,23 @@ $text = isset($block_content['text']) ? $block_content['text'] : '';
 $cta_one = isset($block_content['cta_one']) ? $block_content['cta_one'] : '';
 $cta_two = isset($block_content['cta_two']) ? $block_content['cta_two'] : '';
 
-// Get page ID for cookie - either from return_page parameter or from target URL
+
 $cookie_page_id = '';
 if (isset($_GET['return_page']) && !empty($_GET['return_page'])) {
     $cookie_page_id = intval($_GET['return_page']);
 } elseif (!empty($cta_one['url'])) {
-    // Try to get page ID from the target URL
+   
     $cookie_page_id = url_to_postid($cta_one['url']);
     
-    // Fallback for therapist directory if ID not found
+  
     if (empty($cookie_page_id) && strpos($cta_one['url'], 'therapist-directory') !== false) {
         $cookie_page_id = '592';
     }
 }
 
-// Note: Server-side redirect logic removed to prevent conflicts 
-// with the global redirect handler in functions.php
 
-// Set block classes
+
+
 $block_classes = ['block', 'disclaimer'];
 if (!empty($bg_class)) {
     $block_classes[] = $bg_class;
@@ -40,7 +39,7 @@ if (!empty($text_class)) {
     $block_classes[] = $text_class;
 }
 
-// Get block position
+
 $position = isset($block['attrs']['position']) ? $block['attrs']['position'] : null;
 $is_first_block = ($position === 0);
 ?>
@@ -96,7 +95,7 @@ $is_first_block = ($position === 0);
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Disclaimer JS loaded');
     
-    // Find the consent button
+
     const consentButton = document.querySelector('.consent-button');
     console.log('Consent button found:', consentButton);
     
@@ -110,12 +109,12 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Button clicked!');
             
             if (targetUrl) {
-                // Prevent the default navigation
+                
                 e.preventDefault();
                 
                 let cookiePageId = pageId;
                 
-                // Fallback: if pageId is empty but URL is therapist directory, use 592
+                
                 if (!cookiePageId && targetUrl.includes('therapist-directory')) {
                     cookiePageId = '592';
                     console.log('Using fallback page ID 592 for therapist directory');
@@ -124,34 +123,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (cookiePageId) {
                     console.log('Setting cookie for page:', cookiePageId);
                     
-                    // Set a cookie for this specific page (expires in 30 days)
+                   
                     const domain = window.location.hostname;
                     const isSecure = window.location.protocol === 'https:';
                     
                     let cookieString = `page_consent_${cookiePageId}=1; max-age=2592000; path=/`;
                 
-                // Add domain for better cross-subdomain support
+               
                 if (domain) {
                     cookieString += `; domain=${domain}`;
                 }
                 
-                // Add secure flag for HTTPS sites
+              
                 if (isSecure) {
                     cookieString += `; secure`;
                 }
                 
                 console.log('Setting cookie:', cookieString);
                 
-                // Set the cookie
+             
                 document.cookie = cookieString;
-                
-                // Small delay to ensure cookie is set before navigation
+               
                 setTimeout(() => {
                     console.log('Redirecting to:', targetUrl);
                     
-                    // Navigate to the target URL from ACF field
+                   
                     window.location.href = targetUrl;
-                }, 100); // 100ms delay to ensure cookie is processed
+                }, 100); 
                 }
             } else {
                 console.log('Missing target URL:', targetUrl);
