@@ -65,8 +65,8 @@ add_action('ninja_forms_after_submission', 'create_testimonial_from_ninja_form')
  */
 function create_therapist_from_ninja_form($form_data)
 {
-    // Only process submissions from the therapist form (form ID 7)
-    if ($form_data['form_id'] != 7) {
+    // Only process submissions from the therapist form (form ID 10)
+    if ($form_data['form_id'] != 10) {
         return $form_data;
     }
 
@@ -120,6 +120,11 @@ function create_therapist_from_ninja_form($form_data)
     // australia location field
     if (isset($form_data['fields_by_key']['listselect_australia']) && !empty($form_data['fields_by_key']['listselect_australia']['value'])) {
         $location = sanitize_text_field($form_data['fields_by_key']['listselect_australia']['value']);
+    }
+
+    // new zealand location field
+    if (isset($form_data['fields_by_key']['listselect_new_zealand']) && !empty($form_data['fields_by_key']['listselect_new_zealand']['value'])) {
+        $location = sanitize_text_field($form_data['fields_by_key']['listselect_new_zealand']['value']);
     }
 
     if (isset($form_data['fields_by_key']['country_1746733998322']) && !empty($form_data['fields_by_key']['country_1746733998322']['value'])) {
