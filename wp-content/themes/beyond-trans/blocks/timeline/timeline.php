@@ -126,6 +126,13 @@ $timeline_id = 'timeline-' . uniqid();
             </div>
         <?php endif; ?>
     </div>
+    
+    <!-- Back to Top Button -->
+    <button class="timeline__back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
 </section>
 
 <script>

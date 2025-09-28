@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize scroll progress
     initScrollProgress();
+    
+    // Initialize back to top button
+    initBackToTop();
 });
 
 function initYearNavigation() {
@@ -102,3 +105,41 @@ function initFadeAnimations() {
 document.addEventListener('DOMContentLoaded', function() {
     initFadeAnimations();
 });
+
+function initBackToTop() {
+    const backToTopBtn = document.getElementById('backToTop');
+    const timeline = document.querySelector('.timeline');
+    if (!backToTopBtn || !timeline) return;
+    
+    // Get timeline position
+    const timelineRect = timeline.getBoundingClientRect();
+    const timelineTop = timeline.offsetTop;
+    
+    // Show/hide button based on scroll position relative to timeline
+    function toggleBackToTop() {
+        const scrollTop = window.pageYOffset;
+        const timelineStart = timelineTop;
+        const timelineEnd = timelineTop + timeline.offsetHeight;
+        
+        // Show button when scrolled past timeline start and within timeline
+        if (scrollTop > timelineStart + 200 && scrollTop < timelineEnd - 200) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    }
+    
+    // Scroll to top of timeline when clicked
+    backToTopBtn.addEventListener('click', function() {
+        timeline.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    });
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', toggleBackToTop);
+    
+    // Initial check
+    toggleBackToTop();
+}
