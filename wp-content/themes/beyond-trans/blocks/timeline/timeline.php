@@ -3,96 +3,124 @@ $block_content = get_field('block_content');
 $section_title = $block_content['section_title'];
 $section_description = $block_content['section_description'];
 $timeline_items = $block_content['timeline_items'];
-$enable_auto_scroll = $block_content['enable_auto_scroll'] ?: true; 
-$scroll_speed = $block_content['scroll_speed'] ?: 5000;
-
+$enable_animations = $block_content['enable_animations'] ?? true;
 
 $timeline_id = 'timeline-' . uniqid();
 ?>
 
-<section class="block timeline" id="<?= $timeline_id; ?>">
-    <div class="timeline__background"></div>
+<section class="block timeline timeline--vertical" id="<?= $timeline_id; ?>">
+    <div class="timeline__background">
+        <div class="timeline__background-gradient"></div>
+        <div class="timeline__background-pattern"></div>
+    </div>
     
     <div class="container">
         <div class="timeline__header">
             <?php if ($section_title) : ?>
-                <h2 class="timeline__title fade-in"><?= esc_html($section_title); ?></h2>
+                <h2 class="timeline__title" data-aos="fade-up"><?= esc_html($section_title); ?></h2>
             <?php endif; ?>
 
             <?php if ($section_description) : ?>
-                <p class="timeline__description fade-in"><?= esc_html($section_description); ?></p>
+                <p class="timeline__description" data-aos="fade-up" data-aos-delay="100"><?= esc_html($section_description); ?></p>
             <?php endif; ?>
         </div>
 
         <?php if ($timeline_items && is_array($timeline_items)) : ?>
             <div class="timeline__wrapper">
-               
-                <div class="timeline__controls">
-                    <button class="timeline__nav timeline__nav--prev" aria-label="Previous item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="15,18 9,12 15,6"></polyline>
-                        </svg>
-                    </button>
-                    <button class="timeline__nav timeline__nav--next" aria-label="Next item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9,18 15,12 9,6"></polyline>
-                        </svg>
-                    </button>
+                <!-- Year Navigation -->
+                <div class="timeline__years-nav" data-aos="fade-in" data-aos-delay="200">
+                    <?php 
+                    $years = array_unique(array_column($timeline_items, 'year'));
+                    sort($years);
+                    foreach ($years as $year) : ?>
+                        <button class="timeline__year-btn" data-year="<?= esc_attr($year); ?>">
+                            <?= esc_html($year); ?>
+                        </button>
+                    <?php endforeach; ?>
                 </div>
 
-                <div class="timeline__container" 
-                     data-auto-scroll="<?= $enable_auto_scroll ? 'true' : 'false'; ?>"
-                     data-scroll-speed="<?= esc_attr($scroll_speed); ?>">
-                    <div class="timeline__track">
+                <!-- Main Timeline -->
+                <div class="timeline__container">
+                    <div class="timeline__line">
+                        <div class="timeline__line-progress"></div>
+                    </div>
+                    
+                    <div class="timeline__items">
                         <?php foreach ($timeline_items as $index => $item) :
                             $year = $item['year'] ?: date('Y');
                             $month = $item['month'] ?: 'January';
+                            $day = $item['day'] ?: '01';
                             $title = $item['title'] ?: 'Achievement Title';
                             $description = $item['description'] ?: '';
                             $image = $item['image'];
                             $link = $item['link'] ?: '';
-                            $link_text = $item['link_text'] ?: 'Read More';
+                            $link_text = $item['link_text'] ?: 'Learn More';
                             $category = $item['category'] ?: 'General';
+                            $icon = $item['icon'] ?: 'star';
+                            $side = $index % 2 === 0 ? 'left' : 'right';
                         ?>
-                                        <div class="timeline__item <?= $link ? 'timeline__item--clickable' : ''; ?> timeline__item--<?= esc_attr(strtolower($category)); ?>"
-                data-year="<?= esc_attr($year); ?>"
-                <?= $link ? 'data-link="' . esc_url($link) . '"' : ''; ?>>
-                                <div class="timeline__item__marker">
-                                    <div class="timeline__item__marker__dot"></div>
-                                    <div class="timeline__item__marker__line"></div>
+                            <div class="timeline__item timeline__item--<?= $side; ?> timeline__item--<?= esc_attr(strtolower($category)); ?>"
+                                 data-year="<?= esc_attr($year); ?>"
+                                 data-index="<?= $index; ?>"
+                                 data-aos="fade-<?= $side === 'left' ? 'right' : 'left'; ?>"
+                                 data-aos-delay="<?= 100 + ($index * 50); ?>">
+                                
+                                <!-- Timeline Node -->
+                                <div class="timeline__node" data-year="<?= esc_attr($year); ?>">
+                                    <div class="timeline__node-outer">
+                                        <div class="timeline__node-inner">
+                                            <span class="timeline__node-year"><?= esc_html($year); ?></span>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="timeline__item__content">
-                                    <div class="timeline__item__header">
-                                        <div class="timeline__item__date">
-                                            <span class="timeline__item__year"><?= esc_html($year); ?></span>
-                                            <span class="timeline__item__month"><?= esc_html($month); ?></span>
+                                <!-- Content Card -->
+                                <div class="timeline__card">
+                                    <div class="timeline__card-inner">
+                                        <!-- Date Text -->
+                                        <div class="timeline__date-text">
+                                            <?= esc_html($month); ?> <?= esc_html($year); ?>
                                         </div>
-                                        <div class="timeline__item__category category-<?= esc_attr(strtolower($category)); ?>"><?= esc_html($category); ?></div>
+
+                                        <!-- Category Tag -->
+                                        <div class="timeline__category category-<?= esc_attr(strtolower($category)); ?>">
+                                            <?= esc_html($category); ?>
+                                        </div>
+
+                                        <!-- Content -->
+                                        <div class="timeline__content">
+                                            <h3 class="timeline__item-title"><?= esc_html($title); ?></h3>
+                                            
+                                            <?php if ($description): ?>
+                                                <div class="timeline__item-description">
+                                                    <p><?= esc_html($description); ?></p>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <?php if ($image): ?>
+                                                <div class="timeline__item-image">
+                                                    <img src="<?= esc_url($image['url']); ?>" 
+                                                         alt="<?= esc_attr($image['alt'] ?: $title); ?>"
+                                                         loading="lazy">
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <?php if ($link): ?>
+                                                <a href="<?= esc_url($link); ?>" class="timeline__item-link" target="_blank" rel="noopener">
+                                                    <span><?= esc_html($link_text); ?></span>
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                                    </svg>
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
-
-                                    <div class="timeline__item__details">
-                                    <h3 class="timeline__item__title"><?= esc_html($title); ?></h3>
-                                     <?php if ($description): ?>
-                                            <div class="timeline__item__description">
-                                                <p><?= esc_html($description); ?></p>
-                                            </div>
-                                            <?php endif; ?>     
-
-                                    <?php if ($image): ?>
-                                        <div class="timeline__item__image">
-                                            <img src="<?= esc_url($image['url']); ?>" 
-                                                 alt="<?= esc_attr($image['alt'] ?: $title); ?>"
-                                                 loading="lazy">
-                                        </div>
-                                    <?php endif; ?>
-
-                                    </div> 
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
+
             </div>
         <?php endif; ?>
     </div>
@@ -134,7 +162,7 @@ function initializeTimeline(timelineElement) {
     const totalItems = items.length;
     const autoScroll = container.dataset.autoScroll === 'true';
     const scrollSpeed = parseInt(container.dataset.scrollSpeed) || 5000;
-    const itemWidth = 344; // 320px + 24px gap
+    const itemWidth = 352; // 320px + 32px gap
     let autoScrollInterval;
     
   
