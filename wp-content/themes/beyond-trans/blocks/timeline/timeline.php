@@ -97,14 +97,6 @@ $timeline_id = 'timeline-' . uniqid();
                                                 </div>
                                             <?php endif; ?>
 
-                                            <?php if ($image): ?>
-                                                <div class="timeline__item-image">
-                                                    <img src="<?= esc_url($image['url']); ?>" 
-                                                         alt="<?= esc_attr($image['alt'] ?: $title); ?>"
-                                                         loading="lazy">
-                                                </div>
-                                            <?php endif; ?>
-
                                             <?php if ($link): ?>
                                                 <a href="<?= esc_url($link); ?>" class="timeline__item-link" target="_blank" rel="noopener">
                                                     <span><?= esc_html($link_text); ?></span>
@@ -113,6 +105,16 @@ $timeline_id = 'timeline-' . uniqid();
                                                     </svg>
                                                 </a>
                                             <?php endif; ?>
+
+                                            <?php if ($image): ?>
+                                                <div class="timeline__item-image">
+                                                    <img src="<?= esc_url($image['url']); ?>" 
+                                                         alt="<?= esc_attr($image['alt'] ?: $title); ?>"
+                                                         loading="lazy">
+                                                </div>
+                                            <?php endif; ?>
+
+                                           
                                         </div>
                                     </div>
                                 </div>
